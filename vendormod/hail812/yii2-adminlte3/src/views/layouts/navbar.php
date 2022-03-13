@@ -1,9 +1,24 @@
 <?php
 
 use yii\helpers\Html;
+use backend\components\Mensajes_usuario;
+use backend\components\Notificaciones_usuario;
 
+$nmensajes=New Mensajes_usuario;
+$cmensajes=$nmensajes->getNmensajes();
+$mensajes=$nmensajes->getMensajes();
+
+if ($cmensajes==0){ $cmensajes=""; }
+
+$nnotificaciones=New Notificaciones_usuario;
+$cnotificaciones=$nnotificaciones->getNnotificaciones();
+$notificaciones=$nnotificaciones->getNotificaciones();
+//var_dump($mensajes);
+
+if ($cnotificaciones==0){ $cnotificaciones=""; }
 ?>
-<!-- Navbar -->
+
+ <!-- Navbar -->
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -25,14 +40,14 @@ use yii\helpers\Html;
 
                 <li class="dropdown-divider"></li>
 
-    
+
                 <li class="dropdown-submenu dropdown-hover">
                     <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
                     <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
                         <li>
                             <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
                         </li>
- 
+
                         <li class="dropdown-submenu">
                             <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
                             <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
@@ -40,17 +55,17 @@ use yii\helpers\Html;
                                 <li><a href="#" class="dropdown-item">3rd level</a></li>
                             </ul>
                         </li>
-                       
+
 
                         <li><a href="#" class="dropdown-item">level 2</a></li>
                         <li><a href="#" class="dropdown-item">level 2</a></li>
                     </ul>
                 </li>
-                 
+
             </ul>
         </li>-->
     </ul>
- 
+
     <!-- SEARCH FORM -->
    <!--  <form class="form-inline ml-3">
         <div class="input-group input-group-sm">
@@ -65,7 +80,7 @@ use yii\helpers\Html;
  -->
     <!-- Right navbar links -->
    <ul class="navbar-nav ml-auto">
-   <!--       
+   <!--
         <li class="nav-item">
             <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                 <i class="fas fa-search"></i>
@@ -91,74 +106,50 @@ use yii\helpers\Html;
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-comments"></i>
-                <span class="badge badge-danger navbar-badge">0</span>
+                <span class="badge badge-danger navbar-badge"><?= $cmensajes ?></span>
             </a>
-            <!-- <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <?php foreach ($mensajes as $key => $value) {  ?>
                 <a href="#" class="dropdown-item">
-              
+
                     <div class="media">
-                        <img src="<?//=$assetDir?>/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                        <img src="/backend/web/images/user2-160x160.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
-                                Brad Diesel
-                                <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                                <?= $value->usuariocreacion0->nombres.' '.$value->usuariocreacion0->apellidos ?>
+                                <!--<span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>-->
                             </h3>
-                            <p class="text-sm">Call me whenever you can...</p>
-                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                            <p class="text-sm"><?= substr($value->mensaje,0,40).'...' ?></p>
+                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>Hace un momento</p>
                         </div>
                     </div>
-                  
+
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                  
-                    <div class="media">
-                        <img src="<?//=$assetDir?>/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">
-                                John Pierce
-                                <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                            </h3>
-                            <p class="text-sm">I got your message bro</p>
-                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                        </div>
-                    </div>
-                    
-                </a>
+                <?php } ?>
+
+                 
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                  
-                    <div class="media">
-                        <img src="<?//=$assetDir?>/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">
-                                Nora Silvester
-                                <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                            </h3>
-                            <p class="text-sm">The subject goes here</p>
-                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                        </div>
-                    </div>
-                   
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-            </div> -->
+                <a href="/perfil/buzonmensajes" class="dropdown-item dropdown-footer">Buzón de mensajes</a>
+            </div>
         </li>
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
-                <span class="badge badge-warning navbar-badge">0</span>
+                <span class="badge badge-warning navbar-badge"><?= $cnotificaciones ?></span>
             </a>
-            <!-- <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <span class="dropdown-header">15 Notifications</span>
-                <div class="dropdown-divider"></div>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <!--<span class="dropdown-header"><?//= $cnotificaciones ?> Notificaciones</span>
+                <div class="dropdown-divider"></div>-->
+                <?php foreach ($notificaciones as $key => $value) {  ?>
                 <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 4 new messages
-                    <span class="float-right text-muted text-sm">3 mins</span>
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    <?= $value->mensaje ?>
+                    
+                    <span class="float-right text-muted text-sm">Hace poco</span>
                 </a>
-                <div class="dropdown-divider"></div>
+                <!--<div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
                     <i class="fas fa-users mr-2"></i> 8 friend requests
                     <span class="float-right text-muted text-sm">12 hours</span>
@@ -167,10 +158,11 @@ use yii\helpers\Html;
                 <a href="#" class="dropdown-item">
                     <i class="fas fa-file mr-2"></i> 3 new reports
                     <span class="float-right text-muted text-sm">2 days</span>
-                </a>
+                </a>-->
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-            </div> -->
+                <?php } ?>
+                <a href="#" class="dropdown-item dropdown-footer">Buzón de notificaciones</a>
+            </div>
         </li>
         <li class="nav-item">
             <?= Html::a('<i class="fas fa-sign-out-alt"></i>', ['/site/logout'], ['data-method' => 'post', 'class' => 'nav-link']) ?>

@@ -42,11 +42,11 @@ body {
 }
 
 .main-sidebar .sidebar-menu .nav-item a:hover {
-    border-left-color: #009C41 !important;
+    border-left-color: #80C6AF !important;
 }
 
 .logo {
-    background-color: #009C41 !important;
+    background-color: #80C6AF !important;
 }
 
 #loading {
@@ -90,7 +90,7 @@ body {
 
 .dropdown-menu .active{
 
-    background-color: #009C41 ;
+    background-color: #80C6AF ;
 
 }
 
@@ -102,7 +102,7 @@ body {
 
 .dropdown-item:focus, .dropdown-item:hover
 {
-    background-color: #009C41 ;
+    background-color: #80C6AF ;
     color: white;
 
 }
@@ -115,7 +115,7 @@ body {
 
 .dropdown-menu .active:hover{
 
-    background-color: #009C41 ;
+    background-color: #80C6AF ;
     color: white;
 }
 
@@ -168,11 +168,11 @@ body {
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: white;
-    background-color: #009C41;
+    background-color: #80C6AF;
 }
 
 .nav-pills .nav-link:not(.active):hover {
-    color: #009C41;
+    color: #80C6AF;
 }
 
 .btn-primary {

@@ -217,8 +217,8 @@ class InventarioController extends Controller
 
             foreach ($modelInventario as $keyI => $dataI) {
                 $arrayResp[$keyI]['titulo'] = $dataI->nombreproducto;
-                $arrayResp[$keyI]['descripcion'] = $dataI->descripcion;
-                $arrayResp[$keyI]['imagen'] = '<img style="width:20px;" src="/frontend/web/images/articulos/'.$dataI->imagen.'"/>';
+                $arrayResp[$keyI]['descripcion'] = $dataI->descripcion;src=
+                $arrayResp[$keyI]['imagen'] = '<img style="width:20px;" "/frontend/web/images/articulos/'.$dataI->imagen.'"/>';
                 //$arrayResp[$keyI]['imagen'] = '-';
                 $arrayResp[$keyI]['stock'] = $model[0]->stock;
                 $arrayResp[$keyI]['cantidadini'] = $model[0]->cantidadini;

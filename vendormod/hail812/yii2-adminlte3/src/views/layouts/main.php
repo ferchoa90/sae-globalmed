@@ -63,6 +63,8 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/admi
 
 
 
+
+
 <?php $this->endBody() ?>
 </body>
 
@@ -169,3 +171,4 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/admi
         </style>
 
 <script src="<?= URL::base() ?>/js/plugins/bootstrap3-typeahead.min.js"></script>
+

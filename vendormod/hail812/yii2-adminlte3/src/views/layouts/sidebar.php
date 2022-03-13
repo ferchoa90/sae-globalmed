@@ -1,56 +1,38 @@
 <?php 
 use yii\helpers\Url;
-use backend\models\Menuadmin;
+use backend\components\Menu_admin;
 ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-<a class="logo" href="/backend/web/"><span class="logo-lg">SAE</span></a>
+<a class="logo p-2" href="/backend/web/" style="background-color: transparent !important; border-bottom: 1px solid #4DA88A">
+    <!--<span class="logo-lg">GLOBAL MED</span>-->
+    <img src="/backend/web/images/logo_small.jpg" style="width:50%;" class="" alt=""/>
+</a>
     <section class="sidebar">
     
         <!-- Sidebar user panel -->
-        <div class="user-panel  mt-3 pb-3 mb-3 d-flex">
-            <div class="text-center image">
-                <img src="/backend/web/images/user2-160x160.png" class="img-circle" alt="User Image"/>
-            </div>
-            <div class="text-center info">
-                <p><?= Yii::$app->user->identity->nombres.' '.Yii::$app->user->identity->apellidos ?></p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-             
+        <div class="d-flex user-panel justify-content-center">
+            <div class=" user-panel mt-2 mb-2  d-flex" style="border-bottom: none;">
+                <div class="text-center image">
+                    <img src="/backend/web/images/user2-160x160.png" class="img-circle" alt="User Image"/>
+                </div>
+                <div class="text-center info">
+                    <p class="p-0"><?= Yii::$app->user->identity->nombres.' '.Yii::$app->user->identity->apellidos ?></p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                
+                </div>
             </div>
         </div>
 
         <?php
-            //$menu=['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest];
-            $menuModel= Menuadmin::find()->where(["tipo"=>"WEB","idparent"=>"0","estatus"=>"ACTIVO"])->orderBy(["orden"=>SORT_ASC])->all();
-            foreach ($menuModel as $key => $data) {
-                
-                $subMenuModel= Menuadmin::find()->where(["tipo"=>"WEB","idparent"=>$data->id,"estatus"=>"ACTIVO"])->orderBy(["orden"=>SORT_ASC])->all();
-                if ($subMenuModel)
-                {
-                    $subMenu= array();
-                    foreach ($subMenuModel as $key => $data2) {
-                        //if ($data2->nombre=="Mensajes"){ $template='<a href="{url}">{icon} {label}<span class="pull-right-container"><small class="label pull-right bg-yellow">123</small></span></a>'; }
-                        if ($data2->nombre=="Mensajes"){
-                            $template='<a href="{url}">{icon} {label}<span class="pull-right-container"><small class="label pull-right bg-green">0</small></span></a>';
-                            $subMenu[]=array('label' => $data2->nombre, 'icon' => $data2->icono, 'url' => [$data2->link],'active' => '/'.$this->context->route == $data2->link,'template'=>$template);  
-                        }else{
-                            $subMenu[]=array('label' => $data2->nombre, 'icon' => $data2->icono, 'url' => [$data2->link],'active' => '/'.$this->context->route == $data2->link);  
-                        }
-                    }
-                    $menu[]= array('label' => $data->nombre, 'icon' => $data->icono, 'items' => $subMenu);            
-                }else{
-                    $menu[]= array('label' => $data->nombre, 'icon' => $data->icono, 'url' => [$data->link]);            
-                }
-            }
-            //$menu[]= array('label' => 'Gii2', 'icon' => 'file-code-o', 'url' => ['/gii']);
-//
-            //$menu= array_push($menu,'label' => 'Gii2');
+          $menuadmin= New Menu_admin;
+          $menuadmin= $menuadmin->getMenuadmin(0,$this->context->route);
         ?>
         <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" style="padding-left:0px;">
         <?= \hail812\adminlte\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
-                'items' => $menu,
+                'items' => $menuadmin,
                 /*'items' => [
                     ['label' => '', 'options' => ['class' => 'header']],
                     //['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
