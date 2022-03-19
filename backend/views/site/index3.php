@@ -7,7 +7,7 @@ $this->title = 'Escritorio';
 <div class="site-index">
 
     <div class="jumbotron">
-        <div class="lead">Sistema Integrado Contable BAGSACORP</div>
+        <div class="lead">Sistema Médico</div>
     </div>
 
     <div class="body-content">
@@ -15,8 +15,8 @@ $this->title = 'Escritorio';
         <div class="row">
             <div class="col-lg-12">
 
-                <p>Bienvenido al nuevo sistema integrado contable de Bagsacorp.</p>
-                <p>El sistema reemplaza al antiguo MANAGER, donde podremos encontrar información totalizada del 2020 y 2021, y del nuevo periodo contable.</p>
+                <p>Bienvenido al nuevo sistema médico.</p>
+                <p></p>
             </div>
         </div>
  
