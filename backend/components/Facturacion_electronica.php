@@ -33,7 +33,7 @@ class Facturacion_electronica extends Component
 
     function getClavedeacceso($fecha,$tipocomp='01',$serie,$factura)
     {
-        //$CAacceso = ClaveAcceso($fecha,"01","0890006248001","2",$serie,$factura,"12345678","1");	
+        //$CAacceso = ClaveAcceso($fecha,"01","0890006248001","2",$serie,$factura,"12345678","1");
         $claveAcceso= $this->generarClave($fecha,$tipocomp,$serie,$factura);
         return $claveAcceso;
     }
@@ -87,7 +87,7 @@ class Facturacion_electronica extends Component
                 $response=$clave;
                 //$response=$clave;
             }else{
-                $response = "Error en el formato de fecha";    
+                $response = "Error en el formato de fecha";
             }
         }else{
             $response = "La fecha no puede estar vacia";
@@ -142,7 +142,7 @@ class Facturacion_electronica extends Component
             case ($dia <= 31):
                 $vdia=true;
                 break;
-            
+
             default:
                 $vdia=false;
                 break;
@@ -152,7 +152,7 @@ class Facturacion_electronica extends Component
             case ($mes <= 12):
                 $vmes=true;
                 break;
-            
+
             default:
                 $vmes=false;
                 break;
@@ -162,7 +162,7 @@ class Facturacion_electronica extends Component
             case ($anio >=2010 && $anio <= 2099):
                 $vanio=true;
                 break;
-            
+
             default:
                 $vanio=false;
                 break;
@@ -179,7 +179,7 @@ class Facturacion_electronica extends Component
     protected function IdFactura($fecha,$comprobante,$ruc,$ambiente,$serie,$num_factura,$cod_numerico,$emision){
         $Cadena 		= "";
         $verificador 	= "";
-        $Cadena = str_replace("/", "", $fecha) . $comprobante . $ruc . $ambiente . str_replace("-","",$serie) . 
+        $Cadena = str_replace("/", "", $fecha) . $comprobante . $ruc . $ambiente . str_replace("-","",$serie) .
 		$this->formato($num_factura, 9) . $this->formato($cod_numerico, 8) . $emision;
 		$verificador = $this->getVerificador($Cadena);
         $Cadena = $Cadena . $verificador;
@@ -228,7 +228,7 @@ class Facturacion_electronica extends Component
 
     }
 
-    
+
 
 
 
@@ -245,13 +245,16 @@ class Facturacion_electronica extends Component
             $result = $client->autorizacionComprobante($params);
         } catch (Exception $e) {
                 $msn = 'Excepción capturada: '.$e->getMessage();
-        }	
+        }
         return $result;
     }
 
     public function setCrearfactura($name,$xml,$ruta=""){
-		echo $directorio  = $ruta."E:/xampp-new/htdocs/sae-bagsacorp/backend/web/xml/$name.xml";
-		$directorio2 = $ruta."E:/xampp-new/htdocs/sae-bagsacorp/backend/web/xml_autorizado/$name.xml";
+	//	$directorio  = $ruta."E:/xampp-new/htdocs/sae-bagsacorp/backend/web/xml/$name.xml";
+	//	$directorio2 = $ruta."E:/xampp-new/htdocs/sae-bagsacorp/backend/web/xml_autorizado/$name.xml";
+
+        $directorio  = $ruta."C:/xampp/htdocs/sae-bagsacorp/backend/web/xml/$name.xml";
+		$directorio2 = $ruta."C:/xampp/htdocs/sae-bagsacorp/backend/web/xml_autorizado/$name.xml";
 		if (!file_exists($directorio2)):
 			if (!file_exists($directorio)):
 				date_default_timezone_set("America/Bogota");
@@ -262,7 +265,7 @@ class Facturacion_electronica extends Component
 		endif;
 	}
 
-    protected function facturaPrueba($claveacceso='2022030701093017846200110010010000000348765432117'){
+    protected function facturaPrueba($claveacceso='2022030701093017846200110010010000000348765432117',$subtotal,$iva,$total,$identificacion,$cliente,$direccion){
         $Cabecera = array(
             "ambiente"				=> "1",
             "tipoEmision"			=> "1",
@@ -279,20 +282,20 @@ class Facturacion_electronica extends Component
             "dirEstablecimiento"			=> "EVA ROMÁN Y LEGARDA", //sucursal direccion
             "obligadoContabilidad"			=> "NO",
             "tipoIdentificacionComprador"	=> "05",
-            "razonSocialComprador"			=> "MARIO AGUILAR",
-            "identificacionComprador"		=> "0930178462",
+            "razonSocialComprador"			=> $cliente,
+            "identificacionComprador"		=> $identificacion,
             "base0"							=> "0.00",
-            "base12"						=> "100.00",
-            "monto_iva"						=> "12.00",
+            "base12"						=> $subtotal,
+            "monto_iva"						=> $iva,
             "descuento"						=> 0,
             "propina"						=> 0,
-            "importeTotal"					=> "112.00",
+            "importeTotal"					=> $total,
             "moneda"						=> "DOLAR",
             "formaPagoId"					=> "01",
             "formaPagoDescrip"				=> "EFECTIVO",
             "valorRetIva"					=> 0,
             "valorRetRenta"					=> 0,
-            "Direccion"						=> "Urbanor",
+            "Direccion"						=> $direccion,
             "Email"							=> "marioaguilar1990@gmail.com",
             "placa"							=> "",
             "Fono"							=> "",
@@ -303,9 +306,9 @@ class Facturacion_electronica extends Component
             return $Cabecera;
     }
 
-    public function getXml($Cabecera='',$Detalle='',$porcen_iva='12.00'){
+    public function getXml($Cabecera='',$Detalle='',$porcen_iva='12.00',$subtotal,$iva,$total,$identificacion,$cliente,$direccion){
         //if ($Cabecera){ $Cabecera=$this->facturaPrueba;  }
-        $Cabecera=$this->facturaPrueba();
+        $Cabecera=$this->facturaPrueba('2022031401093017846200110010010000000048765432114',$subtotal,$iva,$total,$identificacion,$cliente,$direccion);
         $porcen_iva='12.00';
         //var_dump($Cabecera);
 		$totalSinImpuestos = $Cabecera['base0'] + $Cabecera['base12'];
