@@ -16213,9 +16213,16 @@ CREATE TABLE `log` (
   KEY `usuariocreacion` (`usuariocreacion`),
   KEY `id` (`id`),
   CONSTRAINT `log_ibfk_1` FOREIGN KEY (`usuariocreacion`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `log` */
+
+insert  into `log`(`id`,`modulo`,`descripcion`,`observacion`,`codigo`,`usuariocreacion`,`fechacreacion`,`estatus`) values 
+(1,'TIPOS EXAMENES ','{\"nombre\":[\"Nombre cannot be blank.\"],\"fechacreacion\":[\"Fechacreacion cannot be blank.\"]}','ID: 0','0',1,'2022-03-20 22:51:51','ACTIVO'),
+(2,'TIPOS EXAMENES ','{\"nombre\":[\"Nombre cannot be blank.\"],\"fechacreacion\":[\"Fechacreacion cannot be blank.\"]}','ID: 0','0',1,'2022-03-20 22:53:12','ACTIVO'),
+(3,'TIPOS EXAMENES ','{\"nombre\":[\"Nombre cannot be blank.\"],\"fechacreacion\":[\"Fechacreacion cannot be blank.\"]}','ID: 0','0',1,'2022-03-20 22:53:19','ACTIVO'),
+(4,'TIPOS EXAMENES ','{\"nombre\":[\"Nombre cannot be blank.\"],\"fechacreacion\":[\"Fechacreacion cannot be blank.\"]}','ID: 0','0',1,'2022-03-20 22:54:16','ACTIVO'),
+(5,'TIPOS EXAMENES ','{\"nombre\":[\"Nombre cannot be blank.\"]}','ID: 0','0',1,'2022-03-20 22:54:50','ACTIVO');
 
 /*Table structure for table `marca` */
 
@@ -16496,9 +16503,9 @@ insert  into `menuadmin`(`id`,`idparent`,`nombre`,`icono`,`link`,`isDeleted`,`us
 (95,90,'Entregas','motorcycle','/produccion/entregas',0,1,0,'2022-01-19 18:19:16',NULL,4,'WEB','ACTIVO'),
 (96,19,'Roles','user-secret','/usuarios/roles',0,1,0,'2021-12-01 19:30:41',NULL,3,'WEB','ACTIVO'),
 (97,0,'Mantenimientos','list','#',0,1,0,'2022-03-13 11:24:20',NULL,9,'WEB','ACTIVO'),
-(98,97,'Clientes','list','/mantenimientos/clientes',0,1,0,'2021-12-08 16:27:17',NULL,1,'WEB','ACTIVO'),
-(99,97,'Proveedores','list','/mantenimientos/proveedores',0,1,0,'2021-12-09 00:59:48',NULL,2,'WEB','ACTIVO'),
-(100,97,'Socios','list','/mantenimientos/socios',0,1,0,'2022-02-17 08:03:58',NULL,3,'WEB','ACTIVO'),
+(98,97,'Clientes','list','/mantenimientos/clientes',0,1,0,'2022-03-20 16:27:52',NULL,2,'WEB','ACTIVO'),
+(99,97,'Proveedores','list','/mantenimientos/proveedores',0,1,0,'2022-03-20 16:27:59',NULL,10,'WEB','ACTIVO'),
+(100,97,'Socios','list','/mantenimientos/socios',0,1,0,'2022-03-20 16:28:00',NULL,11,'WEB','ACTIVO'),
 (101,41,'Cuentas','list','/contabilidad/cuentas',0,1,0,'2021-12-08 07:44:51',NULL,1,'WEB','ACTIVO'),
 (102,41,'Asientos diarios','list','/contabilidad/asientos',0,1,0,'2021-12-08 07:49:39',NULL,1,'WEB','ACTIVO'),
 (104,41,'Anticipo Empleados','list','/contabilidad/anticipoemp',0,1,0,'2021-12-08 07:51:19',NULL,10,'WEB','ACTIVO'),
@@ -16518,37 +16525,37 @@ insert  into `menuadmin`(`id`,`idparent`,`nombre`,`icono`,`link`,`isDeleted`,`us
 (118,5,'Licencia','list','/configuraciones/licencia',0,1,0,'2022-01-19 19:32:07',NULL,2,'WEB','ACTIVO'),
 (119,5,'parent','task','#',1,1,1,'2022-01-24 23:35:32',NULL,10,'WEB','ACTIVO'),
 (120,5,'dwqdwdq','task','#',1,1,1,'2022-01-24 23:35:14',NULL,11,'WEB','ACTIVO'),
-(121,97,'Tipo Cheque','task','tipocheque',0,1,1,'2022-03-13 14:46:56',NULL,4,'WEB','INACTIVO'),
+(121,97,'Tipo Cheque','task','/mantenimientos/tipocheque',0,1,0,'2022-03-20 16:28:00',NULL,12,'WEB','INACTIVO'),
 (122,41,'Bancos Mov','list','/contabilidad/bancosmov',0,1,1,'2022-02-07 13:51:36',NULL,3,'WEB','ACTIVO'),
 (123,41,'Caja','list','/contabilidad/caja',0,1,1,'2022-02-07 13:52:14',NULL,4,'WEB','ACTIVO'),
 (124,2,'Produccion','list','/inventario/produccion',0,1,1,'2022-02-14 21:16:25',NULL,4,'WEB','ACTIVO'),
-(125,97,'Operarios','list','/mantenimientos/operarios',0,1,1,'2022-03-13 14:47:07',NULL,4,'WEB','INACTIVO'),
-(126,97,'Transporte','list','/mantenimientos/transporte',0,1,1,'2022-03-13 14:47:19',NULL,6,'WEB','INACTIVO'),
+(125,97,'Operarios','list','/mantenimientos/operarios',0,1,0,'2022-03-20 16:27:55',NULL,6,'WEB','INACTIVO'),
+(126,97,'Transporte','list','/mantenimientos/transporte',0,1,0,'2022-03-20 16:28:03',NULL,16,'WEB','INACTIVO'),
 (127,41,'Retenciones','list','/contabilidad/retenciones',0,1,1,'2022-02-17 17:38:10',NULL,11,'WEB','ACTIVO'),
 (128,41,'Retenciones cxc','list','/contabilidad/retencionescxc',0,1,1,'2022-02-17 17:38:46',NULL,13,'WEB','ACTIVO'),
 (129,0,'Procesos','list','#',0,1,1,'2022-03-14 10:32:21',NULL,12,'WEB','INACTIVO'),
 (130,129,'Cierre de año','list','/procesos/cierredeanio',0,1,1,'2022-02-20 22:15:48',NULL,1,'WEB','ACTIVO'),
 (131,34,'E.C. Proveedores','list','/reportes/estadoproveedores',0,1,1,'2022-03-14 10:27:18',NULL,3,'WEB','INACTIVO'),
 (132,34,'E.C. Clientes','list','/reportes/estadocliente',0,1,1,'2022-03-14 10:27:19',NULL,4,'WEB','INACTIVO'),
-(133,97,'Pacientes','list','/mantenimientos/pacientes',0,1,0,'2022-03-13 14:44:43',NULL,5,'WEB','ACTIVO'),
-(134,97,'Patologías','list','/mantenimientos/patologias',0,1,0,'2022-03-14 08:03:29',NULL,6,'WEB','ACTIVO'),
+(133,97,'Pacientes','list','/mantenimientos/pacientes',0,1,0,'2022-03-20 16:27:56',NULL,7,'WEB','ACTIVO'),
+(134,97,'Patologías','list','/mantenimientos/patologias',0,1,0,'2022-03-20 16:27:56',NULL,8,'WEB','ACTIVO'),
 (135,0,'Agendamientos','list','#',0,1,0,'2022-03-14 07:55:37',NULL,3,'WEB','ACTIVO'),
 (136,135,'Citas Médicas','list','/agendamientos/citas',0,1,0,'2022-03-14 07:56:03',NULL,1,'WEB','ACTIVO'),
-(137,97,'Profesiones','list','/mantenimientos/profesiones',0,1,0,'2022-03-14 09:01:40',NULL,7,'WEB','ACTIVO'),
+(137,97,'Profesiones','list','/mantenimientos/profesiones',0,1,0,'2022-03-20 16:27:57',NULL,9,'WEB','ACTIVO'),
 (138,135,'Consultas Médicas','list','/agendamientos/consultasmed',0,1,0,'2022-03-14 10:26:11',NULL,2,'WEB','ACTIVO'),
 (139,34,'Agendamientos','list','/reportes/agendamientos',0,1,0,'2022-03-14 10:27:57',NULL,1,'WEB','ACTIVO'),
 (140,34,'Citas Medicas','list','/reportes/citasmedicas',0,1,0,'2022-03-14 10:28:13',NULL,2,'WEB','ACTIVO'),
 (141,34,'Patologías','list','/reportes/patologias',0,1,0,'2022-03-14 10:28:50',NULL,3,'WEB','ACTIVO'),
 (142,1,'Mensajes S','list','/escritorio/mensajes',0,1,0,'2022-03-14 10:31:39',NULL,1,'WEB','ACTIVO'),
 (143,1,'Notificaciones','list','/escritorio/notificaciones',0,1,0,'2022-03-14 10:30:40',NULL,2,'WEB','ACTIVO'),
-(144,97,'Doctores','list','/mantenimientos/doctores',0,1,1,'2022-03-14 18:28:57',NULL,5,'WEB','ACTIVO'),
-(145,97,'Motivo Consulta','list','/mantenimientos/motivoconsulta',0,1,1,'2022-03-19 08:56:47',NULL,6,'WEB','ACTIVO'),
-(146,97,'Tipo Consulta','list','/mantenimientos/tipoconsulta',0,1,1,'2022-03-19 08:57:21',NULL,7,'WEB','ACTIVO'),
-(147,97,'Tipo Examenes','list','/mantenimientos/tipoexamenes',0,1,1,'2022-03-19 08:58:19',NULL,9,'WEB','ACTIVO'),
-(148,97,'Consultorios','list','/mantenimientos/consultorios',0,1,1,'2022-03-19 08:58:46',NULL,10,'WEB','ACTIVO'),
-(149,97,'Ciudad','list','/mantenimientos/cuidades',0,1,1,'2022-03-19 08:59:46',NULL,11,'WEB','ACTIVO'),
-(150,97,'Zona / Sector','list','/mantenimientos/zonasector',0,1,1,'2022-03-19 09:00:19',NULL,12,'WEB','ACTIVO'),
-(151,97,'Tipo cobro','list','/mantenimientos/tipocobro',0,1,1,'2022-03-19 09:00:44',NULL,14,'WEB','ACTIVO'),
+(144,97,'Doctores','list','/mantenimientos/doctores',0,1,1,'2022-03-20 16:27:54',NULL,4,'WEB','ACTIVO'),
+(145,97,'Motivo Consulta','list','/mantenimientos/motivoconsulta',0,1,1,'2022-03-20 16:27:54',NULL,5,'WEB','ACTIVO'),
+(146,97,'Tipo Consulta','list','/mantenimientos/tipoconsulta',0,1,1,'2022-03-20 16:28:02',NULL,14,'WEB','ACTIVO'),
+(147,97,'Tipo Examenes','list','/mantenimientos/tipoexamenes',0,1,1,'2022-03-20 16:28:02',NULL,15,'WEB','ACTIVO'),
+(148,97,'Consultorios','list','/mantenimientos/consultorios',0,1,1,'2022-03-20 16:27:53',NULL,3,'WEB','ACTIVO'),
+(149,97,'Ciudad','list','/mantenimientos/cuidades',0,1,1,'2022-03-20 16:27:52',NULL,1,'WEB','ACTIVO'),
+(150,97,'Zona / Sector','list','/mantenimientos/zonasector',0,1,1,'2022-03-20 16:28:04',NULL,17,'WEB','ACTIVO'),
+(151,97,'Tipo cobro','list','/mantenimientos/tipocobro',0,1,1,'2022-03-20 16:28:01',NULL,13,'WEB','ACTIVO'),
 (152,0,'Pacientes','user-md','#',0,1,1,'2022-03-19 09:06:45',NULL,7,'WEB','ACTIVO'),
 (153,152,'Historia Clínica','stethoscope','/pacientes/historiaclinica',0,1,1,'2022-03-19 09:07:34',NULL,1,'WEB','ACTIVO');
 
@@ -17860,14 +17867,14 @@ CREATE TABLE `tipoexamenes` (
   `valor` decimal(10,3) NOT NULL DEFAULT '0.000',
   `isDeleted` int(1) NOT NULL DEFAULT '0',
   `usuariocreacion` int(11) NOT NULL DEFAULT '1',
-  `fechacreacion` datetime NOT NULL,
+  `fechacreacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `usuarioact` int(11) DEFAULT NULL,
   `fechaact` datetime DEFAULT NULL,
   `estatus` enum('ACTIVO','INACTIVO') CHARACTER SET latin1 NOT NULL DEFAULT 'ACTIVO',
   PRIMARY KEY (`id`),
   KEY `usuariocreacion` (`usuariocreacion`),
   CONSTRAINT `tipoexamenes_ibfk_1` FOREIGN KEY (`usuariocreacion`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=333 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=335 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tipoexamenes` */
 
@@ -17875,7 +17882,7 @@ insert  into `tipoexamenes`(`id`,`nombre`,`descripcion`,`valor`,`isDeleted`,`usu
 (1,'ORA','',40.000,0,1,'2020-02-01 00:00:00',NULL,NULL,'ACTIVO'),
 (223,'OCTN+MACULA+CONTROL','',210.000,0,1,'2020-02-01 00:00:00',NULL,NULL,'ACTIVO'),
 (224,'OCT MACULA','',85.000,0,1,'2020-02-01 00:00:00',NULL,NULL,'ACTIVO'),
-(225,'ANGIOGRAFIA','',85.000,0,1,'2020-02-01 00:00:00',NULL,NULL,'ACTIVO'),
+(225,'ANGIOGRAFIA','',85.000,0,1,'2020-02-01 00:00:00',1,'2022-03-21 14:52:01','ACTIVO'),
 (233,'CAMPIMETRIA','',50.000,0,1,'2020-02-01 00:00:00',NULL,NULL,'ACTIVO'),
 (234,'OCT  MACULA O NERVIO','',85.000,0,1,'2020-02-01 00:00:00',NULL,NULL,'ACTIVO'),
 (235,'OCT MACULA + NERVIO','',130.000,0,1,'2020-02-01 00:00:00',NULL,NULL,'ACTIVO'),
