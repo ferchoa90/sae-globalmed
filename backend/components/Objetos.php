@@ -100,6 +100,10 @@ class Objetos extends Component
             case 'checkbox':
                 return $this->getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $estilo, $icono,$boxbody,$etiqueta,$leyenda, $col, $adicional);
                 break;
+            
+            case 'oculto':
+                return $this->getInputOculto($nombre, $id, $valor,$adicional);
+                break;
 
 
             case 'textarea':
@@ -276,6 +280,51 @@ private function getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $esti
                     '.$input.'
                 </div>
             </div>
+        </div>
+       ';
+        if ($boxbody):
+            $resultado=$boxbodydefault.$resultado.$enddiv;
+        else:
+            //$resultado=$bo$resultado.$enddiv;
+        endif;
+        return $resultado;
+
+    }
+
+    private static function getInputOculto($nombre, $id, $valor,$adicional)
+    {
+        $iconfa=new Iconos;
+        $iconfa= $iconfa->getIconofa($icono);
+        $input='';
+        $classdefault='form-control pull-right';
+        $boxbodydefault='<div class="box-body">';
+        $enddiv='</div>';
+
+        switch ($clase) {
+            case '':
+                $clase=$classdefault;
+                break;
+
+            default:
+                $clase=$clase;
+                break;
+        }
+
+        switch ($leyenda) {
+            case '':
+                $input='<input type="hidden" class="'.$clase.'" id="'.$id.'" name="'.$nombre.'" value="'.$valor.'">';
+                break;
+
+                default:
+                $input='<input type="hidden" class="'.$clase.'" id="'.$id.'" name="'.$nombre.'" value="'.$valor.'" >';
+                break;
+        }
+
+
+
+        $resultado='
+        <div class="'.$col.'" style="display:none;">
+                    '.$input.'
         </div>
        ';
         if ($boxbody):

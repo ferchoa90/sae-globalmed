@@ -36,7 +36,7 @@ class Tipoexamenes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'fechacreacion'], 'required'],
+            [['nombre'], 'required'],
             [['nombre', 'descripcion', 'estatus'], 'string'],
             [['valor'], 'number'],
             [['isDeleted', 'usuariocreacion', 'usuarioact'], 'integer'],
@@ -72,5 +72,12 @@ class Tipoexamenes extends \yii\db\ActiveRecord
     public function getUsuariocreacion0()
     {
         return $this->hasOne(User::className(), ['id' => 'usuariocreacion']);
+    }
+
+    public function getUsuarioactualizacion0()
+    {
+        $response=$this->hasOne(User::className(), ['id' => 'usuarioact']);
+        if (!$this->usuarioact){ $response=(object) $array; $response->username="No registra";}
+        return $response;
     }
 }

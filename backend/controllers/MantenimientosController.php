@@ -9,6 +9,7 @@ use common\models\LoginForm;
 use common\models\Productos;
 use common\models\Clientes;
 use common\models\Pacientes;
+use backend\components\Medico_tipoexamenes;
 use common\models\Tipoexamenes;
 use common\models\Enfermedades;
 use common\models\Proveedores;
@@ -194,6 +195,14 @@ class MantenimientosController extends Controller
         return json_encode($arrayResp);
     }
 
+    public function actionEditartipoexamenes($id)
+    {
+        return $this->render('editartipoexamenes', [
+            'model' => Tipoexamenes::find()->where(['id' => $id, "isDeleted" => 0])->one(),
+        ]);
+
+    }
+
 
 
     public function actionPatologiasreg()
@@ -248,7 +257,7 @@ class MantenimientosController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect(URL::base() . "/site/login");
         }
-        $page = "examenes";
+        $page = "tipoexamenes";
         $view=$page;
         $model = Tipoexamenes::find()->where(['isDeleted' => '0'])->orderBy(["nombre" => SORT_ASC])->all();
         $arrayResp = array();
@@ -354,6 +363,24 @@ class MantenimientosController extends Controller
         ]);
     }
 
+    public function actionNuevoexamen()
+    {
+        /*$paciente=Cuentas::find()->where(["isDeleted" => 0,"estatus" => "ACTIVO"])->orderBy(["codigoant" => SORT_ASC])->all();
+        $pacienteArray=array();
+        $cont=0;
+        foreach ($paciente as $key => $value) {
+            if ($cont==0){ $pacienteArray[$cont]["value"]="Seleccione una cuenta"; $pacienteArray[$cont]["id"]=-1; $cont++; }
+            $pacienteArray[$cont]["value"]=$value->codigoant.' -> '.$value->nombre;
+            $pacienteArray[$cont]["id"]=$value->id;
+            $cont++;
+        }*/
+
+        //var_dump($clientesArray);
+        return $this->render('nuevoexamen', [
+            //'data' => $pacienteArray,
+        ]);
+    }
+
     public function actionVerpacientes($id)
     {
         if (Yii::$app->user->isGuest) {
@@ -363,6 +390,17 @@ class MantenimientosController extends Controller
         return $this->render('verpacientes', [
             'paciente' => Pacientes::find()->where(['id'=>$id])->orderBy(["apellidos"=>SORT_DESC])->one(),
             //'modelTeam' => Productos::find()->all(),
+        ]);
+    
+    }
+
+    public function actionVertipoexamenes($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        return $this->render('vertipoexamenes', [
+            'data' => Tipoexamenes::find()->where(['id'=>$id])->one(),
         ]);
     
     }
@@ -647,6 +685,32 @@ class MantenimientosController extends Controller
             return false;
         }
         //return $this->redirect(['index']);
+    }
+
+    public function actionFormnuevotipoexamen()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Medico_tipoexamenes;
+        $data= $data->Nuevo($_POST);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
+    public function actionFormeditartipoexamen()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Medico_tipoexamenes;
+        $data= $data->Editar($_POST);
+        $response=$data;
+        return json_encode($response);
+
     }
 
 
