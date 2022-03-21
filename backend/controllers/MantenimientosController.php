@@ -10,7 +10,14 @@ use common\models\Productos;
 use common\models\Clientes;
 use common\models\Pacientes;
 use backend\components\Medico_tipoexamenes;
+use backend\components\Medico_consultorios;
+use backend\components\Medico_motivoconsulta;
+use backend\components\Medico_consulta;
+use backend\components\Medico_profesiones;
+use common\models\Profesion;
+use common\models\Motivoconsulta;
 use common\models\Tipoexamenes;
+use common\models\Consultorio;
 use common\models\Enfermedades;
 use common\models\Proveedores;
 use common\models\Doctores;
@@ -195,14 +202,38 @@ class MantenimientosController extends Controller
         return json_encode($arrayResp);
     }
 
+
+
     public function actionEditartipoexamenes($id)
     {
         return $this->render('editartipoexamenes', [
             'model' => Tipoexamenes::find()->where(['id' => $id, "isDeleted" => 0])->one(),
         ]);
+    }
+
+    public function actionEditarprofesiones($id)
+    {
+        return $this->render('editarprofesiones', [
+            'data' => Profesion::find()->where(['id' => $id, "isDeleted" => 0])->one(),
+        ]);
 
     }
 
+    public function actionEditarconsultorios($id)
+    {
+        return $this->render('editarconsultorios', [
+            'model' => Consultorio::find()->where(['id' => $id, "isDeleted" => 0])->one(),
+        ]);
+
+    }
+
+    public function actionEditarmotivoconsulta($id)
+    {
+        return $this->render('editarmotivoconsulta', [
+            'data' => Motivoconsulta::find()->where(['id' => $id, "isDeleted" => 0])->one(),
+        ]);
+
+    }
 
 
     public function actionPatologiasreg()
@@ -296,6 +327,146 @@ class MantenimientosController extends Controller
         return json_encode($arrayResp);
     }
 
+    public function actionConsultoriosreg()
+    {
+        //\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        $page = "consultorios";
+        $view=$page;
+        $model = Consultorio::find()->where(['isDeleted' => '0'])->orderBy(["nombre" => SORT_ASC])->all();
+        $arrayResp = array();
+        $count = 0;
+        foreach ($model as $key => $data) {
+            foreach ($data as $id => $text) {
+                $botones= new Botones;
+                $arrayResp[$key]['num'] = $count+1;
+                //$arrayResp[$key]['imagen'] = '<img style="width:30px;" src="/frontend/web/images/articulos/'.$data->imagen.'"/>';
+                //$arrayResp[$key]['proveedor'] = $data->proveedor->nombre;
+                $arrayResp[$key]['usuariocreacion'] = $data->usuariocreacion0->username;
+              //  $arrayResp[$key]['cliente'] = $data->cliente->nombres;
+                if ($id == "id") {
+                    $botonC=$botones->getBotongridArray(
+                        array(
+                          array('tipo'=>'link','nombre'=>'ver', 'id' => 'editar', 'titulo'=>'', 'link'=>'ver'.$view.'?id='.$text, 'onclick'=>'' , 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'azul', 'icono'=>'ver','tamanio'=>'superp',  'adicional'=>''),
+                          array('tipo'=>'link','nombre'=>'editar', 'id' => 'editar', 'titulo'=>'', 'link'=>'editar'.$view.'?id='.$text, 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'verdesuave', 'icono'=>'editar','tamanio'=>'superp', 'adicional'=>''),
+                          array('tipo'=>'link','nombre'=>'eliminar', 'id' => 'editar', 'titulo'=>'', 'link'=>'','onclick'=>'deleteReg('.$text. ')', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'rojo', 'icono'=>'eliminar','tamanio'=>'superp', 'adicional'=>''),
+                        )
+                      );
+                    $arrayResp[$key]['acciones'] = '<div style="display:flex;">'.$botonC.'</div>' ;
+                    //$arrayResp[$key]['button'] = '-';
+                }
+                if ($id == "estatus" && $text == 'ACTIVO') {
+                    $arrayResp[$key][$id] = '<small class="badge badge-success"><i class="fa fa-circle"></i>&nbsp; ' . $text . '</small>';
+                } elseif ($id == "estatus" && $text == 'INACTIVO') {
+                    $arrayResp[$key][$id] = '<small class="badge badge-secondary"><i class="fa fa-circle-thin"></i>&nbsp; ' . $text . '</small>';
+                } else {
+
+                    if (  ($id == "descripcion") || ($id == "usuariocreacion") || ($id == "nombre")  ) { $arrayResp[$key][$id] = $text; }
+                    if (($id == "fechacreacion") ) { $arrayResp[$key][$id] = $text; }
+                }
+            }
+            $count++;
+        }
+        return json_encode($arrayResp);
+    }
+
+    public function actionMotivoconsultareg()
+    {
+        //\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        $page = "motivoconsulta";
+        $view=$page;
+        $model = Motivoconsulta::find()->where(['isDeleted' => '0'])->orderBy(["nombre" => SORT_ASC])->all();
+        $arrayResp = array();
+        $count = 0;
+        foreach ($model as $key => $data) {
+            foreach ($data as $id => $text) {
+                $botones= new Botones;
+                $arrayResp[$key]['num'] = $count+1;
+                //$arrayResp[$key]['imagen'] = '<img style="width:30px;" src="/frontend/web/images/articulos/'.$data->imagen.'"/>';
+                //$arrayResp[$key]['proveedor'] = $data->proveedor->nombre;
+                $arrayResp[$key]['usuariocreacion'] = $data->usuariocreacion0->username;
+              //  $arrayResp[$key]['cliente'] = $data->cliente->nombres;
+                if ($id == "id") {
+                    $botonC=$botones->getBotongridArray(
+                        array(
+                          array('tipo'=>'link','nombre'=>'ver', 'id' => 'editar', 'titulo'=>'', 'link'=>'ver'.$view.'?id='.$text, 'onclick'=>'' , 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'azul', 'icono'=>'ver','tamanio'=>'superp',  'adicional'=>''),
+                          array('tipo'=>'link','nombre'=>'editar', 'id' => 'editar', 'titulo'=>'', 'link'=>'editar'.$view.'?id='.$text, 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'verdesuave', 'icono'=>'editar','tamanio'=>'superp', 'adicional'=>''),
+                          array('tipo'=>'link','nombre'=>'eliminar', 'id' => 'editar', 'titulo'=>'', 'link'=>'','onclick'=>'deleteReg('.$text. ')', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'rojo', 'icono'=>'eliminar','tamanio'=>'superp', 'adicional'=>''),
+                        )
+                      );
+                    $arrayResp[$key]['acciones'] = '<div style="display:flex;">'.$botonC.'</div>' ;
+                    //$arrayResp[$key]['button'] = '-';
+                }
+                if ($id == "estatus" && $text == 'ACTIVO') {
+                    $arrayResp[$key][$id] = '<small class="badge badge-success"><i class="fa fa-circle"></i>&nbsp; ' . $text . '</small>';
+                } elseif ($id == "estatus" && $text == 'INACTIVO') {
+                    $arrayResp[$key][$id] = '<small class="badge badge-secondary"><i class="fa fa-circle-thin"></i>&nbsp; ' . $text . '</small>';
+                } else {
+
+                    if (  ($id == "descripcion") || ($id == "usuariocreacion") || ($id == "nombre")  ) { $arrayResp[$key][$id] = $text; }
+                    if (($id == "fechacreacion") ) { $arrayResp[$key][$id] = $text; }
+                }
+            }
+            $count++;
+        }
+        return json_encode($arrayResp);
+    }
+
+    public function actionProfesionesreg()
+    {
+        //\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        $page = "profesiones";
+        $view=$page;
+        $model = Profesion::find()->where(['isDeleted' => '0'])->orderBy(["nombre" => SORT_ASC])->all();
+        $arrayResp = array();
+        $count = 0;
+        foreach ($model as $key => $data) {
+            foreach ($data as $id => $text) {
+                $botones= new Botones;
+                $arrayResp[$key]['num'] = $count+1;
+                //$arrayResp[$key]['imagen'] = '<img style="width:30px;" src="/frontend/web/images/articulos/'.$data->imagen.'"/>';
+                //$arrayResp[$key]['proveedor'] = $data->proveedor->nombre;
+                $arrayResp[$key]['usuariocreacion'] = $data->usuariocreacion0->username;
+              //  $arrayResp[$key]['cliente'] = $data->cliente->nombres;
+                if ($id == "id") {
+                    $botonC=$botones->getBotongridArray(
+                        array(
+                          array('tipo'=>'link','nombre'=>'ver', 'id' => 'editar', 'titulo'=>'', 'link'=>'ver'.$view.'?id='.$text, 'onclick'=>'' , 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'azul', 'icono'=>'ver','tamanio'=>'superp',  'adicional'=>''),
+                          array('tipo'=>'link','nombre'=>'editar', 'id' => 'editar', 'titulo'=>'', 'link'=>'editar'.$view.'?id='.$text, 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'verdesuave', 'icono'=>'editar','tamanio'=>'superp', 'adicional'=>''),
+                          array('tipo'=>'link','nombre'=>'eliminar', 'id' => 'editar', 'titulo'=>'', 'link'=>'','onclick'=>'deleteReg('.$text. ')', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'rojo', 'icono'=>'eliminar','tamanio'=>'superp', 'adicional'=>''),
+                        )
+                      );
+                    $arrayResp[$key]['acciones'] = '<div style="display:flex;">'.$botonC.'</div>' ;
+                    //$arrayResp[$key]['button'] = '-';
+                }
+                if ($id == "estatus" && $text == 'ACTIVO') {
+                    $arrayResp[$key][$id] = '<small class="badge badge-success"><i class="fa fa-circle"></i>&nbsp; ' . $text . '</small>';
+                } elseif ($id == "estatus" && $text == 'INACTIVO') {
+                    $arrayResp[$key][$id] = '<small class="badge badge-secondary"><i class="fa fa-circle-thin"></i>&nbsp; ' . $text . '</small>';
+                } else {
+
+                    if (($id == "usuariocreacion") || ($id == "nombre")  ) { $arrayResp[$key][$id] = $text; }
+                    if (($id == "fechacreacion") ) { $arrayResp[$key][$id] = $text; }
+                }
+            }
+            $count++;
+        }
+        return json_encode($arrayResp);
+    }
+
+    public function actionConsultorios()
+    {
+        return $this->render('consultorios');
+    }
+
     public function actionTipoexamenes()
     {
         return $this->render('tipoexamenes');
@@ -309,6 +480,11 @@ class MantenimientosController extends Controller
     public function actionPacientes()
     {
         return $this->render('pacientes');
+    }
+
+    public function actionProfesiones()
+    {
+        return $this->render('profesiones');
     }
 
     public function actionPatologias()
@@ -327,19 +503,13 @@ class MantenimientosController extends Controller
         return $this->render('transporte');
     }
 
+    public function actionNuevomotivoconsulta()
+    {
+        return $this->render('nuevomotivoconsulta');
+    }
+
     public function actionNuevopaciente()
     {
-        /*$paciente=Cuentas::find()->where(["isDeleted" => 0,"estatus" => "ACTIVO"])->orderBy(["codigoant" => SORT_ASC])->all();
-        $pacienteArray=array();
-        $cont=0;
-        foreach ($paciente as $key => $value) {
-            if ($cont==0){ $pacienteArray[$cont]["value"]="Seleccione una cuenta"; $pacienteArray[$cont]["id"]=-1; $cont++; }
-            $pacienteArray[$cont]["value"]=$value->codigoant.' -> '.$value->nombre;
-            $pacienteArray[$cont]["id"]=$value->id;
-            $cont++;
-        }*/
-
-        //var_dump($clientesArray);
         return $this->render('nuevopaciente', [
             'cuentas' => $pacienteArray,
         ]);
@@ -347,19 +517,10 @@ class MantenimientosController extends Controller
 
     public function actionNuevodoctor()
     {
-        /*$paciente=Cuentas::find()->where(["isDeleted" => 0,"estatus" => "ACTIVO"])->orderBy(["codigoant" => SORT_ASC])->all();
-        $pacienteArray=array();
-        $cont=0;
-        foreach ($paciente as $key => $value) {
-            if ($cont==0){ $pacienteArray[$cont]["value"]="Seleccione una cuenta"; $pacienteArray[$cont]["id"]=-1; $cont++; }
-            $pacienteArray[$cont]["value"]=$value->codigoant.' -> '.$value->nombre;
-            $pacienteArray[$cont]["id"]=$value->id;
-            $cont++;
-        }*/
-
-        //var_dump($clientesArray);
+        $profesiones= new Medico_profesiones;
+        $profesiones= $profesiones->getSelect();
         return $this->render('nuevodoctor', [
-            'cuentas' => $pacienteArray,
+            'profesiones' => $profesiones,
         ]);
     }
 
@@ -381,6 +542,20 @@ class MantenimientosController extends Controller
         ]);
     }
 
+    public function actionNuevoconsultorio()
+    {
+        return $this->render('nuevoconsultorio', [
+            //'data' => $pacienteArray,
+        ]);
+    }
+
+    public function actionNuevaprofesion()
+    {
+        return $this->render('nuevaprofesion', [
+            //'data' => $pacienteArray,
+        ]);
+    }
+
     public function actionVerpacientes($id)
     {
         if (Yii::$app->user->isGuest) {
@@ -388,10 +563,36 @@ class MantenimientosController extends Controller
         }
         //var_dump($inventario);
         return $this->render('verpacientes', [
-            'paciente' => Pacientes::find()->where(['id'=>$id])->orderBy(["apellidos"=>SORT_DESC])->one(),
+            'paciente' => Pacientes::find()->where(['id'=>$id])->one(),
             //'modelTeam' => Productos::find()->all(),
         ]);
-    
+
+    }
+
+    public function actionVerconsultorios($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        //var_dump($inventario);
+        return $this->render('verconsultorio', [
+            'data' => Consultorio::find()->where(['id'=>$id])->one(),
+            //'modelTeam' => Productos::find()->all(),
+        ]);
+
+    }
+
+    public function actionVermotivoconsulta($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        //var_dump($inventario);
+        return $this->render('vermotivoconsulta', [
+            'data' => Motivoconsulta::find()->where(['id'=>$id])->one(),
+            //'modelTeam' => Productos::find()->all(),
+        ]);
+
     }
 
     public function actionVertipoexamenes($id)
@@ -402,7 +603,29 @@ class MantenimientosController extends Controller
         return $this->render('vertipoexamenes', [
             'data' => Tipoexamenes::find()->where(['id'=>$id])->one(),
         ]);
-    
+
+    }
+
+    public function actionVerprofesiones($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        return $this->render('verprofesiones', [
+            'data' => Profesion::find()->where(['id'=>$id])->one(),
+        ]);
+
+    }
+
+    public function actionVerdoctores($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        return $this->render('verdoctores', [
+            'data' => Doctores::find()->where(['id'=>$id])->one(),
+        ]);
+
     }
 
     public function actionVeroperarios($id)
@@ -415,7 +638,7 @@ class MantenimientosController extends Controller
             'operario' => Operarios::find()->where(['id'=>$id])->orderBy(["nombres"=>SORT_ASC])->one(),
             //'modelTeam' => Productos::find()->all(),
         ]);
-    
+
     }
 
     public function actionVerproveedor($id)
@@ -423,12 +646,12 @@ class MantenimientosController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect(URL::base() . "/site/login");
         }
- 
+
         return $this->render('verproveedor', [
             'proveedor' => Proveedores::find()->where(['id'=>$id])->orderBy(["nombre"=>SORT_ASC])->one(),
             //'modelTeam' => Productos::find()->all(),
         ]);
-    
+
     }
 
     public function actionVertransporte($id)
@@ -436,12 +659,12 @@ class MantenimientosController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect(URL::base() . "/site/login");
         }
- 
+
         return $this->render('vertransporte', [
             'transporte' => Transporte::find()->where(['id'=>$id])->orderBy(["nombre"=>SORT_ASC])->one(),
             //'modelTeam' => Productos::find()->all(),
         ]);
-    
+
     }
 
     public function actionVercliente($id)
@@ -449,12 +672,12 @@ class MantenimientosController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect(URL::base() . "/site/login");
         }
- 
+
         return $this->render('vercliente', [
             'cliente' => Clientes::find()->where(['id'=>$id])->one(),
             //'modelTeam' => Productos::find()->all(),
         ]);
-    
+
     }
 
     public function actionProveedoresreg()
@@ -544,21 +767,11 @@ class MantenimientosController extends Controller
                     if (($id == "nombres")) { $arrayResp[$key][$id] = $text; }
                     if (($id == "usuariocreacion") ) { $arrayResp[$key][$id] = $text; }
                     if (($id == "fechacreacion") ) { $arrayResp[$key][$id] = $text; }
-
                 }
-
             }
-
             $count++;
-
         }
-
-
-
         return json_encode($arrayResp);
-
-
-
     }
 
     public function actionTransportereg()
@@ -600,23 +813,14 @@ class MantenimientosController extends Controller
                     if (($id == "direccion") || ($id == "contacto") || ($id == "ruc")) { $arrayResp[$key][$id] = $text; }
                     if (($id == "usuariocreacion") ) { $arrayResp[$key][$id] = $text; }
                     if (($id == "fechacreacion") ) { $arrayResp[$key][$id] = $text; }
-
                 }
-
             }
-
             $count++;
 
         }
-
-
-
         return json_encode($arrayResp);
-
-
-
     }
-    
+
 
 
     /**
@@ -650,6 +854,13 @@ class MantenimientosController extends Controller
     {
         return $this->render('proveedores');
     }
+
+    public function actionMotivoconsulta()
+    {
+        return $this->render('motivoconsulta');
+    }
+
+
 
     public function actionOperarioseliminar($id)
     {
@@ -687,6 +898,56 @@ class MantenimientosController extends Controller
         //return $this->redirect(['index']);
     }
 
+    public function actionConsultorioseliminar($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+
+        $data = new Medico_consultorios;
+        $data= $data->Eliminar($id);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
+    public function actionMotivoconsultaeliminar($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        $data = new Medico_motivoconsulta;
+        $data= $data->Eliminar($id);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
+    public function actionProfesioneseliminar($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        $data = new Medico_Profesiones;
+        $data= $data->Eliminar($id);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
+    public function actionFormnuevaprofesion()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Medico_profesiones;
+        $data= $data->Nuevo($_POST);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
     public function actionFormnuevotipoexamen()
     {
         if (Yii::$app->user->isGuest) {
@@ -695,6 +956,71 @@ class MantenimientosController extends Controller
         extract($_POST);
         $data= new Medico_tipoexamenes;
         $data= $data->Nuevo($_POST);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
+    public function actionFormnuevomotivoconsulta()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Medico_motivoconsulta;
+        $data= $data->Nuevo($_POST);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
+    public function actionFormeditarmotivoconsulta()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Medico_motivoconsulta;
+        $data= $data->Editar($_POST);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
+    public function actionFormnuevoconsultorio()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Medico_consultorios;
+        $data= $data->Nuevo($_POST);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
+    public function actionFormeditarconsultorio()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Medico_consultorios;
+        $data= $data->Editar($_POST);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
+    public function actionFormeditarprofesion()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Medico_profesiones;
+        $data= $data->Editar($_POST);
         $response=$data;
         return json_encode($response);
 

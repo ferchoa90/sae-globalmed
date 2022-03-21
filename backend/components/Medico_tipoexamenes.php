@@ -65,20 +65,20 @@ class Medico_tipoexamenes extends Component
             $dataModel->estatus="ACTIVO";
             if ($dataModel->save()) {
                 $id=$dataModel->id;
-                $error=false; 
-                return array("response" => true, "id" => $dataModel->id, "mensaje"=> "Registro agregado","tipo"=>"success", "success"=>true); 
+                $error=false;
+                return array("response" => true, "id" => $dataModel->id, "mensaje"=> "Registro agregado","tipo"=>"success", "success"=>true);
             } else {
                 $this->callback(1,$id,$dataModel->errors);
                 return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
-            }    
+            }
         else:
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO POST";
-            $log->Nuevo("USUARIOS :: Medico_tipoexamenes",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo("TIPOS EXAMENES :: Medico_tipoexamenes",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
         endif;
-        
+
         return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
     }
 
@@ -96,20 +96,20 @@ class Medico_tipoexamenes extends Component
             $dataModel->usuarioact=Yii::$app->user->identity->id;
             $dataModel->fechaact= date("Y-m-d H:i:s");
             if ($dataModel->save()) {
-                $error=false; 
-                return array("response" => true, "id" => $dataModel->id, "mensaje"=> "Registro actualizado","tipo"=>"success", "success"=>true); 
+                $error=false;
+                return array("response" => true, "id" => $dataModel->id, "mensaje"=> "Registro actualizado","tipo"=>"success", "success"=>true);
             } else {
                 $this->callback(1,$id,$dataModel->errors);
                 return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizado el registro","tipo"=>"error", "success"=>false);
-            }    
+            }
         else:
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO POST";
-            $log->Nuevo("USUARIOS :: Medico_tipoexamenes -> editar",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo("TIPOS EXAMENES :: Medico_tipoexamenes -> editar",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizado el registro","tipo"=>"error", "success"=>false);
         endif;
-        
+
         return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizado el registro","tipo"=>"error", "success"=>false);
     }
 
@@ -122,13 +122,13 @@ class Medico_tipoexamenes extends Component
                 $log->Nuevo("TIPOS EXAMENES ",$error,$observacion,0,Yii::$app->user->identity->id);
                 //return true;
                 break;
-            
+
             default:
                 # code...
                 break;
         }
     }
- 
+
 
 
 }

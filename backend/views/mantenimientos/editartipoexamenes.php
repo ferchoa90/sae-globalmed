@@ -24,10 +24,10 @@ $div= new Bloques;
         array('tipo'=>'input','subtipo'=>'numero', 'nombre'=>'valor', 'id'=>'valor', 'valor'=>$model->valor, 'etiqueta'=>'Valor: ','onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'col'=>'col-12 col-md-6', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'descripcion', 'id'=>'descripcion', 'valor'=>$model->descripcion,'etiqueta'=>'Descripcion: ', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'col'=>'col-12 col-md-12', 'adicional'=>''),
         //array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
-        
+
     ),true
 );
- 
+
  $botones= new Botones; $botonC=$botones->getBotongridArray(
     array(
         array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
@@ -37,7 +37,7 @@ $div= new Bloques;
 ));
 
 $contenidoClass= new contenido;
-$stylestatus="badge-success"; 
+$stylestatus="badge-success";
 $estatus='<span class="badge '.$stylestatus.'"><i class="fa fa-circle"></i>&nbsp;&nbsp;ACTIVO</span>';
 $contenido2=$contenidoClass->getContenidoArrayr(
     array(
@@ -46,13 +46,13 @@ $contenido2=$contenidoClass->getContenidoArrayr(
     )
 );
 
- 
+
 $form = ActiveForm::begin(['id'=>'frmDatos']);
  echo $div->getBloqueArray(
     array(
         array('tipo'=>'bloquediv','nombre'=>'div1','id'=>'div1','titulo'=>'Datos tipo examen: '.$model->id,'clase'=>'col-md-9 col-xs-12 ','style'=>'','col'=>'','tipocolor'=>'','adicional'=>'','contenido'=>$contenido.$botonC),
         array('tipo'=>'bloquediv','nombre'=>'div2','id'=>'div2','titulo'=>'Información','clase'=>'col-md-3 col-xs-12 ','style'=>'','col'=>'','tipocolor'=>'gris','adicional'=>'','contenido'=>$contenido2),
-        
+
     )
 );
 ActiveForm::end();
@@ -78,7 +78,7 @@ ActiveForm::end();
                         // ============================ Not here, this would be too late
                         notificacion(data.mensaje,data.tipo);
                         //$this.data().isSubmitted = true;
-                        $('#frmDatos')[0].reset();
+                        //$('#frmDatos')[0].reset();
                         return true;
                     }else{
                         notificacion(data.mensaje,data.tipo);
@@ -104,7 +104,7 @@ ActiveForm::end();
            console.log("validardatos");
             if ($('#nombres').val()!=""){
                 if ($('#valor').val()!=""){
-                            return true;                            
+                            return true;
                 }else{
                     $('#valor').focus();
                     return false;
