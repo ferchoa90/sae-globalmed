@@ -312,11 +312,11 @@ private function getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $esti
 
         switch ($leyenda) {
             case '':
-                $input='<input type="hidden" class="'.$clase.'" id="'.$id.'" name="'.$nombre.'" value="'.$valor.'">';
+                $input='<input type="hidden" class="'.$clase.'" id="'.$id.'" name="'.$nombre.'" value="'.$valor.'" '.$adicional.'>';
                 break;
 
                 default:
-                $input='<input type="hidden" class="'.$clase.'" id="'.$id.'" name="'.$nombre.'" value="'.$valor.'" >';
+                $input='<input type="hidden" class="'.$clase.'" id="'.$id.'" name="'.$nombre.'" value="'.$valor.'" '.$adicional.'>';
                 break;
         }
 
@@ -680,11 +680,11 @@ private function getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $esti
 
         switch ($leyenda) {
             case '':
-                $input='<input type="date" data-provide="datepicker" class="'.$clase.'" id="'.$id.'" name="'.$nombre.'" value="'.$valor.'">';
+                $input='<input type="date" data-provide="datepicker" class="'.$clase.'" id="'.$id.'" name="'.$nombre.'" value="'.$valor.'" '.$adicional.'>';
                 break;
 
                 default:
-                $input='<input type="date" data-provide="datepicker" class="'.$clase.'" id="'.$id.'" name="'.$nombre.'" value="'.$valor.'" placeholder="'.$leyenda.'">';
+                $input='<input type="date" data-provide="datepicker" class="'.$clase.'" id="'.$id.'" name="'.$nombre.'" value="'.$valor.'" placeholder="'.$leyenda.'" '.$adicional.'>';
                 break;
         }
 

@@ -90,7 +90,7 @@ class Medico_profesiones extends Component
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO POST";
-            $log->Nuevo($this->MODULO." :: Medico_profesiones",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo(self::MODULO." :: Medico_profesiones",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
         endif;
 
@@ -119,7 +119,7 @@ class Medico_profesiones extends Component
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO POST";
-            $log->Nuevo($this->MODULO." :: Medico_consultorio -> editar",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo(self::MODULO." :: Medico_consultorio -> editar",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizado el registro","tipo"=>"error", "success"=>false);
         endif;
 
@@ -145,7 +145,7 @@ class Medico_profesiones extends Component
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO ID";
-            $log->Nuevo($this->MODULO." :: Medico_profesiones -> eliminar",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo(self::MODULO." :: Medico_profesiones -> eliminar",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al eliminar el registro","tipo"=>"error", "success"=>false);
         endif;
 
@@ -158,7 +158,7 @@ class Medico_profesiones extends Component
             case 1:
                 $log= new Log_errores;
                 $observacion="ID: ".$id;
-                $log->Nuevo($this->MODULO." ",$error,$observacion,0,Yii::$app->user->identity->id);
+                $log->Nuevo(self::MODULO." ",$error,$observacion,0,Yii::$app->user->identity->id);
                 //return true;
                 break;
 

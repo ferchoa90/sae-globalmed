@@ -14,6 +14,7 @@ use backend\components\Medico_consultorios;
 use backend\components\Medico_motivoconsulta;
 use backend\components\Medico_consulta;
 use backend\components\Medico_profesiones;
+use backend\components\Medico_doctores;
 use common\models\Profesion;
 use common\models\Motivoconsulta;
 use common\models\Tipoexamenes;
@@ -935,6 +936,19 @@ class MantenimientosController extends Controller
 
     }
 
+    public function actionFormnuevodoctor()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Medico_doctores;
+        $data= $data->Nuevo($_POST);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
     public function actionFormnuevaprofesion()
     {
         if (Yii::$app->user->isGuest) {
@@ -981,6 +995,19 @@ class MantenimientosController extends Controller
         }
         extract($_POST);
         $data= new Medico_motivoconsulta;
+        $data= $data->Editar($_POST);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
+    public function actionFormeditardoctor()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Medico_doctores;
         $data= $data->Editar($_POST);
         $response=$data;
         return json_encode($response);

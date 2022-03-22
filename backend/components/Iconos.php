@@ -33,13 +33,17 @@ class Iconos extends Component
                 $tipo='fa fa-file-code-o';
                 break;
 
-            
+ 
             case 'pdf':
                 $tipo='file-pdf-o';
                 break;
 
             case 'lapiz':
                 $tipo='fas fa-pencil-alt';
+                break;
+
+            case 'telefono':
+                $tipo='fa fa-phone';
                 break;
 
             case 'ver':
@@ -86,7 +90,7 @@ class Iconos extends Component
                 $tipo='fas fa-id-card';
                 break;
 
-            case 'arroba':
+            case 'arroba' || 'correo':
                 $tipo='fa fa-at';
                 break;
 
