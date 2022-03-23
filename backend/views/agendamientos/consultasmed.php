@@ -18,9 +18,9 @@ $botones= new Botones;
 ?>
 <div class="row col-12 p-2" >
 <?php
-echo $botones->getBotongridArray(
-    array(array('tipo'=>'link','nombre'=>'ver', 'id' => 'new', 'titulo'=>' Agregar Cita', 'link'=>'nuevacita', 'onclick'=>'' , 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'verde', 'icono'=>'nuevo','tamanio'=>'pequeño',  'adicional'=>'')));
-
+//echo $botones->getBotongridArray(
+  // array(array('tipo'=>'link','nombre'=>'ver', 'id' => 'new', 'titulo'=>' Agregar Cita', 'link'=>'nuevacita', 'onclick'=>'' , 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'verde', 'icono'=>'nuevo','tamanio'=>'pequeño',  'adicional'=>''))
+//);
 ?>
 </div>
 <?php
@@ -40,7 +40,7 @@ $columnas= array(
 
 echo $grid->getGrid(
         array(
-            array('tipo'=>'datagrid','nombre'=>'table','id'=>'table','columnas'=>$columnas,'clase'=>'','style'=>'','col'=>'','adicional'=>'','url'=>'citasmedicasreg')
+            array('tipo'=>'datagrid','nombre'=>'table','id'=>'table','columnas'=>$columnas,'clase'=>'','style'=>'','col'=>'','adicional'=>'','url'=>'consultasmedicasreg')
         )
 );
 

@@ -237,7 +237,8 @@ class AgendamientosController extends Controller
         $page = "consultamedica";
         $view=$page;
         $usuario=Yii::$app->user->identity->id;
-        $model = Citasmedicas::find()->where(['isDeleted' => '0','iddoctor' => $usuario])->orderBy(["fechacreacion" => SORT_DESC])->all();
+        $doctor= Doctores::find()->where(['isDeleted' => '0','idususistem' => $usuario])->orderBy(["fechacreacion" => SORT_DESC])->one();
+        $model = Citasmedicas::find()->where(['isDeleted' => '0','iddoctor' => $doctor->id])->orderBy(["fechacreacion" => SORT_DESC])->all();
         $arrayResp = array();
         $count = 0;
         foreach ($model as $key => $data) {
@@ -247,7 +248,7 @@ class AgendamientosController extends Controller
                     $editar=array('tipo'=>'link','nombre'=>'editar', 'id' => 'editar', 'titulo'=>'', 'link'=>'editar'.$view.'?id='.$data["id"], 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'verdesuave', 'icono'=>'editar','tamanio'=>'superp', 'adicional'=>'');
                 }
                 if ( $data["estatus"]=="ACTIVO" ) {
-                    $borrar=array('tipo'=>'link','nombre'=>'eliminar', 'id' => 'editar', 'titulo'=>'', 'link'=>'','onclick'=>'deleteReg('.$data["id"]. ')', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'rojo', 'icono'=>'eliminar','tamanio'=>'superp', 'adicional'=>'');
+                    //$borrar=array('tipo'=>'link','nombre'=>'eliminar', 'id' => 'editar', 'titulo'=>'', 'link'=>'','onclick'=>'deleteReg('.$data["id"]. ')', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'rojo', 'icono'=>'eliminar','tamanio'=>'superp', 'adicional'=>'');
                 }
 
             foreach ($data as $id => $text) {
@@ -328,6 +329,17 @@ class AgendamientosController extends Controller
         $cita= Citasmedicas::find()->where(['id' => $id, "isDeleted" => 0])->one();
 
         return $this->render('vercita', [
+            'cita' =>$cita,
+           // 'entregasdetalle' => Diariodetalle::find()->where(['diario' => $entregas->diario, "isDeleted" => 0])->all(),
+        ]);
+
+    }
+
+    public function actionVerconsultamedica($id)
+    {
+        $cita= Citasmedicas::find()->where(['id' => $id, "isDeleted" => 0])->one();
+
+        return $this->render('verconsultamedica', [
             'cita' =>$cita,
            // 'entregasdetalle' => Diariodetalle::find()->where(['diario' => $entregas->diario, "isDeleted" => 0])->all(),
         ]);
