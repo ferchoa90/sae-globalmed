@@ -8,7 +8,7 @@ use yii\base\InvalidConfigException;
 use common\models\Roles;
 use common\models\Rolespermisos;
 use backend\components\Log_errores;
-use common\models\Doctores;
+use common\models\Ciudades;
 use backend\models\User;
 
 
@@ -20,24 +20,24 @@ use backend\models\User;
  * Time: 14:55
  */
 
-class Medico_doctores extends Component
+class General_Ciudades extends Component
 {
-    const MODULO='DOCTORES';
+    const MODULO='CIUDADES';
 
-    public function getDoctores($tipo,$array=true,$orderby,$limit,$all=true)
+    public function getCiudades($tipo,$array=true,$orderby,$limit,$all=true)
     {
         if ($all){
-            $asiento= Doctores::find()->where(["isDeleted"=>0])->all();
+            $asiento= Ciudades::find()->where(["isDeleted"=>0])->all();
         }else{
-            $asiento= Doctores::find()->where(["isDeleted"=>0])->one();
+            $asiento= Ciudades::find()->where(["isDeleted"=>0])->one();
         }
     }
 
-    public function getDoctor($id,$condicion=NULL,$itemsret=NULL)
+    public function getCiudad($id,$condicion=NULL,$itemsret=NULL,$idprovincia=0,$idpais=1)
     {
         $result=array();
         if ($id){
-            $result= Doctores::find()->where(["id"=>$id])->one();
+            $result= Ciudades::find()->where(["id"=>$id,"idpais"=>$idpais])->one();
             if ($result)
             {
                 //$result=$result["nombres"].' '.$result["apellidos"].')';
@@ -56,18 +56,13 @@ class Medico_doctores extends Component
         //$date = date("Y-m-d H:i:s");
         $idusuario=0;
         $idmodulo=0;
-        $model= new Doctores;
+        $model= new Ciudades;
         $result=false;
         if ($data):
             //$data = $usuario;
-            $model->cedula=$data['cedula'];
-            $model->apellidos=$data['apellidos'];
-            $model->nombres=$data['nombres'];
-            $model->direccion=$data['direccion'];
-            $model->fechanac=$data['fechanac'];
-            $model->tiposangre=$data['tiposangre'];
-            $model->idprofesion=$data['profesion'];
-            $model->correo=$data['correo'];
+            $model->nombre=$data['nombre'];
+            $model->idpais=$data['pais'];
+            $model->idprovincia=$data['provincia'];
             $model->isDeleted=0;
             $model->idususistem=0;
             $model->usuariocreacion=Yii::$app->user->identity->id;
@@ -87,11 +82,27 @@ class Medico_doctores extends Component
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO POST";
-            $log->Nuevo(self::MODULO." :: Medico_doctores",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo(self::MODULO." :: General_ciudades",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
         endif;
 
         return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
+    }
+
+    public function getSelect()
+    {
+        $clientes = Ciudades::find()->where("isDeleted = 0")->orderBy(["nombre" => SORT_ASC])->all();
+        //var_dump($clientes);
+        $clientesArray=array();
+        $cont=0;
+        foreach ($clientes as $key => $value) {
+            if ($cont==0){ $clientesArray[$cont]["value"]="Seleccione una ciudad"; $clientesArray[$cont]["id"]=-1; $cont++; }
+            $clientesArray[$cont]["value"]=$value->nombre;
+            $clientesArray[$cont]["id"]=$value->id;
+            $cont++;
+        }
+        return $clientesArray;
+
     }
 
     public function Editar($data)
@@ -101,15 +112,10 @@ class Medico_doctores extends Component
         $result=false;
         if ($data):
             //$data = $usuario;
-            $model= Doctores::find()->where(["id"=>$data['id']])->one();
-            $model->cedula=$data['cedula'];
-            $model->apellidos=$data['apellidos'];
-            $model->nombres=$data['nombres'];
-            $model->idprofesion=$data['profesion'];
-            $model->direccion=$data['direccion'];
-            $model->fechanac=$data['fechanac'];
-            $model->tiposangre=$data['tiposangre'];
-            $model->correo=$data['correo'];
+            $model= Ciudades::find()->where(["id"=>$data['id']])->one();
+            $model->nombre=$data['nombre'];
+            $model->idpais=$data['pais'];
+            $model->idprovincia=$data['provincia'];
             $model->usuarioact=Yii::$app->user->identity->id;
             $model->fechaact= date("Y-m-d H:i:s");
             if ($model->save()) {
@@ -117,17 +123,17 @@ class Medico_doctores extends Component
                 return array("response" => true, "id" => $model->id, "mensaje"=> "Registro actualizado","tipo"=>"success", "success"=>true);
             } else {
                 $this->callback(1,$id,$model->errors);
-                return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
+                return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizado el registro","tipo"=>"error", "success"=>false);
             }
         else:
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO POST";
-            $log->Nuevo(self::MODULO." :: Medico_doctores -> editar",$error,$observacion,0,Yii::$app->user->identity->id);
-            return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
+            $log->Nuevo(self::MODULO." :: General_ciudades -> editar",$error,$observacion,0,Yii::$app->user->identity->id);
+            return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizado el registro","tipo"=>"error", "success"=>false);
         endif;
 
-        return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
+        return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizado el registro","tipo"=>"error", "success"=>false);
     }
 
     public function Eliminar($id)
@@ -136,7 +142,7 @@ class Medico_doctores extends Component
         $result=false;
         if ($id):
             //$data = $usuario;
-            $dataModel= Doctores::find()->where(["id"=>$id])->one();
+            $dataModel= Ciudades::find()->where(["id"=>$id])->one();
             $dataModel->isDeleted=1;
             if ($dataModel->save()) {
                 $error=false;
@@ -149,7 +155,7 @@ class Medico_doctores extends Component
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO ID";
-            $log->Nuevo(self::MODULO." :: Medico_doctores -> eliminar",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo(self::MODULO." :: General_ciudades -> eliminar",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al eliminar el registro","tipo"=>"error", "success"=>false);
         endif;
 

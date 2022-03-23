@@ -5,35 +5,36 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "citasmedicas".
+ * This is the model class for table "consultamedica".
  *
  * @property int $id
- * @property int $idusuario
+ * @property int $idcitamedica
+ * @property int $idpaciente
  * @property resource $observacion
  * @property string $fechacita
  * @property string $horacita
  * @property int|null $isDeleted
  * @property string $fechacreacion
- * @property string $fechaact
+ * @property string|null $fechaact
  * @property int $iddoctor
+ * @property string|null $fechainatencion
+ * @property string|null $fechafinatencion
  * @property int $usuariocreacion
  * @property int|null $usuarioact
- * @property string $estatuscita
- * @property string $via
  * @property string $estatus
  *
- * @property Doctores $iddoctor0
- * @property Pacientes $idusuario0
+ * @property Citasmedicas $idcitamedica0
+ * @property Pacientes $idpaciente0
  * @property User $usuariocreacion0
  */
-class Citasmedicas extends \yii\db\ActiveRecord
+class Consultamedica extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'citasmedicas';
+        return 'consultamedica';
     }
 
     /**
@@ -42,13 +43,13 @@ class Citasmedicas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idusuario', 'observacion', 'fechacita', 'horacita',   'usuariocreacion'], 'required'],
-            [['idusuario', 'isDeleted', 'iddoctor', 'usuariocreacion', 'usuarioact'], 'integer'],
-            [['observacion', 'estatuscita', 'via', 'estatus'], 'string'],
-            [['fechacita', 'horacita', 'fechacreacion' ], 'safe'],
-            [['idusuario'], 'exist', 'skipOnError' => true, 'targetClass' => Pacientes::className(), 'targetAttribute' => ['idusuario' => 'id']],
+            [['idcitamedica', 'idpaciente', 'observacion', 'fechacita', 'horacita', 'usuariocreacion'], 'required'],
+            [['idcitamedica', 'idpaciente', 'isDeleted', 'iddoctor', 'usuariocreacion', 'usuarioact'], 'integer'],
+            [['observacion', 'estatus'], 'string'],
+            [['fechacita', 'horacita', 'fechacreacion', 'fechaact', 'fechainatencion', 'fechafinatencion'], 'safe'],
+            [['idpaciente'], 'exist', 'skipOnError' => true, 'targetClass' => Pacientes::className(), 'targetAttribute' => ['idpaciente' => 'id']],
+            [['idcitamedica'], 'exist', 'skipOnError' => true, 'targetClass' => Citasmedicas::className(), 'targetAttribute' => ['idcitamedica' => 'id']],
             [['usuariocreacion'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['usuariocreacion' => 'id']],
-            [['iddoctor'], 'exist', 'skipOnError' => true, 'targetClass' => Doctores::className(), 'targetAttribute' => ['iddoctor' => 'id']],
         ];
     }
 
@@ -59,7 +60,8 @@ class Citasmedicas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'idusuario' => 'Idusuario',
+            'idcitamedica' => 'Idcitamedica',
+            'idpaciente' => 'Idpaciente',
             'observacion' => 'Observacion',
             'fechacita' => 'Fechacita',
             'horacita' => 'Horacita',
@@ -67,32 +69,32 @@ class Citasmedicas extends \yii\db\ActiveRecord
             'fechacreacion' => 'Fechacreacion',
             'fechaact' => 'Fechaact',
             'iddoctor' => 'Iddoctor',
+            'fechainatencion' => 'Fechainatencion',
+            'fechafinatencion' => 'Fechafinatencion',
             'usuariocreacion' => 'Usuariocreacion',
             'usuarioact' => 'Usuarioact',
-            'estatuscita' => 'Estatuscita',
-            'via' => 'Via',
             'estatus' => 'Estatus',
         ];
     }
 
     /**
-     * Gets query for [[Iddoctor0]].
+     * Gets query for [[Idcitamedica0]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIddoctor0()
+    public function getIdcitamedica0()
     {
-        return $this->hasOne(Doctores::className(), ['id' => 'iddoctor']);
+        return $this->hasOne(Citasmedicas::className(), ['id' => 'idcitamedica']);
     }
 
     /**
-     * Gets query for [[Idusuario0]].
+     * Gets query for [[Idpaciente0]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdusuario0()
+    public function getIdpaciente0()
     {
-        return $this->hasOne(Pacientes::className(), ['id' => 'idusuario']);
+        return $this->hasOne(Pacientes::className(), ['id' => 'idpaciente']);
     }
 
     /**
@@ -103,13 +105,5 @@ class Citasmedicas extends \yii\db\ActiveRecord
     public function getUsuariocreacion0()
     {
         return $this->hasOne(User::className(), ['id' => 'usuariocreacion']);
-    }
-
-
-    public function getUsuarioactualizacion0()
-    {
-        $response=$this->hasOne(User::className(), ['id' => 'usuarioact']);
-        if (!$this->usuarioact){ $response=(object) $array; $response->username="No registra";}
-        return $response;
     }
 }

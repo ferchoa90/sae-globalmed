@@ -19,6 +19,7 @@ $div= new Bloques;
 $urlpost='formeditardoctor';
  $contenido=$objeto->getObjetosArray(
     array(
+        array('tipo'=>'input','subtipo'=>'oculto', 'nombre'=>'id', 'id'=>'id', 'valor'=>$data->id,   'col'=>'col-12 col-md-6', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'apellidos', 'id'=>'apellidos', 'valor'=>$data->apellidos, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Apellidos: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'nombres', 'id'=>'nombres', 'valor'=>$data->nombres, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombres: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
         array('tipo'=>'select','subtipo'=>'', 'nombre'=>'profesion', 'id'=>'profesion', 'valor'=>$profesiones,'valordefecto'=>$data->idprofesion, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Profesión: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
@@ -104,7 +105,7 @@ ActiveForm::end();
                         // ============================ Not here, this would be too late
                         notificacion(data.mensaje,data.tipo);
                         //$this.data().isSubmitted = true;
-                        $('#frmDatos')[0].reset();
+                        //$('#frmDatos')[0].reset();
                         return true;
                     }else{
                         notificacion(data.mensaje,data.tipo);

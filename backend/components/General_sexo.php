@@ -8,7 +8,7 @@ use yii\base\InvalidConfigException;
 use common\models\Roles;
 use common\models\Rolespermisos;
 use backend\components\Log_errores;
-use common\models\Doctores;
+use common\models\Sexo;
 use backend\models\User;
 
 
@@ -20,24 +20,24 @@ use backend\models\User;
  * Time: 14:55
  */
 
-class Medico_doctores extends Component
+class General_sexo extends Component
 {
-    const MODULO='DOCTORES';
+    const MODULO='SEXO';
 
-    public function getDoctores($tipo,$array=true,$orderby,$limit,$all=true)
+    public function getSexo($tipo,$array=true,$orderby,$limit,$all=true)
     {
         if ($all){
-            $asiento= Doctores::find()->where(["isDeleted"=>0])->all();
+            $asiento= Sexo::find()->where(["isDeleted"=>0])->all();
         }else{
-            $asiento= Doctores::find()->where(["isDeleted"=>0])->one();
+            $asiento= Sexo::find()->where(["isDeleted"=>0])->one();
         }
     }
 
-    public function getDoctor($id,$condicion=NULL,$itemsret=NULL)
+    public function getCiudad($id,$condicion=NULL,$itemsret=NULL)
     {
         $result=array();
         if ($id){
-            $result= Doctores::find()->where(["id"=>$id])->one();
+            $result= Sexo::find()->where(["id"=>$id])->one();
             if ($result)
             {
                 //$result=$result["nombres"].' '.$result["apellidos"].')';
@@ -51,23 +51,33 @@ class Medico_doctores extends Component
         return $result;
     }
 
+    public function getSelect()
+    {
+        $clientes = Sexo::find()->where("isDeleted = 0")->orderBy(["nombre" => SORT_ASC])->all();
+        //var_dump($clientes);
+        $clientesArray=array();
+        $cont=0;
+        foreach ($clientes as $key => $value) {
+            if ($cont==0){ $clientesArray[$cont]["value"]="Seleccione un género"; $clientesArray[$cont]["id"]=-1; $cont++; }
+            $clientesArray[$cont]["value"]=$value->nombre;
+            $clientesArray[$cont]["id"]=$value->id;
+            $cont++;
+        }
+        return $clientesArray;
+
+    }
+
     public function Nuevo($data)
     {
         //$date = date("Y-m-d H:i:s");
         $idusuario=0;
         $idmodulo=0;
-        $model= new Doctores;
+        $model= new Sexo;
         $result=false;
         if ($data):
             //$data = $usuario;
-            $model->cedula=$data['cedula'];
-            $model->apellidos=$data['apellidos'];
-            $model->nombres=$data['nombres'];
-            $model->direccion=$data['direccion'];
-            $model->fechanac=$data['fechanac'];
-            $model->tiposangre=$data['tiposangre'];
-            $model->idprofesion=$data['profesion'];
-            $model->correo=$data['correo'];
+            $model->nombre=$data['nombre'];
+            $model->sufijo=$data['sufijo'];
             $model->isDeleted=0;
             $model->idususistem=0;
             $model->usuariocreacion=Yii::$app->user->identity->id;
@@ -87,7 +97,7 @@ class Medico_doctores extends Component
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO POST";
-            $log->Nuevo(self::MODULO." :: Medico_doctores",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo(self::MODULO." :: General_sexo",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
         endif;
 
@@ -101,15 +111,9 @@ class Medico_doctores extends Component
         $result=false;
         if ($data):
             //$data = $usuario;
-            $model= Doctores::find()->where(["id"=>$data['id']])->one();
-            $model->cedula=$data['cedula'];
-            $model->apellidos=$data['apellidos'];
-            $model->nombres=$data['nombres'];
-            $model->idprofesion=$data['profesion'];
-            $model->direccion=$data['direccion'];
-            $model->fechanac=$data['fechanac'];
-            $model->tiposangre=$data['tiposangre'];
-            $model->correo=$data['correo'];
+            $model= Sexo::find()->where(["id"=>$data['id']])->one();
+            $model->nombre=$data['nombre'];
+            $model->sufijo=$data['sufijo'];
             $model->usuarioact=Yii::$app->user->identity->id;
             $model->fechaact= date("Y-m-d H:i:s");
             if ($model->save()) {
@@ -117,17 +121,17 @@ class Medico_doctores extends Component
                 return array("response" => true, "id" => $model->id, "mensaje"=> "Registro actualizado","tipo"=>"success", "success"=>true);
             } else {
                 $this->callback(1,$id,$model->errors);
-                return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
+                return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizado el registro","tipo"=>"error", "success"=>false);
             }
         else:
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO POST";
-            $log->Nuevo(self::MODULO." :: Medico_doctores -> editar",$error,$observacion,0,Yii::$app->user->identity->id);
-            return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
+            $log->Nuevo(self::MODULO." :: General_sexo -> editar",$error,$observacion,0,Yii::$app->user->identity->id);
+            return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizado el registro","tipo"=>"error", "success"=>false);
         endif;
 
-        return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
+        return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizado el registro","tipo"=>"error", "success"=>false);
     }
 
     public function Eliminar($id)
@@ -136,7 +140,7 @@ class Medico_doctores extends Component
         $result=false;
         if ($id):
             //$data = $usuario;
-            $dataModel= Doctores::find()->where(["id"=>$id])->one();
+            $dataModel= Sexo::find()->where(["id"=>$id])->one();
             $dataModel->isDeleted=1;
             if ($dataModel->save()) {
                 $error=false;
@@ -149,7 +153,7 @@ class Medico_doctores extends Component
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO ID";
-            $log->Nuevo(self::MODULO." :: Medico_doctores -> eliminar",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo(self::MODULO." :: General_sexo -> eliminar",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al eliminar el registro","tipo"=>"error", "success"=>false);
         endif;
 

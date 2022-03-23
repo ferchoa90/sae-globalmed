@@ -8,7 +8,7 @@ use yii\base\InvalidConfigException;
 use common\models\Roles;
 use common\models\Rolespermisos;
 use backend\components\Log_errores;
-use common\models\Pacientes;
+use common\models\Citasmedicas;
 use backend\models\User;
 
 
@@ -20,24 +20,24 @@ use backend\models\User;
  * Time: 14:55
  */
 
-class Medico_pacientes extends Component
+class Medico_citas extends Component
 {
-    const MODULO='PACIENTES';
+    const MODULO='CITAS';
 
-    public function getPacientes($tipo,$array=true,$orderby,$limit,$all=true)
+    public function getCitas($tipo,$array=true,$orderby,$limit,$all=true)
     {
         if ($all){
-            $asiento= Pacientes::find()->where(["isDeleted"=>0])->all();
+            $asiento= Citasmedicas::find()->where(["isDeleted"=>0])->all();
         }else{
-            $asiento= Pacientes::find()->where(["isDeleted"=>0])->one();
+            $asiento= Citasmedicas::find()->where(["isDeleted"=>0])->one();
         }
     }
 
-    public function getPaciente($id,$condicion=NULL,$itemsret=NULL)
+    public function getCitamedica($id,$condicion=NULL,$itemsret=NULL)
     {
         $result=array();
         if ($id){
-            $result= Pacientes::find()->where(["id"=>$id])->one();
+            $result= Citasmedicas::find()->where(["id"=>$id])->one();
             if ($result)
             {
                 //$result=$result["nombres"].' '.$result["apellidos"].')';
@@ -51,49 +51,21 @@ class Medico_pacientes extends Component
         return $result;
     }
 
-    public function getSelect()
-    {
-        $clientes = Pacientes::find()->where(["isDeleted" => 0])->orderBy(["nombre" => SORT_ASC])->all();
-        //var_dump($clientes);
-        $clientesArray=array();
-        $cont=0;
-        foreach ($clientes as $key => $value) {
-            if ($cont==0){ $clientesArray[$cont]["value"]="Seleccione un paciente"; $clientesArray[$cont]["id"]=-1; $cont++; }
-            $clientesArray[$cont]["value"]=$value->apellidos.' '.$value->nombres;
-            $clientesArray[$cont]["id"]=$value->id;
-            $cont++;
-        }
-        return $clientesArray;
-
-    }
-
     public function Nuevo($data)
     {
         //$date = date("Y-m-d H:i:s");
         $idusuario=0;
         $idmodulo=0;
-        $model= new Pacientes;
+        $model= new Citasmedicas;
         $result=false;
         if ($data):
-            $model->nombres=$data['nombres'];
-            $model->apellidos=$data['apellidos'];
-            $model->cedula=$data['cedula'];
-            $model->idgenero=$data['genero'];
-            $model->idciudad=$data['ciudad'];
-            $model->direccion=$data['direccion'];
-            $model->correo=$data['correo'];
-            $model->alerta=$data['alerta'];
-            $model->fechanac=$data['fechanac'];
-            $model->idprofesion=$data['profesion'];
-            $model->tiposangre=$data['tiposangre'];
-            $model->antecedentesp=$data['antecedentesp'];
-            $model->antecedenteso=$data['antecedenteso'];
-            $model->antecedentesf=$data['antecedentesf'];
-            $model->enfermedada=$data['enfermedada'];
-            $model->antecedentesf=$data['antecedentesf'];
-            $model->telefonoemer=$data['telefonoemer'];
-            $model->direccionemer=$data['direccionemer'];
+            $model->idusuario=$data['paciente'];
+            $model->fechacita=$data['fecha'];
+            $model->horacita=$data['hora'];
+            $model->iddoctor=$data['doctor'];
+            $model->observacion=$data['observacion'];
             $model->usuariocreacion=Yii::$app->user->identity->id;
+            $model->estatuscita="AGENDADA";
             $model->estatus="ACTIVO";
             $model->isDeleted=0;
             if ($model->save()) {
@@ -109,7 +81,7 @@ class Medico_pacientes extends Component
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO POST";
-            $log->Nuevo(self::MODULO." :: Medico_pacientes ",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo(self::MODULO." :: Medico_citas ",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
         endif;
 
@@ -121,25 +93,12 @@ class Medico_pacientes extends Component
         $id=0;
         $result=false;
         if ($data):
-            $model= Pacientes::find()->where(["id"=>$data['id']])->one();
-            $model->nombres=$data['nombres'];
-            $model->apellidos=$data['apellidos'];
-            $model->cedula=$data['cedula'];
-            $model->alerta=$data['alerta'];
-            $model->idgenero=$data['genero'];
-            $model->idciudad=$data['ciudad'];
-            $model->idprofesion=$data['profesion'];
-            $model->direccion=$data['direccion'];
-            $model->correo=$data['correo'];
-            $model->fechanac=$data['fechanac'];
-            $model->tiposangre=$data['tiposangre'];
-            $model->antecedentesp=$data['antecedentesp'];
-            $model->antecedenteso=$data['antecedenteso'];
-            $model->antecedentesf=$data['antecedentesf'];
-            $model->enfermedada=$data['enfermedada'];
-            $model->antecedentesf=$data['antecedentesf'];
-            $model->telefonoemer=$data['telefonoemer'];
-            $model->direccionemer=$data['direccionemer'];
+            $model= Citasmedicas::find()->where(["id"=>$data['id']])->one();
+            $model->idusuario=$data['paciente'];
+            $model->fechacita=$data['fecha'];
+            $model->horacita=$data['hora'];
+            $model->iddoctor=$data['doctor'];
+            $model->observacion=$data['observacion'];
             $model->usuarioact=Yii::$app->user->identity->id;
             $model->fechaact= date("Y-m-d H:i:s");
             if ($model->save()) {
@@ -153,7 +112,7 @@ class Medico_pacientes extends Component
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO POST";
-            $log->Nuevo(self::MODULO." :: Medico_pacientes -> editar",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo(self::MODULO." :: Medico_citas -> editar",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
         endif;
 
@@ -166,7 +125,7 @@ class Medico_pacientes extends Component
         $result=false;
         if ($id):
             //$data = $usuario;
-            $data= Pacientes::find()->where(["id"=>$id])->one();
+            $data= Citasmedicas::find()->where(["id"=>$id])->one();
             $data->isDeleted=1;
             if ($data->save()) {
                 $error=false;
@@ -179,22 +138,60 @@ class Medico_pacientes extends Component
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO ID";
-            $log->Nuevo(self::MODULO." :: Medico_pacientes -> eliminar",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo(self::MODULO." :: Medico_citas -> eliminar",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al eliminar el registro","tipo"=>"error", "success"=>false);
         endif;
 
         return array("response" => true, "id" => 0, "mensaje"=> "Error al eliminar el registro","tipo"=>"error", "success"=>false);
     }
 
+    public function estatus($estatus)
+    {
+        $style="";
+
+        switch ($estatus) {
+            case 'AGENDADA':
+                $stylestatuscit='badge-primary';
+                break;
+
+            case 'CONFIRMADA':
+                $stylestatuscit='badge-success';
+                break;
+
+            case 'REENVIADO':
+                $stylestatuscit='badge-primary';
+                break;
+
+            case 'CANCELADA':
+                $stylestatuscit='badge-danger';
+                break;
+
+            case 'ATENDIDA':
+                $stylestatuscit='badge-secondary';
+                break;
+
+            case 'EN ATENCIÓN':
+                $stylestatuscit='badge-info';
+                break;
+
+            case 'REAGENDADA':
+                $stylestatuscit='badge-info';
+                break;
+
+            default:
+                # code...
+                break;
+        }
+        return $style;
+    }
+
     public function callback($tipo,$id,$error)
     {
         switch ($tipo) {
             case 1:
-
-
                 $log= new Log_errores;
                 $observacion="ID: ".$id;
-                $log->Nuevo("USUARIO ",$error,$observacion,0,Yii::$app->user->identity->id);
+                $log->Nuevo(self::MODULO,$error,$observacion,0,Yii::$app->user->identity->id);
                 //return true;
                 break;
 

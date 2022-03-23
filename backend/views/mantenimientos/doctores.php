@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $grid= new Grid;
 $botones= new Botones;
-?> 
+?>
 <div class="row col-12 p-2" >
 <?php
 echo $botones->getBotongridArray(
@@ -29,6 +29,7 @@ $columnas= array(
     array('columna'=>'Identificacion', 'datareg' => 'cedula', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),
     array('columna'=>'Apellidos', 'datareg' => 'apellidos', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),
     array('columna'=>'Nombres', 'datareg' => 'nombres', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),
+    array('columna'=>'Profesión', 'datareg' => 'profesion', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),
     array('columna'=>'Correo', 'datareg' => 'correo', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),
     array('columna'=>'Tipo S.', 'datareg' => 'tiposangre', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),
     array('columna'=>'Dirección', 'datareg' => 'direccion', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),
