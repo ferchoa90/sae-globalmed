@@ -17,6 +17,7 @@ use common\models\Sucursal;
 use common\models\Roles;
 use common\models\Rolespermisos;
 use backend\components\Usuarios_sistema;
+use backend\components\Configuraciones_rolesmodulo;
 
 /**
  * Default controller for the `admin` module
@@ -94,7 +95,14 @@ class UsuariosController extends Controller
 
     public function actionNuevorol()
     {
-        return $this->render('nuevorol');
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        $nuevorol= new Configuraciones_rolesmodulo;
+        $nuevorol= $nuevorol->getData();
+        return $this->render('nuevorol', [
+            'roles' => $nuevorol,
+        ]);
     }
 
 

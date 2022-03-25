@@ -10,12 +10,14 @@ use Yii;
  * @property int $id
  * @property resource $nombre
  * @property resource|null $descripcion
+ * @property resource|null $nameint
  * @property int $idmenu
  * @property int $usuariocreacion
  * @property string $fechacreacion
+ * @property int $isDeleted
  * @property string $estatus
  *
- * @property MenuAdmin $idmenu0
+ * @property Menuadmin $idmenu0
  * @property Rolespermisos[] $rolespermisos
  * @property Rolessubmodulo[] $rolessubmodulos
  * @property User $usuariocreacion0
@@ -37,11 +39,11 @@ class Rolesmodulo extends \yii\db\ActiveRecord
     {
         return [
             [['nombre', 'idmenu', 'usuariocreacion'], 'required'],
-            [['nombre', 'descripcion', 'estatus'], 'string'],
-            [['idmenu', 'usuariocreacion'], 'integer'],
+            [['nombre', 'descripcion', 'nameint', 'estatus'], 'string'],
+            [['idmenu', 'usuariocreacion', 'isDeleted'], 'integer'],
             [['fechacreacion'], 'safe'],
             [['usuariocreacion'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['usuariocreacion' => 'id']],
-            [['idmenu'], 'exist', 'skipOnError' => true, 'targetClass' => MenuAdmin::className(), 'targetAttribute' => ['idmenu' => 'id']],
+            [['idmenu'], 'exist', 'skipOnError' => true, 'targetClass' => Menuadmin::className(), 'targetAttribute' => ['idmenu' => 'id']],
         ];
     }
 
@@ -54,9 +56,11 @@ class Rolesmodulo extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nombre' => 'Nombre',
             'descripcion' => 'Descripcion',
+            'nameint' => 'Nameint',
             'idmenu' => 'Idmenu',
             'usuariocreacion' => 'Usuariocreacion',
             'fechacreacion' => 'Fechacreacion',
+            'isDeleted' => 'Is Deleted',
             'estatus' => 'Estatus',
         ];
     }
@@ -68,7 +72,7 @@ class Rolesmodulo extends \yii\db\ActiveRecord
      */
     public function getIdmenu0()
     {
-        return $this->hasOne(MenuAdmin::className(), ['id' => 'idmenu']);
+        return $this->hasOne(Menuadmin::className(), ['id' => 'idmenu']);
     }
 
     /**
