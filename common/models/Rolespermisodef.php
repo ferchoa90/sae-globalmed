@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "rolessubmodulo".
+ * This is the model class for table "rolespermisodef".
  *
  * @property int $id
  * @property int $idmodulo
@@ -20,14 +20,14 @@ use Yii;
  * @property Rolesmodulo $idmodulo0
  * @property User $usuariocreacion0
  */
-class Rolessubmodulo extends \yii\db\ActiveRecord
+class Rolespermisodef extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'rolessubmodulo';
+        return 'rolespermisodef';
     }
 
     /**

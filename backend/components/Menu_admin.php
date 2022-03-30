@@ -8,7 +8,9 @@ use yii\base\Component;
 use yii\base\InvalidConfigException;
 use common\models\Menuadmin;
 use common\models\Roles;
+use common\models\Rolespermisodef;
 use common\models\Rolespermisos;
+use common\models\Rolesusuario;
 use backend\components\Log_errores;
 
 
@@ -35,31 +37,49 @@ class Menu_admin extends Component
     public function getMenuadmin($rol=0,$context='')
     {
         if ($all){
-            
+
         }else{
-            
+
         }
         //$menu=['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest];
         $menuModel= Menuadmin::find()->where(["tipo"=>"WEB","idparent"=>"0","estatus"=>"ACTIVO","isDeleted"=>0])->orderBy(["orden"=>SORT_ASC])->all();
-        foreach ($menuModel as $key => $data) {
-            
-            $subMenuModel= Menuadmin::find()->where(["tipo"=>"WEB","idparent"=>$data->id,"estatus"=>"ACTIVO","isDeleted"=>0])->orderBy(["orden"=>SORT_ASC])->all();
-            if ($subMenuModel)
-            {
-                $subMenu= array();
-                foreach ($subMenuModel as $key => $data2) {
-                    //if ($data2->nombre=="Mensajes"){ $template='<a href="{url}">{icon} {label}<span class="pull-right-container"><small class="label pull-right bg-yellow">123</small></span></a>'; }
-                    if ($data2->nombre=="Mensajes"){
-                        $template='<a href="{url}">{icon} {label}<span class="pull-right-container"><small class="label pull-right bg-green">0</small></span></a>';
-                        $subMenu[]=array('label' => $data2->nombre, 'icon' => $data2->icono, 'url' => [$data2->link],'active' => '/'.$context == $data2->link,'template'=>$template);  
+        $rolusuario=Rolesusuario::find()->where(["idusuario"=>Yii::$app->user->identity->id,"estatus"=>"ACTIVO","isDeleted"=>0])->one();
+        if ($rolusuario){
+            $rol=$rolusuario["idrol"];
+            $nombrerol= $rolusuario->idrol0->nombre;
+            $rolusuario=Rolespermisos::find()->where(["idrol"=>$rol,"estatus"=>"ACTIVO","isDeleted"=>0])->one();
+            $permisosdef=Rolespermisodef::find()->where(["estatus"=>"ACTIVO","isDeleted"=>0])->all();
+            $permitidomenu=false;
+            foreach ($menuModel as $key => $data) {
+                //$permisosdef=Rolespermisodef::find()->where(["idmenu"=>$data->id,"estatus"=>"ACTIVO","isDeleted"=>0])->one();
+                //echo $data->id;
+                //var_dump($permisosdef);
+                $permitidomenu=false;
+                foreach ($permisosdef as $key => $valuedef) {
+                    if ($valuedef["idmenu"]==$data->id){$permitidomenu=true;}
+                }
+
+                if ($permitidomenu){
+                    $subMenuModel= Menuadmin::find()->where(["tipo"=>"WEB","idparent"=>$data->id,"estatus"=>"ACTIVO","isDeleted"=>0])->orderBy(["orden"=>SORT_ASC])->all();
+                    if ($subMenuModel)
+                    {
+                        $subMenu= array();
+                        foreach ($subMenuModel as $key => $data2) {
+                            //if ($data2->nombre=="Mensajes"){ $template='<a href="{url}">{icon} {label}<span class="pull-right-container"><small class="label pull-right bg-yellow">123</small></span></a>'; }
+                            if ($data2->nombre=="Mensajes"){
+                                $template='<a href="{url}">{icon} {label}<span class="pull-right-container"><small class="label pull-right bg-green">0</small></span></a>';
+                                $subMenu[]=array('label' => $data2->nombre,'options'=> ['data-class'=>'submenu1'], 'icon' => $data2->icono, 'url' => [$data2->link],'active' => '/'.$context == $data2->link,'template'=>$template);
+                            }else{
+                                $subMenu[]=array('label' => $data2->nombre,'options'=> ['data-class'=>'submenu2'], 'icon' => $data2->icono, 'url' => [$data2->link],'active' => '/'.$context == $data2->link);
+                            }
+                        }
+                        $menu[]= array('label' => $data->nombre, 'icon' => $data->icono,'options'=> ['data-class'=>'menu1'], 'items' => $subMenu);
                     }else{
-                        $subMenu[]=array('label' => $data2->nombre, 'icon' => $data2->icono, 'url' => [$data2->link],'active' => '/'.$context == $data2->link);  
+                    $menu[]= array('label' => $data->nombre, 'icon' => $data->icono,'options'=> ['data-class'=>'menu2'], 'url' => [$data->link]);
                     }
                 }
-                $menu[]= array('label' => $data->nombre, 'icon' => $data->icono, 'items' => $subMenu);            
-            }else{
-               $menu[]= array('label' => $data->nombre, 'icon' => $data->icono, 'url' => [$data->link]);            
-            } 
+
+            }
         }
         return $menu;
     }
@@ -160,13 +180,13 @@ class Menu_admin extends Component
 
                 return true;
                 break;
-            
+
             default:
                 # code...
                 break;
         }
     }
- 
+
 
 
 }

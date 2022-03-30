@@ -100,7 +100,7 @@ class ConfiguracionesController extends Controller
         $page = "Menuadmin";
         $model = Menuadmin::find()->where(['isDeleted' => '0'])->orderBy(["idparent" => SORT_ASC,"nombre" => SORT_ASC])->all();
         $arrayResp = array();
-        $count = 1;
+        $count =0;
         foreach ($model as $key => $data) {
             foreach ($data as $id => $text) {
                 $botones= new Botones;

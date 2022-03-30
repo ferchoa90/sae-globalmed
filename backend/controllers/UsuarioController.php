@@ -50,9 +50,9 @@ class UsuarioController extends Controller
      * Renders the index view for the module
      * @return string
      */
-    public function actionIndex()
+    public function actionMiperfil()
     {
-        return $this->render('index');
+        return $this->render('miperfil');
     }
 
     /**
@@ -126,8 +126,8 @@ class UsuarioController extends Controller
             'modelEquipos' => $modelEquipos,
         ]);
     }
- 
- 
+
+
 
     /**
      * Finds the TriviaHead model based on its primary key value.
@@ -146,4 +146,3 @@ class UsuarioController extends Controller
     }
 
 }
-

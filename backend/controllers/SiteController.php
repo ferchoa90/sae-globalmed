@@ -6,6 +6,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use yii\base\ErrorHandler;
 
 /**
  * Site controller
@@ -22,11 +23,11 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error','denegado'],
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index','denegado'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -49,9 +50,20 @@ class SiteController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
+               // 'class' => ErrorAction::class,
             ],
         ];
     }
+
+    public function actionError()
+    {
+        //die(Yii::app()->errorHandler->error['code']);
+        if (Yii::app()->errorHandler->error['code'] == 403)
+            $this->redirect('error');
+        else
+            $this->render('denegado');
+    }
+
 
     /**
      * Displays homepage.
@@ -61,6 +73,12 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index3');
+    }
+
+    public function actionDenegado()
+    {
+       // echo '23232323';
+        return $this->render('denegado');
     }
 
 

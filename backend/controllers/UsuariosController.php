@@ -17,6 +17,7 @@ use common\models\Sucursal;
 use common\models\Roles;
 use common\models\Rolespermisos;
 use backend\components\Usuarios_sistema;
+use backend\components\Usuarios_permisos;
 use backend\components\Configuraciones_rolesmodulo;
 
 /**
@@ -30,15 +31,29 @@ class UsuariosController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create', 'update', 'view', 'delete', 'index'],
+                'only' => ['create', 'update', 'view', 'delete', 'index','nuevorol'],
                 'rules' => [
                     [
-                        'actions' => ['create', 'update', 'view', 'delete', 'index'],
+                        'actions' => ['create', 'update', 'view', 'delete', 'index','nuevorol'],
                         'allow' => true,
                         'roles' => ['@'],
+
                         'matchCallback' => function ($rule, $action) {
-                            return User::isUserAdmin(Yii::$app->user->identity->username);
-                        }
+                            if (Usuarios_permisos::isPermisos(Yii::$app->user->identity->username))
+                            {
+                                return true;
+                            }else{
+                                return $this->redirect('/backend/web/site/denegado');
+                               //return false;
+                            }
+                            //return $this->render('index');
+                        },
+
+                        /*'denyCallback' => function($rule, $action) {
+                            //redirection here
+                            return $this->render('roles');
+                       }*/
+
                     ],
                 ],
             ],
@@ -50,6 +65,8 @@ class UsuariosController extends Controller
             ],
         ];
     }
+
+
 
     /**
      * Renders the index view for the module
