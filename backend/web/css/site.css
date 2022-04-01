@@ -76,7 +76,7 @@ body {
     display: block;
     opacity: 0.7;
     background-color: #fff;
-    z-index: 99;
+    z-index: 9999;
     text-align: center;
   }
 
@@ -157,7 +157,8 @@ body {
 }
 
 [class*=sidebar-dark-] {
-    background-color: transparent !important;
+    /*background-color: transparent !important;*/
+    background-color: white !important;
 }
 
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover {

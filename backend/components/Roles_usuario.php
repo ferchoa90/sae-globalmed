@@ -17,7 +17,7 @@ use yii\base\InvalidConfigException;
  * Time: 19:40
  */
 
-class Rolesusuario extends Component
+class Roles_usuario extends Component
 {
     public function getPermisousuario($idusuario,$modulo,$submodulo=0)
     {
@@ -25,11 +25,11 @@ class Rolesusuario extends Component
             case 0:
                 # code...
                 break;
-            
+
             case 0:
                 # code...
                 break;
-                
+
             default:
                 # code...
                 break;
@@ -49,5 +49,5 @@ class Rolesusuario extends Component
         }
     }
 
- 
+
 }

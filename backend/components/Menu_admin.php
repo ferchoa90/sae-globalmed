@@ -55,16 +55,15 @@ class Menu_admin extends Component
                 //echo $data->id;
                 //var_dump($permisosdef);
                 $permitidomenu=false;
-                
+
                 $arrayPermisos= array();
                 $submodulos= array();
                 foreach ($permisos as $key => $valueper) {
                     foreach ($valueper->idmodulo0 as $key => $valueperdet) {
                         //$submodulos[]=$valueperdet;
                         //var_dump($valueper);
-                         
-                        echo ($valueperdet["idmenu"].' => '.$valueper->id.'| ');
-                        if ($valueperdet["idmenu"]==$valueper->id){$permitidomenu=true;}
+                        //echo ($valueperdet["idmenu"].' => '.$data->id.'<br> ');
+                        if ($valueperdet["idmenu"]==$data->id){$permitidomenu=true;}
                     }
                     if ($valueper->idsubmodulo){
                         foreach ($valueper->idsubmodulo0 as $key => $valuepersubdet) {
@@ -73,45 +72,59 @@ class Menu_admin extends Component
                             //echo $valueperdet["nombreint"];
                         }
                     }
-                    
-                   
+
+
                 }
                 foreach ($permisosdef as $key => $valuedef) {
+                    //echo ($valuedef["idmenu"].' => '.$data->id.'<br> ');
                     if ($valuedef["idmenu"]==$data->id){$permitidomenu=true;}
                 }
                 //var_dump($submodulos);
-                
+
                 if ($permitidomenu){
                     $subMenuModel= Menuadmin::find()->where(["tipo"=>"WEB","idparent"=>$data->id,"estatus"=>"ACTIVO","isDeleted"=>0])->orderBy(["orden"=>SORT_ASC])->all();
                     if ($subMenuModel)
                     {
                         $subMenu= array();
+                        $contsubmenu=0;
                         foreach ($subMenuModel as $key => $data2) {
                             //if ($data2->nombre=="Mensajes"){ $template='<a href="{url}">{icon} {label}<span class="pull-right-container"><small class="label pull-right bg-yellow">123</small></span></a>'; }
-                            if ($data2->nombre=="Mensajes"){
-                                $template='<a href="{url}">{icon} {label}<span class="pull-right-container"><small class="label pull-right bg-green">0</small></span></a>';
-                                $subMenu[]=array('label' => $data2->nombre,'options'=> ['data-class'=>'submenu1'], 'icon' => $data2->icono, 'url' => [$data2->link],'active' => '/'.$context == $data2->link,'template'=>$template);
+                            //echo ' || '.$data2->rolpermiso. '<br>' ;
+                            //echo ' || '.$data2->nombre. '<br>' ;
+                            if ($data2->nombre=="Mensajes" || $data2->nombre=="mensajes" || $data2->nombre=="notificaciones" || $data2->nombre=="Notificaciones"){
+                                $contsubmenu++;
+                                $template='<a href="{url}" class="nav-link " style="width: 100%;">{icon} '.$data2->nombre.' <span class="pull-right-container"><small class="label bg-cyan rounded" style="padding: 2px 5px 2px 5px;">0</small></span></a>';
+                                $subMenu[]=array('label' => $data2->nombre,'options'=> ['data-class'=>'submenu1','style'=>'padding-left:3%;'], 'icon' => $data2->icono, 'url' => [$data2->link],'active' => '/'.$context == $data2->link,'template'=>$template);
                             }else{
                                 $permitidosubmenu=false;
                                 //echo '||'.$permisonom=$data2->rolpermiso.'||';
                                 //var_dump ($submodulos);
-                                foreach ($submodulos as $valsubmodulo) {
-                                    //var_dump($valueper);
-                                    //if ($valueperdet["nombreint"]==$valueper->id){}
-                                    //echo $valueperdet["nombreint"];
-                                    //echo $data2->rolpermiso;
-                                    //echo ' || '.$permisonom. ' => '.$valsubmodulo.'|' ;
-                                    if ($data2->rolpermiso==$valsubmodulo){$permitidosubmenu=true; }
-                                }
-                                if ($permitidosubmenu){
-                                    $subMenu[]=array('label' => $data2->nombre,'options'=> ['data-class'=>'submenu2'], 'icon' => $data2->icono, 'url' => [$data2->link],'active' => '/'.$context == $data2->link);
+                                if ($data2->rolpermiso){
+                                    foreach ($submodulos as $valsubmodulo) {
+                                        //var_dump($valueper);
+                                        //if ($valueperdet["nombreint"]==$valueper->id){}
+                                        //echo $valueperdet["nombreint"];
+                                        //echo $data2->rolpermiso;
+                                        //echo ' || '.$data2->rolpermiso. ' => '.$valsubmodulo.'<br>' ;
+                                        if ($data2->rolpermiso==$valsubmodulo){$permitidosubmenu=true; }
+                                    }
+                                    if ($permitidosubmenu){
+                                        $contsubmenu++;
+                                        $subMenu[]=array('label' => $data2->nombre,'options'=> ['data-class'=>'submenu2'], 'icon' => $data2->icono, 'url' => [$data2->link],'active' => '/'.$context == $data2->link);
+                                    }
                                 }
                             }
                         }
-                        $menu[]= array('label' => $data->nombre, 'icon' => $data->icono,'options'=> ['data-class'=>'menu1'], 'items' => $subMenu);
+                        if ($contsubmenu!=0){
+                            $menu[]= array('label' => $data->nombre, 'icon' => $data->icono,'options'=> ['data-class'=>'menu1'], 'items' => $subMenu);
+                        }else{
+                            $menu[]= array('label' => $data->nombre, 'icon' => $data->icono,'options'=> ['data-class'=>'menu2'], 'url' => [$data->link]);
+                        }
                     }else{
-                    $menu[]= array('label' => $data->nombre, 'icon' => $data->icono,'options'=> ['data-class'=>'menu2'], 'url' => [$data->link]);
+                        $menu[]= array('label' => $data->nombre, 'icon' => $data->icono,'options'=> ['data-class'=>'menu2'], 'url' => [$data->link]);
                     }
+                }else{
+                    //$menu[]= array('label' => $data->nombre, 'icon' => $data->icono,'options'=> ['data-class'=>'menu1'], 'items' => $subMenu);
                 }
 
             }

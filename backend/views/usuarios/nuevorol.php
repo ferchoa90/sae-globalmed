@@ -211,9 +211,10 @@ $contenidotab=$nav->getNavsarray($tabs);
 
         $("#guardar").on('click', function() {
             if (validardatos()==true){
-                var form    = $('#frmDatos'),
-                nombre   = $('#nombrerol').val(),
+                var form    = $('#frmDatos');
+                nombre   = $('#nombrerol').val();
                 descripcion   = $('#descripcion').val();
+                loading(1);
                 $.ajax({
                     url: '<?= $urlpost ?>',
                     async: 'false',
@@ -226,14 +227,25 @@ $contenidotab=$nav->getNavsarray($tabs);
                     console.log(data.success);
                     if ( data.success == true ) {
                         // ============================ Not here, this would be too late
+                        loading(0);
                         notificacion(data.mensaje,data.tipo);
                         //$this.data().isSubmitted = true;
                         $('#frmDatos')[0].reset();
                         return true;
                     }else{
+                        loading(0);
                         notificacion(data.mensaje,data.tipo);
                     }
-                }
+                },
+                    fail:function( ){
+                        loading(0);
+                        return false;
+                    },
+                    error: function(jqXHR,status,error){
+                        if (globalVars.unloaded)
+                            loading(0);
+                            return false;
+                    }
             });
             }else{
 

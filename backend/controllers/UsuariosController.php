@@ -18,6 +18,7 @@ use common\models\Roles;
 use common\models\Rolespermisos;
 use backend\components\Usuarios_sistema;
 use backend\components\Usuarios_permisos;
+
 use backend\components\Configuraciones_rolesmodulo;
 
 /**
@@ -72,6 +73,21 @@ class UsuariosController extends Controller
      * Renders the index view for the module
      * @return string
      */
+
+    public function actionEditarrol($id)
+    {
+        $nuevorol= new Configuraciones_rolesmodulo;
+        $nuevorol= $nuevorol->getDataID();
+        //$roldata=={}
+        return $this->render('editarrol', [
+            'data' => Roles::find()->where(['id' => $id, "isDeleted" => 0])->one(),
+            'roles' => $nuevorol,
+
+        ]);
+    }
+
+
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -122,6 +138,33 @@ class UsuariosController extends Controller
         ]);
     }
 
+    public function actionFormeditarrol()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Usuarios_roles;
+        $data= $data->Editar($_POST);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
+    public function actionFormeditartipoexamen()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Usuarios_roles;
+        $data= $data->Editar($_POST);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
+
 
 
     /**
@@ -137,7 +180,7 @@ class UsuariosController extends Controller
 
         $model = Roles::find()->where(["isDeleted"=>"0"])->orderBy(["fechacreacion" => SORT_DESC])->all();
         $arrayResp = array();
-        $count = 1;
+        $count =0;
         foreach ($model as $key => $data) {
             foreach ($data as $id => $text) {
                 //$arrayResp[$key]['num'] = $count;

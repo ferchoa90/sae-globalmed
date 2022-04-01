@@ -32,7 +32,7 @@ class Objetos extends Component
 
             switch ($obj['tipo']) {
             case 'input':
-                    $resultado.= $this->getInput($obj['subtipo'],$obj['nombre'], $obj['id'], $obj['valor'], $obj['onchange'], $obj['clase'], $obj['estilo'], $obj['icono'],$obj['boxbody'],$obj['etiqueta'],$obj['leyenda'], $obj['col'], $obj['adicional']);
+                    $resultado.= $this->getInput($obj['subtipo'],$obj['nombre'], $obj['id'], $obj['valor'], $obj['onchange'], $obj['clase'], $obj['estilo'], $obj['icono'],$obj['boxbody'],$obj['etiqueta'],$obj['leyenda'], $obj['col'], $obj['adicional'], $obj['valordefecto']);
                     break;
 
             case 'select':
@@ -71,7 +71,7 @@ class Objetos extends Component
         }
     }
 
-    public function getInput($tipo, $nombre='', $id='', $valor='', $onchange='', $clase='', $style='', $icono='',$boxbody=false,$etiqueta='',$leyenda='', $col='', $adicional)
+    public function getInput($tipo, $nombre='', $id='', $valor='', $onchange='', $clase='', $style='', $icono='',$boxbody=false,$etiqueta='',$leyenda='', $col='', $adicional,$valordefecto='')
     {
         //$date = date("Y-m-d H:i:s");
         $iconfa=new Iconos;
@@ -100,7 +100,7 @@ class Objetos extends Component
             case 'checkbox':
                 return $this->getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $estilo, $icono,$boxbody,$etiqueta,$leyenda, $col, $adicional);
                 break;
-            
+
             case 'oculto':
                 return $this->getInputOculto($nombre, $id, $valor,$adicional);
                 break;
@@ -111,7 +111,7 @@ class Objetos extends Component
                 break;
 
             case 'onoff':
-                return $this->getInputOnoff($nombre, $id, $valor, $onchange, $clase, $estilo, $icono,$boxbody,$etiqueta,$leyenda, $col, $adicional);
+                return $this->getInputOnoff($nombre, $id, $valor,$valordefecto, $onchange, $clase, $estilo, $icono,$boxbody,$etiqueta,$leyenda, $col, $adicional);
                 break;
 
             case 'archivo':
@@ -365,7 +365,7 @@ private function getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $esti
                 break;
         }
 
- 
+
         $resultado='
         <div class="'.$col.' mb-3 mt-2">
             <div class="input-group">
@@ -599,7 +599,7 @@ private function getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $esti
 
         }
 
-        private function getInputOnoff($nombre, $id, $valor, $onchange, $clase, $estilo, $icono,$boxbody,$etiqueta,$leyenda='', $col, $adicional)
+        private function getInputOnoff($nombre, $id, $valor, $valordefecto='OFF', $onchange, $clase, $estilo, $icono,$boxbody,$etiqueta,$leyenda='', $col, $adicional)
         {
             $iconfa=new Iconos;
             $iconfa= $iconfa->getIconofa($icono);
@@ -607,6 +607,7 @@ private function getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $esti
             $classdefault='form-control pull-right';
             $boxbodydefault='<div class="box-body">';
             $enddiv='</div>';
+            $valordefectodefault=($valordefecto=='ON')? 'checked="checked"' : '' ;
 
             switch ($clase) {
                 case '':
@@ -618,13 +619,15 @@ private function getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $esti
                     break;
             }
 
+
+
             switch ($leyenda) {
                 case '':
-                    $input='<input type="checkbox" id="'.$id.'" name="'.$nombre.'"   class="'.$clase.'"  data-on="'.$valor.'" data-off="'.$valor.'" data-toggle="toggle" data-onstyle="outline-info" data-offstyle="outline-danger" '.$adicional.' />';
+                    $input='<input type="checkbox"  '.$valordefectodefault.' id="'.$id.'" name="'.$nombre.'"   class="'.$clase.'"  data-on="'.$valor.'" data-off="'.$valor.'" data-toggle="toggle" data-onstyle="outline-info" data-offstyle="outline-danger" '.$adicional.' />';
                     break;
 
                     default:
-                    $input='<input type="checkbox" id="'.$id.'" name="'.$nombre.'"   class="'.$clase.'"  data-on="'.$valor.'" data-off="'.$leyenda.'" data-toggle="toggle" data-onstyle="outline-info" data-offstyle="outline-danger" '.$adicional.' />';
+                    $input='<input type="checkbox" '.$valordefectodefault.' id="'.$id.'" name="'.$nombre.'"   class="'.$clase.'"  data-on="'.$valor.'" data-off="'.$leyenda.'" data-toggle="toggle" data-onstyle="outline-info" data-offstyle="outline-danger" '.$adicional.' />';
                     break;
             }
 

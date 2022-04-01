@@ -73,6 +73,16 @@ class Configuraciones_rolesmodulo extends Component
 
     }
 
+    public function getDataID()
+    {
+        $model = Rolesmodulo::find()->where(["isDeleted" => 0])->orderBy(["id" => SORT_ASC])->all();
+        $dataArray=array();
+        $dataArray=$model;
+        return $dataArray;
+
+    }
+
+
     public function Nuevo($data)
     {
         //$date = date("Y-m-d H:i:s");

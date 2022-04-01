@@ -25,7 +25,7 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/admi
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="<?= URL::base() ?>/css/alertify.rtl.css">
     <?php $this->head() ?>
-    
+
 </head>
 <body class="hold-transition sidebar-mini">
 <?php $this->beginBody() ?>
@@ -83,7 +83,7 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/admi
   text-align: center;
   opacity: 0.7;
   background-color: #000;
-  z-index: 99;
+  z-index: 9999;
 }
 
 #loading-image {
@@ -102,7 +102,7 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/admi
 }
 
 .sidebar-menu a{
-    
+
     background: rgba(129,224,145,.3);
 }
 
@@ -171,4 +171,3 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/admi
         </style>
 
 <script src="<?= URL::base() ?>/js/plugins/bootstrap3-typeahead.min.js"></script>
-

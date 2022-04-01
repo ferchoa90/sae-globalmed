@@ -1,4 +1,4 @@
-<?php 
+<?php
 use yii\helpers\Url;
 use backend\components\Menu_admin;
 ?>
@@ -8,7 +8,7 @@ use backend\components\Menu_admin;
     <img src="/backend/web/images/logo_small.jpg" style="width:50%;" class="" alt=""/>
 </a>
     <section class="sidebar">
-    
+
         <!-- Sidebar user panel -->
         <div class="d-flex user-panel justify-content-center">
             <div class=" user-panel mt-2 mb-2  d-flex" style="border-bottom: none;">
@@ -18,7 +18,7 @@ use backend\components\Menu_admin;
                 <div class="text-center info">
                     <p class="p-0"><?= Yii::$app->user->identity->nombres.' '.Yii::$app->user->identity->apellidos ?></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                
+
                 </div>
             </div>
         </div>
@@ -33,6 +33,7 @@ use backend\components\Menu_admin;
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => $menuadmin,
+                //'activateParents'=>true,
                 /*'items' => [
                     ['label' => '', 'options' => ['class' => 'header']],
                     //['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
