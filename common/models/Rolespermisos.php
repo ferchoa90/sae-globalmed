@@ -68,7 +68,13 @@ class Rolespermisos extends \yii\db\ActiveRecord
      */
     public function getIdmodulo0()
     {
-        return $this->hasOne(Rolesmodulo::className(), ['id' => 'idmodulo']);
+        return $this->hasMany(Rolesmodulo::className(), ['id' => 'idmodulo']);
+    }
+
+
+    public function getIdsubmodulo0()
+    {
+        return $this->hasMany(Rolessubmodulo::className(), ['idmodulo' => 'idmodulo']);
     }
 
     /**
