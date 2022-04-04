@@ -108,6 +108,11 @@ class Menu_admin extends Component
                                         //echo ' || '.$data2->rolpermiso. ' => '.$valsubmodulo.'<br>' ;
                                         if ($data2->rolpermiso==$valsubmodulo){$permitidosubmenu=true; }
                                     }
+
+                                    foreach ($permisosdef as $key => $valuedef) {
+                                        //echo ($valuedef["idmenu"].' => '.$data->id.'<br> ');
+                                        if ($valuedef["nombreint"]==$data2->rolpermiso){$permitidosubmenu=true;}
+                                    }
                                     if ($permitidosubmenu){
                                         $contsubmenu++;
                                         $subMenu[]=array('label' => $data2->nombre,'options'=> ['data-class'=>'submenu2'], 'icon' => $data2->icono, 'url' => [$data2->link],'active' => '/'.$context == $data2->link);
