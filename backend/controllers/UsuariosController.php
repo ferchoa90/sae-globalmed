@@ -75,12 +75,13 @@ class UsuariosController extends Controller
      */
 
     public function actionEditarrol($id)
-    {
+    { 
         $nuevorol= new Configuraciones_rolesmodulo;
         $nuevorol= $nuevorol->getDataID();
         //$roldata=={}
         return $this->render('editarrol', [
             'data' => Roles::find()->where(['id' => $id, "isDeleted" => 0])->one(),
+            'datapermiso' => Rolespermisos::find()->where(['idrol' => $id, "isDeleted" => 0])->all(),
             'roles' => $nuevorol,
 
         ]);

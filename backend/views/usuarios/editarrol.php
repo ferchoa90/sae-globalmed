@@ -42,7 +42,9 @@ foreach ($roles as $key => $value) {
     $contenidoRolessub=array();
     $checked='OFF';
 
-    foreach ($value->rolespermisos as $key => $valueVR) {
+
+    foreach ($datapermiso as $key => $valueVR) {
+        //echo ' | '.$value->id.' => '.$valueVR->idmodulo.' <br>'; 
         if ($value->id==$valueVR->idmodulo){$checked='ON';}
     }
     $data=array('tipo'=>'input','subtipo'=>'onoff', 'nombre'=>$value->nameint, 'id'=>$value->nameint, 'valor'=>$value->nombre, 'valordefecto'=>$checked, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'dinero','boxbody'=>false,'etiqueta'=>'Módulo: ', 'col'=>'col-4 col-md-4', 'adicional'=>' data-width="80%" data-height="35"');
@@ -54,7 +56,7 @@ foreach ($roles as $key => $value) {
 
     foreach ($value->rolessubmodulos as $key => $valueRS) {
         $checkedsub='OFF';
-        foreach ($value->rolespermisos as $key => $valueVR) {
+        foreach ($datapermiso as $key => $valueVR) {
             if ($valueRS->id==$valueVR->idsubmodulo){$checkedsub='ON';}
         }
         $dataSub=array('tipo'=>'input','subtipo'=>'onoff', 'nombre'=>$valueRS->nombreint, 'id'=>$valueRS->nombreint, 'valor'=>$valueRS->nombre,'valordefecto'=>$checkedsub, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'','boxbody'=>false,'etiqueta'=>'', 'col'=>'col-4 col-md-4', 'adicional'=>' data-width="80%" data-height="35"');

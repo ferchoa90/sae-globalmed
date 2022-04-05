@@ -16594,7 +16594,7 @@ CREATE TABLE `log` (
   KEY `usuariocreacion` (`usuariocreacion`),
   KEY `id` (`id`),
   CONSTRAINT `log_ibfk_1` FOREIGN KEY (`usuariocreacion`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 /*Data for the table `log` */
 
@@ -16613,7 +16613,10 @@ insert  into `log`(`id`,`modulo`,`descripcion`,`observacion`,`codigo`,`usuariocr
 (12,'CITAS','{\"fechaact\":[\"Fechaact cannot be blank.\"]}','ID: 0','0',1,'2022-03-22 15:36:29','ACTIVO'),
 (13,'CITAS','{\"fechaact\":[\"Fechaact cannot be blank.\"]}','ID: 0','0',1,'2022-03-22 15:37:32','ACTIVO'),
 (14,'ROLES','null','ID: ','0',1,'2022-04-01 16:49:26','ACTIVO'),
-(15,'ROLES','null','ID: ','0',1,'2022-04-01 16:52:32','ACTIVO');
+(15,'ROLES','null','ID: ','0',1,'2022-04-01 16:52:32','ACTIVO'),
+(16,'USUARIO ','{\"email\":[\"Email \\\"marioaguilar1990@gmail.com\\\" has already been taken.\"]}','ID: 0','0',1,'2022-04-04 10:37:28','ACTIVO'),
+(17,'USUARIO ','{\"email\":[\"Email \\\"marioaguilar1990@gmail.com\\\" has already been taken.\"]}','ID: 0','0',1,'2022-04-04 10:37:36','ACTIVO'),
+(18,'USUARIO ','{\"username\":[\"Username \\\"fiturralde\\\" has already been taken.\"],\"email\":[\"Email \\\"marioaguilarg1990@gmail.com\\\" has already been taken.\"]}','ID: 0','0',1,'2022-04-04 10:55:26','ACTIVO');
 
 /*Table structure for table `marca` */
 
@@ -16806,7 +16809,7 @@ CREATE TABLE `menuadmin` (
   KEY `id` (`id`),
   KEY `usuarioc` (`usuarioc`),
   CONSTRAINT `menuadmin_ibfk_1` FOREIGN KEY (`usuarioc`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8;
 
 /*Data for the table `menuadmin` */
 
@@ -16895,9 +16898,9 @@ insert  into `menuadmin`(`id`,`idparent`,`nombre`,`icono`,`link`,`rolpermiso`,`i
 (95,90,'Entregas','motorcycle','/produccion/entregas',NULL,0,1,0,'2022-01-19 18:19:16',NULL,4,'WEB','ACTIVO'),
 (96,19,'Roles','user-secret','/usuarios/roles','roles',0,1,0,'2022-04-01 10:48:15',NULL,3,'WEB','ACTIVO'),
 (97,0,'Mantenimientos','list','#','menumantenimiento',0,1,0,'2022-03-28 12:20:54',NULL,9,'WEB','ACTIVO'),
-(98,97,'Clientes','list','/mantenimientos/clientes',NULL,0,1,0,'2022-03-20 16:27:52',NULL,2,'WEB','ACTIVO'),
-(99,97,'Proveedores','list','/mantenimientos/proveedores',NULL,0,1,0,'2022-03-20 16:27:59',NULL,10,'WEB','ACTIVO'),
-(100,97,'Socios','list','/mantenimientos/socios',NULL,0,1,0,'2022-03-20 16:28:00',NULL,11,'WEB','ACTIVO'),
+(98,97,'Clientes','list','/mantenimientos/clientes','clientes',0,1,0,'2022-04-04 23:47:41',NULL,2,'WEB','ACTIVO'),
+(99,97,'Proveedores','list','/mantenimientos/proveedores','proveedores',0,1,0,'2022-04-04 23:47:45',NULL,10,'WEB','ACTIVO'),
+(100,97,'Socios','list','/mantenimientos/socios','socios',0,1,0,'2022-04-04 23:47:48',NULL,11,'WEB','ACTIVO'),
 (101,41,'Cuentas','list','/contabilidad/cuentas',NULL,0,1,0,'2021-12-08 07:44:51',NULL,1,'WEB','ACTIVO'),
 (102,41,'Asientos diarios','list','/contabilidad/asientos',NULL,0,1,0,'2021-12-08 07:49:39',NULL,1,'WEB','ACTIVO'),
 (104,41,'Anticipo Empleados','list','/contabilidad/anticipoemp',NULL,0,1,0,'2021-12-08 07:51:19',NULL,10,'WEB','ACTIVO'),
@@ -16917,43 +16920,45 @@ insert  into `menuadmin`(`id`,`idparent`,`nombre`,`icono`,`link`,`rolpermiso`,`i
 (118,5,'Licencia','list','/configuraciones/licencia',NULL,0,1,0,'2022-01-19 19:32:07',NULL,2,'WEB','ACTIVO'),
 (119,5,'parent','task','#',NULL,1,1,1,'2022-01-24 23:35:32',NULL,10,'WEB','ACTIVO'),
 (120,5,'dwqdwdq','task','#',NULL,1,1,1,'2022-01-24 23:35:14',NULL,11,'WEB','ACTIVO'),
-(121,97,'Tipo Cheque','task','/mantenimientos/tipocheque',NULL,0,1,0,'2022-03-20 16:28:00',NULL,12,'WEB','INACTIVO'),
+(121,97,'Tipo Cheque','task','/mantenimientos/tipocheque','tipocheque',0,1,0,'2022-04-04 23:47:52',NULL,12,'WEB','INACTIVO'),
 (122,41,'Bancos Mov','list','/contabilidad/bancosmov',NULL,0,1,1,'2022-02-07 13:51:36',NULL,3,'WEB','ACTIVO'),
 (123,41,'Caja','list','/contabilidad/caja',NULL,0,1,1,'2022-02-07 13:52:14',NULL,4,'WEB','ACTIVO'),
 (124,2,'Produccion','list','/inventario/produccion',NULL,0,1,1,'2022-02-14 21:16:25',NULL,4,'WEB','ACTIVO'),
-(125,97,'Operarios','list','/mantenimientos/operarios',NULL,0,1,0,'2022-03-20 16:27:55',NULL,6,'WEB','INACTIVO'),
-(126,97,'Transporte','list','/mantenimientos/transporte',NULL,0,1,0,'2022-03-20 16:28:03',NULL,16,'WEB','INACTIVO'),
+(125,97,'Operarios','list','/mantenimientos/operarios','operarios',0,1,0,'2022-04-04 23:47:55',NULL,6,'WEB','INACTIVO'),
+(126,97,'Transporte','list','/mantenimientos/transporte','transporte',0,1,0,'2022-04-04 23:48:00',NULL,16,'WEB','INACTIVO'),
 (127,41,'Retenciones','list','/contabilidad/retenciones',NULL,0,1,1,'2022-02-17 17:38:10',NULL,11,'WEB','ACTIVO'),
 (128,41,'Retenciones cxc','list','/contabilidad/retencionescxc',NULL,0,1,1,'2022-02-17 17:38:46',NULL,13,'WEB','ACTIVO'),
 (129,0,'Procesos','list','#','menuprocesos',0,1,1,'2022-03-28 12:21:16',NULL,12,'WEB','INACTIVO'),
 (130,129,'Cierre de año','list','/procesos/cierredeanio',NULL,0,1,1,'2022-02-20 22:15:48',NULL,1,'WEB','ACTIVO'),
 (131,34,'E.C. Proveedores','list','/reportes/estadoproveedores',NULL,0,1,1,'2022-03-14 10:27:18',NULL,3,'WEB','INACTIVO'),
 (132,34,'E.C. Clientes','list','/reportes/estadocliente',NULL,0,1,1,'2022-03-14 10:27:19',NULL,4,'WEB','INACTIVO'),
-(133,97,'Pacientes','list','/mantenimientos/pacientes',NULL,0,1,0,'2022-03-20 16:27:56',NULL,7,'WEB','ACTIVO'),
-(134,97,'Patologías','list','/mantenimientos/patologias',NULL,0,1,0,'2022-03-20 16:27:56',NULL,8,'WEB','ACTIVO'),
+(133,97,'Pacientes','list','/mantenimientos/pacientes','pacientes',0,1,0,'2022-04-04 23:48:03',NULL,7,'WEB','ACTIVO'),
+(134,97,'Patologías','list','/mantenimientos/patologias','patologias',0,1,0,'2022-04-04 23:48:08',NULL,8,'WEB','ACTIVO'),
 (135,0,'Agendamientos','list','#','menuagendamiento',0,1,0,'2022-03-28 12:21:21',NULL,3,'WEB','ACTIVO'),
-(136,135,'Citas Médicas','list','/agendamientos/citas',NULL,0,1,0,'2022-03-14 07:56:03',NULL,1,'WEB','ACTIVO'),
-(137,97,'Profesiones','list','/mantenimientos/profesiones',NULL,0,1,0,'2022-03-20 16:27:57',NULL,9,'WEB','ACTIVO'),
+(136,135,'Citas Médicas','list','/agendamientos/citas','citas',0,1,0,'2022-04-04 16:15:27',NULL,1,'WEB','ACTIVO'),
+(137,97,'Profesiones','list','/mantenimientos/profesiones','profesiones',0,1,0,'2022-04-04 23:48:11',NULL,9,'WEB','ACTIVO'),
 (138,135,'Consultas Médicas','list','/agendamientos/consultasmed',NULL,0,1,0,'2022-03-14 10:26:11',NULL,2,'WEB','ACTIVO'),
 (139,34,'Agendamientos','list','/reportes/agendamientos',NULL,0,1,0,'2022-03-14 10:27:57',NULL,1,'WEB','ACTIVO'),
 (140,34,'Citas Medicas','list','/reportes/citasmedicas',NULL,0,1,0,'2022-03-14 10:28:13',NULL,2,'WEB','ACTIVO'),
 (141,34,'Patologías','list','/reportes/patologias',NULL,0,1,0,'2022-03-14 10:28:50',NULL,3,'WEB','ACTIVO'),
 (142,1,'Mensajes','list','/escritorio/mensajes','mensajes',0,1,0,'2022-04-01 11:08:19',NULL,1,'WEB','ACTIVO'),
 (143,1,'Notificaciones','list','/escritorio/notificaciones','notificaciones',0,1,0,'2022-04-01 11:05:39',NULL,2,'WEB','ACTIVO'),
-(144,97,'Doctores','list','/mantenimientos/doctores',NULL,0,1,1,'2022-03-20 16:27:54',NULL,4,'WEB','ACTIVO'),
-(145,97,'Motivo Consulta','list','/mantenimientos/motivoconsulta',NULL,0,1,1,'2022-03-20 16:27:54',NULL,5,'WEB','ACTIVO'),
-(146,97,'Tipo Consulta','list','/mantenimientos/tipoconsulta',NULL,0,1,1,'2022-03-20 16:28:02',NULL,14,'WEB','ACTIVO'),
-(147,97,'Tipo Examenes','list','/mantenimientos/tipoexamenes',NULL,0,1,1,'2022-03-20 16:28:02',NULL,15,'WEB','ACTIVO'),
-(148,97,'Consultorios','list','/mantenimientos/consultorios',NULL,0,1,1,'2022-03-20 16:27:53',NULL,3,'WEB','ACTIVO'),
-(149,97,'Ciudad','list','/mantenimientos/ciudades',NULL,0,1,1,'2022-03-22 12:05:19',NULL,1,'WEB','ACTIVO'),
-(150,97,'Zona / Sector','list','/mantenimientos/zonasector',NULL,0,1,1,'2022-03-20 16:28:04',NULL,17,'WEB','ACTIVO'),
-(151,97,'Tipo cobro','list','/mantenimientos/tipocobro',NULL,0,1,1,'2022-03-20 16:28:01',NULL,13,'WEB','ACTIVO'),
+(144,97,'Doctores','list','/mantenimientos/doctores','dcotores',0,1,1,'2022-04-04 23:48:17',NULL,4,'WEB','ACTIVO'),
+(145,97,'Motivo Consulta','list','/mantenimientos/motivoconsulta','motivoconsulta',0,1,1,'2022-04-04 23:48:21',NULL,5,'WEB','ACTIVO'),
+(146,97,'Tipo Consulta','list','/mantenimientos/tipoconsulta','tipoconsulta',0,1,1,'2022-04-04 23:48:25',NULL,14,'WEB','ACTIVO'),
+(147,97,'Tipo Examenes','list','/mantenimientos/tipoexamenes','tipoexamenes',0,1,1,'2022-04-04 23:48:31',NULL,15,'WEB','ACTIVO'),
+(148,97,'Consultorios','list','/mantenimientos/consultorios','consultorios',0,1,1,'2022-04-04 23:48:34',NULL,3,'WEB','ACTIVO'),
+(149,97,'Ciudad','list','/mantenimientos/ciudades','ciudad',0,1,1,'2022-04-04 23:48:37',NULL,1,'WEB','ACTIVO'),
+(150,97,'Zona / Sector','list','/mantenimientos/zonasector','sector',0,1,1,'2022-04-04 23:48:41',NULL,17,'WEB','ACTIVO'),
+(151,97,'Tipo cobro','list','/mantenimientos/tipocobro','tipocobro',0,1,1,'2022-04-04 23:48:45',NULL,13,'WEB','ACTIVO'),
 (152,0,'Pacientes','user-md','#','menupacientes',0,1,1,'2022-03-28 12:21:25',NULL,7,'WEB','ACTIVO'),
-(153,152,'Historia Clínica','stethoscope','/pacientes/historiaclinica',NULL,0,1,1,'2022-03-19 09:07:34',NULL,1,'WEB','ACTIVO'),
+(153,152,'Historia Clínica','stethoscope','/pacientes/historiaclinica','historiaclinica',0,1,1,'2022-04-04 12:23:38',NULL,2,'WEB','ACTIVO'),
 (154,5,'Sistema','list','configuraciones/sistema',NULL,0,1,1,'2022-03-24 10:37:18',NULL,3,'WEB','ACTIVO'),
 (155,5,'Módulos Roles','list','modulosroles',NULL,0,1,1,'2022-03-24 10:48:42',NULL,4,'WEB','ACTIVO'),
 (156,5,'Módulos subroles','list','configuraciones/modulossubroles',NULL,0,1,1,'2022-03-24 10:49:35',NULL,5,'WEB','ACTIVO'),
-(157,0,'Auditoria','list','#',NULL,0,1,1,'2022-03-28 12:30:46',NULL,25,'WEB','INACTIVO');
+(157,0,'Auditoria','list','#',NULL,0,1,1,'2022-03-28 12:30:46',NULL,25,'WEB','INACTIVO'),
+(158,152,'Agenda','list','/pacientes/agenda','agenda',0,1,1,'2022-04-04 12:22:22',NULL,1,'WEB','ACTIVO'),
+(159,34,'Atención Pac.','list','/reportes/atencionpacientes','atencionpacientes',0,1,1,'2022-04-04 12:49:05',NULL,1,'WEB','ACTIVO');
 
 /*Table structure for table `menuprincipal` */
 
@@ -18026,12 +18031,12 @@ CREATE TABLE `roles` (
   KEY `id` (`id`),
   KEY `usuariocreacion` (`usuariocreacion`),
   CONSTRAINT `roles_ibfk_1` FOREIGN KEY (`usuariocreacion`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 /*Data for the table `roles` */
 
 insert  into `roles`(`id`,`nombre`,`descripcion`,`usuariocreacion`,`fechacreacion`,`usuarioact`,`fechaact`,`isDeleted`,`estatus`) values 
-(1,'SuperAdmin','Usuario de Sistema',1,'2021-12-01 19:54:52',1,'2022-04-01 17:46:19',0,'ACTIVO'),
+(1,'SuperAdmin','Usuario de Sistema',1,'2021-12-01 19:54:52',1,'2022-04-04 23:45:05',0,'ACTIVO'),
 (2,'Administrador','Usuario Administrador',1,'2021-12-01 20:59:14',NULL,NULL,0,'ACTIVO'),
 (3,'Facturacion','Facturacion',1,'2021-12-01 20:00:43',NULL,NULL,0,'ACTIVO'),
 (4,'Reportes','Reportes',1,'2021-12-01 20:00:55',NULL,NULL,0,'ACTIVO'),
@@ -18042,7 +18047,9 @@ insert  into `roles`(`id`,`nombre`,`descripcion`,`usuariocreacion`,`fechacreacio
 (33,'sdsds','dsdsds',1,'2022-04-01 18:27:40',NULL,NULL,1,'ACTIVO'),
 (34,'sdsds','dsdsds',1,'2022-04-01 18:27:52',NULL,NULL,1,'ACTIVO'),
 (35,'sdsds','dsdsds',1,'2022-04-01 18:28:35',NULL,NULL,1,'ACTIVO'),
-(36,'doctoresnew','dsdsds',1,'2022-04-01 18:29:38',NULL,NULL,0,'ACTIVO');
+(36,'Doctores','dsdsds',1,'2022-04-01 18:29:38',NULL,NULL,0,'ACTIVO'),
+(37,'Recepcion','Rol para recepcion',1,'2022-04-04 16:12:43',1,'2022-04-04 23:43:39',0,'ACTIVO'),
+(38,'prueba','prueba',1,'2022-04-04 16:55:47',NULL,NULL,1,'ACTIVO');
 
 /*Table structure for table `rolesmodulo` */
 
@@ -18072,9 +18079,9 @@ insert  into `rolesmodulo`(`id`,`nombre`,`descripcion`,`nameint`,`idmenu`,`usuar
 (2,'Contabilidad','MODULO CONTABLE','contabilidad',41,1,'2021-12-01 20:53:40',0,'ACTIVO'),
 (3,'Facturación','MODULA DE FACTURACIÓN','facturacion',9,1,'2021-12-01 20:54:07',0,'ACTIVO'),
 (4,'Inventario','MODULO DE INVENTARIO','inventario',2,1,'2021-12-01 20:54:31',0,'ACTIVO'),
-(5,'R. Humanos','MODULO DE RECURSOS HUMANOS','recursoshumanos',23,1,'2021-12-01 20:54:59',0,'ACTIVO'),
+(5,'R. Humanos','MODULO DE RECURSOS HUMANOS','recursoshumanos',64,1,'2021-12-01 20:54:59',0,'ACTIVO'),
 (6,'Reportes','MODULO DE REPORTES','reportes',34,1,'2021-12-01 20:55:23',0,'ACTIVO'),
-(7,'Mantenimientos','MODULO DE MANTENIMIENTOS','mantenimiento',64,1,'2021-12-01 20:55:46',0,'ACTIVO'),
+(7,'Mantenimientos','MODULO DE MANTENIMIENTOS','mantenimiento',97,1,'2021-12-01 20:55:46',0,'ACTIVO'),
 (8,'Auditoria','MODULO DE AUDITORIA','sistema',157,1,'2021-12-01 20:56:12',0,'ACTIVO'),
 (9,'Configuraciones','MODULO DE CONFIGURACIONES GENERALES','configuraciones',5,1,'2021-12-01 20:56:51',0,'ACTIVO'),
 (11,'Sistema','MÓDULO DE SISTEMA','sistema',6,1,'2022-03-24 10:30:28',0,'ACTIVO'),
@@ -18135,7 +18142,7 @@ CREATE TABLE `rolespermisos` (
   CONSTRAINT `rolespermisos_ibfk_1` FOREIGN KEY (`usuariocreacion`) REFERENCES `user` (`id`),
   CONSTRAINT `rolespermisos_ibfk_2` FOREIGN KEY (`idmodulo`) REFERENCES `rolesmodulo` (`id`),
   CONSTRAINT `rolespermisos_ibfk_3` FOREIGN KEY (`idrol`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=193 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=599 DEFAULT CHARSET=utf8;
 
 /*Data for the table `rolespermisos` */
 
@@ -18168,41 +18175,163 @@ insert  into `rolespermisos`(`id`,`idrol`,`idmodulo`,`idsubmodulo`,`descripcion`
 (92,7,1,51,NULL,0,1,'2022-04-01 17:34:03','ACTIVO'),
 (93,7,1,52,NULL,0,1,'2022-04-01 17:34:03','ACTIVO'),
 (94,7,9,58,NULL,0,1,'2022-04-01 17:34:03','ACTIVO'),
-(143,1,1,NULL,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(144,1,2,NULL,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(145,1,3,NULL,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(146,1,4,NULL,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(147,1,5,NULL,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(148,1,6,NULL,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(149,1,7,NULL,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(150,1,8,NULL,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(151,1,9,NULL,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(152,1,11,NULL,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(153,1,12,NULL,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(154,1,13,NULL,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(155,1,14,NULL,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(156,1,9,47,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(157,1,9,48,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(158,1,9,49,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(159,1,9,50,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(160,1,1,51,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(161,1,1,52,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
-(162,1,9,58,NULL,0,1,'2022-04-01 17:46:19','ACTIVO'),
 (178,36,1,NULL,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
 (179,36,5,NULL,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
 (180,36,8,NULL,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
-(181,36,11,NULL,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
-(182,36,13,NULL,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
+(181,36,12,65,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
 (183,36,1,1,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
 (184,36,1,2,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
 (185,36,1,3,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
 (186,36,1,4,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
-(187,36,1,51,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
-(188,36,1,52,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
-(189,36,1,61,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
-(190,36,1,62,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
-(191,36,1,63,NULL,0,1,'2022-04-01 18:29:38','ACTIVO'),
-(192,36,1,64,NULL,0,1,'2022-04-01 18:29:38','ACTIVO');
+(193,36,12,67,NULL,0,1,'2022-04-04 12:23:13','ACTIVO'),
+(441,38,1,NULL,NULL,0,1,'2022-04-04 16:55:47','ACTIVO'),
+(442,38,2,NULL,NULL,0,1,'2022-04-04 16:55:47','ACTIVO'),
+(443,38,3,NULL,NULL,0,1,'2022-04-04 16:55:47','ACTIVO'),
+(444,38,7,NULL,NULL,0,1,'2022-04-04 16:55:47','ACTIVO'),
+(445,38,8,NULL,NULL,0,1,'2022-04-04 16:55:47','ACTIVO'),
+(446,38,9,NULL,NULL,0,1,'2022-04-04 16:55:47','ACTIVO'),
+(447,38,11,NULL,NULL,0,1,'2022-04-04 16:55:47','ACTIVO'),
+(448,38,1,51,NULL,0,1,'2022-04-04 16:55:47','ACTIVO'),
+(449,38,1,61,NULL,0,1,'2022-04-04 16:55:47','ACTIVO'),
+(450,38,1,62,NULL,0,1,'2022-04-04 16:55:47','ACTIVO'),
+(451,38,1,63,NULL,0,1,'2022-04-04 16:55:47','ACTIVO'),
+(452,38,1,64,NULL,0,1,'2022-04-04 16:55:47','ACTIVO'),
+(463,37,6,NULL,NULL,0,1,'2022-04-04 23:43:39','ACTIVO'),
+(464,37,7,NULL,NULL,0,1,'2022-04-04 23:43:39','ACTIVO'),
+(465,37,13,NULL,NULL,0,1,'2022-04-04 23:43:39','ACTIVO'),
+(466,37,14,NULL,NULL,0,1,'2022-04-04 23:43:39','ACTIVO'),
+(467,37,7,43,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(468,37,7,44,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(469,37,7,45,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(470,37,7,46,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(471,37,7,57,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(472,37,13,66,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(473,37,7,71,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(474,37,7,72,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(475,37,7,73,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(476,37,7,74,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(477,37,7,75,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(478,37,7,76,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(479,37,7,77,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(480,37,7,78,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(481,37,7,79,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(482,37,7,80,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(483,37,7,81,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(484,37,7,82,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(485,37,7,83,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(486,37,7,84,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(487,37,7,85,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(488,37,13,95,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(489,37,13,96,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(490,37,13,97,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(491,37,13,98,NULL,0,1,'2022-04-04 23:43:40','ACTIVO'),
+(492,1,1,NULL,NULL,0,1,'2022-04-04 23:45:05','ACTIVO'),
+(493,1,2,NULL,NULL,0,1,'2022-04-04 23:45:05','ACTIVO'),
+(494,1,3,NULL,NULL,0,1,'2022-04-04 23:45:05','ACTIVO'),
+(495,1,4,NULL,NULL,0,1,'2022-04-04 23:45:05','ACTIVO'),
+(496,1,5,NULL,NULL,0,1,'2022-04-04 23:45:05','ACTIVO'),
+(497,1,6,NULL,NULL,0,1,'2022-04-04 23:45:05','ACTIVO'),
+(498,1,7,NULL,NULL,0,1,'2022-04-04 23:45:06','ACTIVO'),
+(499,1,8,NULL,NULL,0,1,'2022-04-04 23:45:06','ACTIVO'),
+(500,1,9,NULL,NULL,0,1,'2022-04-04 23:45:06','ACTIVO'),
+(501,1,11,NULL,NULL,0,1,'2022-04-04 23:45:06','ACTIVO'),
+(502,1,12,NULL,NULL,0,1,'2022-04-04 23:45:06','ACTIVO'),
+(503,1,13,NULL,NULL,0,1,'2022-04-04 23:45:06','ACTIVO'),
+(504,1,14,NULL,NULL,0,1,'2022-04-04 23:45:06','ACTIVO'),
+(505,1,1,1,NULL,0,1,'2022-04-04 23:45:06','ACTIVO'),
+(506,1,1,2,NULL,0,1,'2022-04-04 23:45:06','ACTIVO'),
+(507,1,1,3,NULL,0,1,'2022-04-04 23:45:06','ACTIVO'),
+(508,1,1,4,NULL,0,1,'2022-04-04 23:45:06','ACTIVO'),
+(509,1,2,5,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(510,1,2,6,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(511,1,2,7,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(512,1,2,8,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(513,1,2,9,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(514,1,2,10,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(515,1,2,11,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(516,1,2,12,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(517,1,2,13,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(518,1,2,14,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(519,1,2,15,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(520,1,2,16,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(521,1,2,17,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(522,1,2,18,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(523,1,2,19,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(524,1,2,20,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(525,1,2,21,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(526,1,2,22,NULL,0,1,'2022-04-04 23:45:07','ACTIVO'),
+(527,1,2,23,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(528,1,2,24,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(529,1,2,25,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(530,1,2,26,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(531,1,2,27,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(532,1,2,28,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(533,1,3,29,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(534,1,3,30,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(535,1,3,31,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(536,1,3,32,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(537,1,4,33,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(538,1,4,34,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(539,1,4,35,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(540,1,4,36,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(541,1,5,37,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(542,1,5,38,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(543,1,5,39,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(544,1,5,40,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(545,1,6,41,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(546,1,6,42,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(547,1,7,43,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(548,1,7,44,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(549,1,7,45,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(550,1,7,46,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(551,1,9,47,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(552,1,9,48,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(553,1,9,49,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(554,1,9,50,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(555,1,1,51,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(556,1,1,52,NULL,0,1,'2022-04-04 23:45:08','ACTIVO'),
+(557,1,3,53,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(558,1,4,54,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(559,1,5,55,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(560,1,6,56,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(561,1,7,57,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(562,1,9,58,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(563,1,12,60,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(564,1,1,61,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(565,1,1,62,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(566,1,1,63,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(567,1,1,64,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(568,1,12,65,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(569,1,13,66,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(570,1,12,67,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(571,1,6,68,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(572,1,7,71,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(573,1,7,72,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(574,1,7,73,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(575,1,7,74,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(576,1,7,75,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(577,1,7,76,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(578,1,7,77,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(579,1,7,78,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(580,1,7,79,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(581,1,7,80,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(582,1,7,81,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(583,1,7,82,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(584,1,7,83,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(585,1,7,84,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(586,1,7,85,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(587,1,8,86,NULL,0,1,'2022-04-04 23:45:09','ACTIVO'),
+(588,1,8,87,NULL,0,1,'2022-04-04 23:45:10','ACTIVO'),
+(589,1,8,88,NULL,0,1,'2022-04-04 23:45:10','ACTIVO'),
+(590,1,8,89,NULL,0,1,'2022-04-04 23:45:10','ACTIVO'),
+(591,1,8,90,NULL,0,1,'2022-04-04 23:45:10','ACTIVO'),
+(592,1,8,91,NULL,0,1,'2022-04-04 23:45:10','ACTIVO'),
+(593,1,8,92,NULL,0,1,'2022-04-04 23:45:10','ACTIVO'),
+(594,1,8,93,NULL,0,1,'2022-04-04 23:45:10','ACTIVO'),
+(595,1,13,95,NULL,0,1,'2022-04-04 23:45:10','ACTIVO'),
+(596,1,13,96,NULL,0,1,'2022-04-04 23:45:10','ACTIVO'),
+(597,1,13,97,NULL,0,1,'2022-04-04 23:45:10','ACTIVO'),
+(598,1,13,98,NULL,0,1,'2022-04-04 23:45:10','ACTIVO');
 
 /*Table structure for table `rolessubmodulo` */
 
@@ -18224,7 +18353,7 @@ CREATE TABLE `rolessubmodulo` (
   KEY `idmodulo` (`idmodulo`),
   CONSTRAINT `rolessubmodulo_ibfk_1` FOREIGN KEY (`usuariocreacion`) REFERENCES `user` (`id`),
   CONSTRAINT `rolessubmodulo_ibfk_2` FOREIGN KEY (`idmodulo`) REFERENCES `rolesmodulo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
 
 /*Data for the table `rolessubmodulo` */
 
@@ -18282,17 +18411,48 @@ insert  into `rolessubmodulo`(`id`,`idmodulo`,`idmenu`,`nombreint`,`nombre`,`des
 (51,1,NULL,'usuarios','Usuarios',NULL,0,1,'2022-04-01 16:18:35','ACTIVO'),
 (52,1,NULL,'roles','Roles Usuario',NULL,0,1,'2022-04-01 16:18:12','ACTIVO'),
 (53,3,NULL,'menufacturacion','Menú Facturación',NULL,0,1,'2022-03-28 11:26:11','ACTIVO'),
-(54,4,NULL,'menuinventario','Menú Inventario',NULL,0,1,'2022-03-28 11:26:17','ACTIVO'),
+(54,4,NULL,'menuinventario','Inventario',NULL,0,1,'2022-04-04 10:33:31','ACTIVO'),
 (55,5,NULL,'menurecursosh','Menú R. Humanos',NULL,0,1,'2022-03-28 11:26:18','ACTIVO'),
 (56,6,NULL,'menureportes','Menú Reportes',NULL,0,1,'2022-03-28 11:26:19','ACTIVO'),
 (57,7,NULL,'menumantenimiento','Menú Mantenimiento',NULL,0,1,'2022-03-28 11:26:28','ACTIVO'),
 (58,9,NULL,'menuadmin','Menú Admin',NULL,0,1,'2022-04-01 17:41:41','ACTIVO'),
 (59,11,NULL,'menusistema','Menú Sistema',NULL,0,1,'2022-03-28 11:26:54','ACTIVO'),
-(60,12,NULL,'menupacientes','Menú Pacientes',NULL,0,1,'2022-03-28 11:26:55','ACTIVO'),
+(60,12,NULL,'menupacientes','Pacientes',NULL,0,1,'2022-04-04 10:27:16','ACTIVO'),
 (61,1,NULL,'verrol','Ver Rol',NULL,0,1,'2022-04-01 16:30:31','ACTIVO'),
 (62,1,NULL,'agregarrol','Agregar Rol',NULL,0,1,'2022-04-01 16:30:50','ACTIVO'),
 (63,1,NULL,'editarrol','Editar Rol',NULL,0,1,'2022-04-01 16:31:03','ACTIVO'),
-(64,1,NULL,'eliminarrol','Eliminar Rol',NULL,0,1,'2022-04-01 16:31:25','ACTIVO');
+(64,1,NULL,'eliminarrol','Eliminar Rol',NULL,0,1,'2022-04-01 16:31:25','ACTIVO'),
+(65,12,NULL,'historiaclinica','Historia Clínica',NULL,0,1,'2022-04-04 10:26:47','ACTIVO'),
+(66,13,NULL,'citas','Citas',NULL,0,1,'2022-04-04 10:27:53','ACTIVO'),
+(67,12,NULL,'agenda','Agenda',NULL,0,1,'2022-04-04 12:22:54','ACTIVO'),
+(68,6,NULL,'atencionpacientes','Atención Pacientes',NULL,0,1,'2022-04-04 12:43:44','ACTIVO'),
+(71,7,NULL,'pacientes','Pacientes',NULL,0,1,'2022-04-04 23:29:48','ACTIVO'),
+(72,7,NULL,'verpeciente','Ver paciente',NULL,0,1,'2022-04-04 23:30:32','ACTIVO'),
+(73,7,NULL,'agregarpaciente','Agregar Paciente',NULL,0,1,'2022-04-04 23:30:49','ACTIVO'),
+(74,7,NULL,'eliminarpaciente','Eliminar paciente',NULL,0,1,'2022-04-04 23:31:07','ACTIVO'),
+(75,7,NULL,'editarpacientes','Editar Paciente',NULL,0,1,'2022-04-04 23:31:28','ACTIVO'),
+(76,7,NULL,'motivoconsulta','Motivo Consulta',NULL,0,1,'2022-04-04 23:33:08','ACTIVO'),
+(77,7,NULL,'vermotivo','Ver Motivo',NULL,0,1,'2022-04-04 23:34:50','ACTIVO'),
+(78,7,NULL,'editarmotivo','Editar Motivo',NULL,0,1,'2022-04-04 23:33:37','ACTIVO'),
+(79,7,NULL,'agregarmotivo','Agregar Motivo',NULL,0,1,'2022-04-04 23:33:59','ACTIVO'),
+(80,7,NULL,'eliminarmotivo','Eliminar Motivo',NULL,0,1,'2022-04-04 23:34:15','ACTIVO'),
+(81,7,NULL,'ciudad','Ciudad',NULL,0,1,'2022-04-04 23:35:39','ACTIVO'),
+(82,7,NULL,'verciudad','Ver Ciudad',NULL,0,1,'2022-04-04 23:35:49','ACTIVO'),
+(83,7,NULL,'editarciudad','Editar Ciudad',NULL,0,1,'2022-04-04 23:36:06','ACTIVO'),
+(84,7,NULL,'eliminarciudad','Eliminar Ciudad',NULL,0,1,'2022-04-04 23:36:18','ACTIVO'),
+(85,7,NULL,'agregarciudad','Agregar Ciudad',NULL,0,1,'2022-04-04 23:36:30','ACTIVO'),
+(86,8,NULL,'modulocontable','Módulo Contable',NULL,0,1,'2022-04-04 23:37:38','ACTIVO'),
+(87,8,NULL,'modulorrhh','Módulo R. Humanos',NULL,0,1,'2022-04-04 23:37:51','ACTIVO'),
+(88,8,NULL,'modulosistemas','Módulo Sistemas',NULL,0,1,'2022-04-04 23:38:14','ACTIVO'),
+(89,8,NULL,'modulofacturacion','Módulo Facturación',NULL,0,1,'2022-04-04 23:38:30','ACTIVO'),
+(90,8,NULL,'moduloagendamiento','Módulo Agendamiento',NULL,0,1,'2022-04-04 23:38:45','ACTIVO'),
+(91,8,NULL,'modulopacientes','Módulo Pacientes',NULL,0,1,'2022-04-04 23:39:02','ACTIVO'),
+(92,8,NULL,'modulousuarios','Módulo Usuarios',NULL,0,1,'2022-04-04 23:39:47','ACTIVO'),
+(93,8,NULL,'moduloconfiguraciones','Módulo Configuraciones',NULL,0,1,'2022-04-04 23:40:09','ACTIVO'),
+(95,13,NULL,'vercitas','Ver citas',NULL,0,1,'2022-04-04 23:41:05','ACTIVO'),
+(96,13,NULL,'agregarcitas','Agregar Citas',NULL,0,1,'2022-04-04 23:41:19','ACTIVO'),
+(97,13,NULL,'eliminarcitas','Eliminar Citas',NULL,0,1,'2022-04-04 23:41:37','ACTIVO'),
+(98,13,NULL,'editarcitas','Editar Citas',NULL,0,1,'2022-04-04 23:41:52','ACTIVO');
 
 /*Table structure for table `rolesusuario` */
 
@@ -18313,13 +18473,16 @@ CREATE TABLE `rolesusuario` (
   CONSTRAINT `rolesusuario_ibfk_1` FOREIGN KEY (`usuariocreacion`) REFERENCES `user` (`id`),
   CONSTRAINT `rolesusuario_ibfk_2` FOREIGN KEY (`idrol`) REFERENCES `roles` (`id`),
   CONSTRAINT `rolesusuario_ibfk_3` FOREIGN KEY (`idusuario`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `rolesusuario` */
 
 insert  into `rolesusuario`(`id`,`idrol`,`idusuario`,`isDeleted`,`fechacreacion`,`usuariocreacion`,`estatus`) values 
 (1,1,1,0,'2022-03-28 13:28:11',1,'ACTIVO'),
-(2,3,10001,0,'2022-03-28 13:28:30',1,'ACTIVO');
+(2,3,10001,0,'2022-03-28 13:28:30',1,'ACTIVO'),
+(3,36,10012,0,'2022-04-04 10:59:14',1,'ACTIVO'),
+(4,36,10013,0,'2022-04-04 16:10:55',1,'ACTIVO'),
+(5,37,10014,0,'2022-04-04 16:13:38',1,'ACTIVO');
 
 /*Table structure for table `rubroretencion` */
 
@@ -18428,9 +18591,12 @@ CREATE TABLE `sucursal` (
   PRIMARY KEY (`id`),
   KEY `usuariocreacion` (`usuariocreacion`),
   CONSTRAINT `sucursal_ibfk_1` FOREIGN KEY (`usuariocreacion`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `sucursal` */
+
+insert  into `sucursal`(`id`,`idempresa`,`nombre`,`isDeleted`,`direccion`,`usuariocreacion`,`fechacreacion`,`fechamod`,`estatus`) values 
+(1,1,'MATRIZ',0,'GUAYAQUIL',1,'2022-04-04 10:39:22',NULL,'ACTIVO');
 
 /*Table structure for table `sustentotributario` */
 
@@ -18891,18 +19057,17 @@ CREATE TABLE `user` (
   KEY `idrol` (`idrol`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`idsucursal`) REFERENCES `sucursal` (`id`),
   CONSTRAINT `user_ibfk_2` FOREIGN KEY (`idrol`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10006 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10015 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `user` */
 
 insert  into `user`(`id`,`username`,`nombres`,`apellidos`,`cedula`,`idrol`,`auth_key`,`password_hash`,`password_reset_token`,`email`,`status`,`isDeleted`,`created_at`,`updated_at`,`fotoperfil`,`fechacreacion`,`estatus`,`idsucursal`,`creado_por`) values 
 (1,'mario','Mario','Aguilar','8888888888',1,'sPLOVRHcWZjqnQLCfFIQytZimLIuxXbl','$2y$13$z/0M2JiQbcIJNrySYNp4s.HXWfPKRJGqvAVgAOPQaBmvwhGYsnIuK',NULL,'marioaguilar1990@gmail.com',10,0,1543813416,1543813416,'marioaguilar.png','2019-07-14 19:48:00','Activo',1,'1'),
 (21,'usuario','USUARIO','USUARIO','900000001',2,'qBsm2pBnvWqODXkw8497oMu6BCKknip-','$2y$13$z/0M2JiQbcIJNrySYNp4s.HXWfPKRJGqvAVgAOPQaBmvwhGYsnIuK',NULL,'usuario@gmail.com',10,0,1634843998,1634843998,'user2-160x160.png','0000-00-00 00:00:00','Activo',1,'1'),
-(10000,'maaguilar1990','Mario','Aguilar','0930178462',2,'NSN-4dv8OL3HBjalR3rQTTEhwQpLh8xf','$2y$13$NyEyfjp.gnlN1nJvhPL3beKx2sWTjPNt5Ipit6KOOBjFWs9Q577lW',NULL,'marioaguilar2010@gmail.com',10,0,1567369981,1567369981,'user2-160x160.png','2019-09-01 15:33:01','Activo',1,'1'),
 (10001,'maferitoag','Mario F','Aguilar G','0911969095',2,'NSN-4dv8OL3HBjalR3rQTTEhwQpLh8xf','$2y$13$z/0M2JiQbcIJNrySYNp4s.HXWfPKRJGqvAVgAOPQaBmvwhGYsnIuK',NULL,'mariofaguilarg@gmail.com',10,0,1232334343,1223232333,'user2-160x160.png','2019-11-17 10:21:46','Activo',1,'1'),
-(10002,'system','System','S','0930723682',2,'NSN-4dv8OL3HBjalR3rQTTEhwQpLh8xf','$2y$13$z/0M2JiQbcIJNrySYNp4s.HXWfPKRJGqvAVgAOPQaBmvwhGYsnIuK.',NULL,'mariofaguilarg2@gmail.com',10,0,1223343434,1323233434,'user2-160x160.png','2019-11-17 22:20:04','Activo',1,'1'),
-(10003,'acepsistemas@gmail.com','jacqueline esther','inca tumbaco','0900000000',2,'qBsm2pBnvWqODXkw8497oMu6BCKknip-','$2y$13$q.X.w/9Y53audqPRKOIzAei9Vp0aXG/2pE6QXFTROBuwaZQnIPgJS',NULL,'acepsistemas@gmail.com',10,0,1634843998,1634843998,'user2-160x160.png','2021-10-21 14:19:58','Activo',1,NULL),
-(10005,'mjimenez','mario','jimenez','0923306200',2,'qBsm2pBnvWqODXkw8497oMu6BCKknip-','$2y$13$xFRirIXg2F0EkdAdEPraL.ykZRKCX8N0nmtNsyxiZAdlmvtHqSOCW',NULL,'fercho_latinlover55@gmail.com',10,0,1,1,'user2-160x160.png','2022-01-24 00:31:20','Activo',1,'1');
+(10012,'fiturralde','Felix','Iturralde','0923136022',36,'qBsm2pBnvWqODXkw8497oMu6BCKknip-','$2y$13$YZjZ2Zcf/d7qmtcqaC1OgeMEGNsv641oQP9g.L8cZII/g94eFhSNG',NULL,'marioaguilarg1990@gmail.com',10,0,1,1,'user2-160x160.png','2022-04-04 10:59:14','Activo',1,'1'),
+(10013,'nmatamoros','Nelson','Matamoros','0923136033',36,'qBsm2pBnvWqODXkw8497oMu6BCKknip-','$2y$13$2HbF5PX7S0YKnJWXQrVdCuRCcB0R86Ns6.ELRR5nKqD9Gz1DpKzC6',NULL,'nelsonmata@gmail.com',10,0,1,1,'user2-160x160.png','2022-04-04 16:10:55','Activo',1,'1'),
+(10014,'recepcion','recepcion','recopcion','1234567890',37,'qBsm2pBnvWqODXkw8497oMu6BCKknip-','$2y$13$/AvtCYBEhRX7/eHBgbgpyeEPnBPAf.4d/2PC2fTEP/fTLg7E0.93.',NULL,'recepcion@mir.com.ec',10,0,1,1,'user2-160x160.png','2022-04-04 16:13:37','Activo',1,'1');
 
 /*Table structure for table `usuariorol` */
 
