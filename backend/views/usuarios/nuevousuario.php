@@ -72,6 +72,7 @@ $botones= new Botones;
          //console.log("elemento.id="+ elemento.id + ", elemento.value=" + elemento.value);
         //});
         $("#guardar").on('click', function() {
+            loading(1);
             if (validardatos()==true){
                 var form    = $('#frmDatos'),
                 nombre   = $('#nombrerol').val(),
@@ -90,10 +91,13 @@ $botones= new Botones;
                         // ============================ Not here, this would be too late
                         notificacion(data.mensaje,data.tipo);
                         //$this.data().isSubmitted = true;
+                        loading(0);
+
                         $('#frmDatos')[0].reset();
                         return true;
                     }else{
                         notificacion(data.mensaje,data.tipo);
+                        loading(0);
                     }
                 }
             });

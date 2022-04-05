@@ -49,6 +49,7 @@ class Menu_admin extends Component
             $nombrerol= $rolusuario->idrol0->nombre;
             $permisos=Rolespermisos::find()->where(["idrol"=>$rol,"estatus"=>"ACTIVO","isDeleted"=>0])->all();
             $permisosdef=Rolespermisodef::find()->where(["estatus"=>"ACTIVO","isDeleted"=>0])->all();
+            //var_dump($permisosdef);
             $permitidomenu=false;
             foreach ($menuModel as $key => $data) {
                 //$permisosdef=Rolespermisodef::find()->where(["idmenu"=>$data->id,"estatus"=>"ACTIVO","isDeleted"=>0])->one();
@@ -66,7 +67,10 @@ class Menu_admin extends Component
                         if ($valueperdet["idmenu"]==$data->id){$permitidomenu=true;}
                     }
                     if ($valueper->idsubmodulo){
+                        //echo $valueper->idsubmodulo0->id ;
                         foreach ($valueper->idsubmodulo0 as $key => $valuepersubdet) {
+                            //echo ($valuepersubdet["nombreint"]. '<br> ');
+
                             $submodulos[]=$valuepersubdet["nombreint"];
                             //var_dump($valueper);
                             //echo $valueperdet["nombreint"];
@@ -115,7 +119,8 @@ class Menu_admin extends Component
                                     }
                                     if ($permitidosubmenu){
                                         $contsubmenu++;
-                                        $subMenu[]=array('label' => $data2->nombre,'options'=> ['data-class'=>'submenu2'], 'icon' => $data2->icono, 'url' => [$data2->link],'active' => '/'.$context == $data2->link);
+                                        $template='<a href="{url}" class="nav-link " style="width: 100%;">{icon} '.$data2->nombre.' </a>';
+                                        $subMenu[]=array('label' => $data2->nombre,'options'=> ['data-class'=>'submenu2','style'=>'padding-left:3%;'], 'icon' => $data2->icono, 'url' => [$data2->link],'active' => '/'.$context == $data2->link,'template'=>$template);
                                     }
                                 }
                             }

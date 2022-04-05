@@ -7,6 +7,7 @@ use yii\base\Component;
 use yii\base\InvalidConfigException;
 use common\models\Roles;
 use common\models\Rolespermisos;
+use common\models\Rolesusuario;
 use backend\components\Log_errores;
 use backend\models\User;
 
@@ -75,14 +76,25 @@ class Usuarios_sistema extends Component
             $modelUsuario->updated_at=Yii::$app->user->identity->id;
 
             if ($modelUsuario->save()) {
+                $rolusuario= new Rolesusuario;
+                $rolusuario->idrol=$data['rol'];
+                $rolusuario->isDeleted=0;
+                $rolusuario->idusuario=$modelUsuario->id;
+                $rolusuario->usuariocreacion=Yii::$app->user->identity->id;
                 $idusuario=$modelUsuario->id;
-                $error=false; 
-                //$this->callback(1,$idusuario,$modelUsuario->errors);
-                return array("response" => true, "id" => $modelUsuario->id, "mensaje"=> "Registro agregado","tipo"=>"success", "success"=>true); 
+                if ($rolusuario->save()){
+                    $error=false;
+                    //$this->callback(1,$idusuario,$modelUsuario->errors);
+                    return array("response" => true, "id" => $modelUsuario->id, "mensaje"=> "Registro agregado","tipo"=>"success", "success"=>true);
+                }else{
+                    $this->callback(1,$idusuario,$rolusuario->errors);
+                    return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
+                }
+
             } else {
                 $this->callback(1,$idusuario,$modelUsuario->errors);
                 return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
-            }    
+            }
         else:
             $log= new Log_errores;
             $observacion="ID: 0";
@@ -90,7 +102,7 @@ class Usuarios_sistema extends Component
             $log->Nuevo("USUARIOS :: Usuarios_sistema ",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
         endif;
-        
+
         return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
     }
 
@@ -105,13 +117,13 @@ class Usuarios_sistema extends Component
                 $log->Nuevo("USUARIO ",$error,$observacion,0,Yii::$app->user->identity->id);
                 //return true;
                 break;
-            
+
             default:
                 # code...
                 break;
         }
     }
- 
+
 
 
 }
