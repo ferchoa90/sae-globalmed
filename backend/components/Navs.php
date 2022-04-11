@@ -48,29 +48,29 @@ class Navs extends Component
         {
             $this->active=true;
 
-            $return.='</ul>'; 
+            $return.='</ul>';
             foreach($objetos as $obj):
 
                 switch ($obj['tipo']) {
                     case 'config':
                         $return.=$this->getConfigtabcontent($obj['nombre'],$obj['id'],$obj['titulo'],$obj['link'],$obj['onclick'],$obj['clase'],$obj['style'],$obj['col'],$obj['tipocolor'],$obj['icono'],$obj['tamanio'],$obj['adicional'],$obj['contenido']);
                         break;
-    
+
                     case 'tab':
                         $return.=$this->getTabcontent($obj['nombre'],$obj['id'],$obj['titulo'],$obj['link'],$obj['onclick'],$obj['clase'],$obj['style'],$obj['col'],$obj['tipocolor'],$obj['icono'],$obj['tamanio'],$obj['adicional'],$obj['contenido']);
                         break;
                 }
             endforeach;
-            $return.='</div></p>'; 
+            $return.='</div></p>';
         }
-        
-        
+
+
         return $return;
     }
 
     private function getConfig($nombre='', $id='', $titulo='', $link='', $onclick='', $clase='', $style='', $col='',$tipocolor='',$icono='',$tamanio='', $adicional, $contenido='' )
     {
-        $return='<p><ul class="nav nav-tabs" id="'.$id.'" name="'.$nombre.'" role="tablist">';
+        $return=' <ul class="nav nav-tabs" id="'.$id.'" name="'.$nombre.'" role="tablist"> ';
         return $return;
     }
 
@@ -96,7 +96,7 @@ class Navs extends Component
 
         $icon = new Iconos;
         //var_dump($icono);
-        $icono= $icon->getIconos($icono,'','','','','','','');   
+        $icono= $icon->getIconos($icono,'','','','','','','');
 
         switch ($clase) {
             case !'':
@@ -107,9 +107,9 @@ class Navs extends Component
                 $clase=$classdefault;
                 break;
         }
-        
-         
-        if ($this->active){ $activecont="active"; }else{ $activecont="";} 
+
+
+        if ($this->active){ $activecont="active"; }else{ $activecont="";}
         $div='
             <li class="nav-item">
                 <a class="nav-link '.$activecont.' " id="'.$id.'" name="'.$nombre.'" data-toggle="tab" href="#dv-'.$nombre.'" role="tab" aria-controls="home" aria-selected="true">'.$titulo.'</a>
@@ -125,7 +125,7 @@ class Navs extends Component
         ';*/
         $resultado=$div;
         return $resultado;
-        
+
     }
 
     public function getTabcontent($nombre='', $id='', $titulo='', $link='', $onclick='', $clase='', $style='', $col='',$tipocolor='',$icono='',$tamanio='', $adicional, $contenido='' )
@@ -142,7 +142,7 @@ class Navs extends Component
 
         $icon = new Iconos;
         //var_dump($icono);
-        $icono= $icon->getIconos($icono,'','','','','','','');   
+        $icono= $icon->getIconos($icono,'','','','','','','');
 
         switch ($clase) {
             case !'':
@@ -154,17 +154,17 @@ class Navs extends Component
                 break;
         }
 
-        if ($this->active){ $activecont="active"; }else{ $activecont="";} 
+        if ($this->active){ $activecont="active"; }else{ $activecont="";}
         $div='<div class="tab-pane fade show '.$activecont.' p-3  " id="dv-'.$id.'"  name="dv-'.$nombre.'" role="tabpanel" aria-labelledby="nav-home-tab">'.$contenido.'</div>';
-        
+
         $this->active=false;
-      
+
         $resultado=$div;
         return $resultado;
-        
+
     }
 
-   
+
 
     public function getSeparador($clase='',$estilo='', $color='')
     {
@@ -181,4 +181,3 @@ class Navs extends Component
 
 
 }
- 

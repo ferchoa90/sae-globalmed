@@ -53,7 +53,7 @@ class Medico_pacientes extends Component
 
     public function getSelect()
     {
-        $clientes = Pacientes::find()->where(["isDeleted" => 0])->orderBy(["nombre" => SORT_ASC])->all();
+        $clientes = Pacientes::find()->where(["isDeleted" => 0])->orderBy(["apellidos" => SORT_ASC])->all();
         //var_dump($clientes);
         $clientesArray=array();
         $cont=0;

@@ -6,6 +6,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\components\Botones;
+use backend\components\Medico_pacientes;
 use common\models\LoginForm;
 use common\models\Cierreanio;
 use common\models\Pacientes;
@@ -192,6 +193,17 @@ class PacientesController extends Controller
     public function actionHistoriaclinica()
     {
         return $this->render('historiaclinica');
+    }
+
+    public function actionVerhistoriaclinica($id)
+    {
+        $profesiones= new Medico_pacientes;
+        $pacientes= $profesiones->getSelect();
+        return $this->render('verhistoriaclinica', [
+            //'data' => Doctores::find()->where(['id' => $id, "isDeleted" => 0])->one(),
+            'pacientes' => $pacientes,
+        ]);
+
     }
 
     public function actionAgenda()

@@ -107,9 +107,7 @@ class Bloques extends Component
                         <h3 class="card-title">'.$titulo.'</h3>
                     </div>
 
-                    <div class="card-body">
-                    '.$contenido.'
-                    </div>
+                    <div class="card-body">'.$contenido.'</div>
                 </div>
             </div>
         </div>
