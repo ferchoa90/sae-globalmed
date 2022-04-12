@@ -8,9 +8,7 @@ use yii\base\InvalidConfigException;
 use common\models\Roles;
 use common\models\Rolespermisos;
 use backend\components\Log_errores;
-use common\models\Pacientes;
 use common\models\Consultamedica;
-use common\models\Citasmedicas;
 use backend\models\User;
 
 
@@ -22,16 +20,16 @@ use backend\models\User;
  * Time: 14:55
  */
 
-class Medico_pacientes extends Component
+class Medico_consulta extends Component
 {
-    const MODULO='PACIENTES';
+    const MODULO='CONSULTA';
 
-    public function getPacientes($tipo,$array=true,$orderby,$limit,$all=true)
+    public function getConsultamedica($tipo,$array=true,$orderby,$limit,$all=true)
     {
         if ($all){
-            $asiento= Pacientes::find()->where(["isDeleted"=>0])->all();
+            $asiento= Consultamedica::find()->where(["isDeleted"=>0])->all();
         }else{
-            $asiento= Pacientes::find()->where(["isDeleted"=>0])->one();
+            $asiento= Consultamedica::find()->where(["isDeleted"=>0])->one();
         }
     }
 
@@ -39,7 +37,7 @@ class Medico_pacientes extends Component
     {
         $result=array();
         if ($id){
-            $result = Pacientes::find()->where(["isDeleted" => 0,"estatus" => "ACTIVO"])->orderBy(["apellidos" => SORT_ASC])->one();
+            $result = Consultamedica::find()->where(["isDeleted" => 0,"estatus" => "ACTIVO"])->orderBy(["apellidos" => SORT_ASC])->one();
             if ($result)
             {
                 //$result=$result["nombres"].' '.$result["apellidos"].')';
@@ -57,7 +55,7 @@ class Medico_pacientes extends Component
     {
         $result=array();
         if ($idpaciente){
-            $result = Consultamedica::find()->where(["idpaciente"=>$idpaciente,"isDeleted" => 0,"estatus" => "ACTIVO"])->orderBy(["fechacreacion" => SORT_DESC])->one();
+            $result = Consultamedica::find()->where(["idpaciente"=>$idpaciente,"isDeleted" => 0,"estatus" => "ACTIVO"])->orderBy(["fechacreacion" => SORT_DESC])->all();
             if ($result)
             {
                 return $result;
@@ -73,7 +71,7 @@ class Medico_pacientes extends Component
 
     public function getSelect()
     {
-        $clientes = Pacientes::find()->where(["isDeleted" => 0])->orderBy(["apellidos" => SORT_ASC])->all();
+        $clientes = Consultamedica::find()->where(["isDeleted" => 0])->orderBy(["apellidos" => SORT_ASC])->all();
         //var_dump($clientes);
         $clientesArray=array();
         $cont=0;
@@ -92,7 +90,7 @@ class Medico_pacientes extends Component
         //$date = date("Y-m-d H:i:s");
         $idusuario=0;
         $idmodulo=0;
-        $model= new Pacientes;
+        $model= new Consultamedica;
         $result=false;
         if ($data):
             $model->nombres=$data['nombres'];
@@ -129,7 +127,7 @@ class Medico_pacientes extends Component
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO POST";
-            $log->Nuevo(self::MODULO." :: Medico_pacientes ",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo(self::MODULO." :: Medico_consultamedica ",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
         endif;
 
@@ -141,7 +139,7 @@ class Medico_pacientes extends Component
         $id=0;
         $result=false;
         if ($data):
-            $model= Pacientes::find()->where(["id"=>$data['id']])->one();
+            $model= Consultamedica::find()->where(["id"=>$data['id']])->one();
             $model->nombres=$data['nombres'];
             $model->apellidos=$data['apellidos'];
             $model->cedula=$data['cedula'];
@@ -173,7 +171,7 @@ class Medico_pacientes extends Component
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO POST";
-            $log->Nuevo(self::MODULO." :: Medico_pacientes -> editar",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo(self::MODULO." :: Medico_consultamedica -> editar",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
         endif;
 
@@ -186,7 +184,7 @@ class Medico_pacientes extends Component
         $result=false;
         if ($id):
             //$data = $usuario;
-            $data= Pacientes::find()->where(["id"=>$id])->one();
+            $data= Consultamedica::find()->where(["id"=>$id])->one();
             $data->isDeleted=1;
             if ($data->save()) {
                 $error=false;
@@ -199,7 +197,7 @@ class Medico_pacientes extends Component
             $log= new Log_errores;
             $observacion="ID: 0";
             $error="NO ID";
-            $log->Nuevo(self::MODULO." :: Medico_pacientes -> eliminar",$error,$observacion,0,Yii::$app->user->identity->id);
+            $log->Nuevo(self::MODULO." :: Medico_consultamedica -> eliminar",$error,$observacion,0,Yii::$app->user->identity->id);
             return array("response" => true, "id" => 0, "mensaje"=> "Error al eliminar el registro","tipo"=>"error", "success"=>false);
         endif;
 

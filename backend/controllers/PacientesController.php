@@ -197,11 +197,13 @@ class PacientesController extends Controller
 
     public function actionVerhistoriaclinica($id)
     {
-        $profesiones= new Medico_pacientes;
-        $pacientes= $profesiones->getSelect();
+        $data= new Medico_pacientes;
+        $pacientes= $data->getPaciente($id);
+        $consultas= $data->getHistoriaclinica($id);
         return $this->render('verhistoriaclinica', [
             //'data' => Doctores::find()->where(['id' => $id, "isDeleted" => 0])->one(),
-            'pacientes' => $pacientes,
+            'paciente' => $pacientes,
+            'consultas' => $consultas,
         ]);
 
     }
