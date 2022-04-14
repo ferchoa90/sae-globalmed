@@ -204,7 +204,7 @@ class PacientesController extends Controller
             //'data' => Doctores::find()->where(['id' => $id, "isDeleted" => 0])->one(),
             'paciente' => $pacientes,
             'consultas' => $consultas,
-        ]);
+        ]); 
 
     }
 

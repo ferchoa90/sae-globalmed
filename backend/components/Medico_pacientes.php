@@ -57,7 +57,7 @@ class Medico_pacientes extends Component
     {
         $result=array();
         if ($idpaciente){
-            $result = Consultamedica::find()->where(["idpaciente"=>$idpaciente,"isDeleted" => 0,"estatus" => "ACTIVO"])->orderBy(["fechacreacion" => SORT_DESC])->one();
+            $result = Consultamedica::find()->where(["idpaciente"=>$idpaciente,"isDeleted" => 0,"estatus" => "ACTIVO"])->orderBy(["fechacreacion" => SORT_DESC])->all();
             if ($result)
             {
                 return $result;
