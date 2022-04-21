@@ -114,7 +114,9 @@ class Iconos extends Component
                 $tipo='fa fa-reply';
                 break;
 
-
+            case 'citamedica':
+                $tipo='fa fa-stethoscope';
+                break;
 
             default:
                 $tipo=$tipodefault;
@@ -131,6 +133,10 @@ class Iconos extends Component
         $tamaniodefault='';
         switch ($tipo) {
 
+            case 'citamedica':
+                $tipo='fa fa-stethoscope';
+                break;
+                
             case 'archivo':
                 $tipo='fa fa-file-code-o';
                 break;

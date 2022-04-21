@@ -12,6 +12,7 @@ use common\models\Cierreanio;
 use common\models\Pacientes;
 use common\models\Cierreaniodetalle;
 use common\models\Citasmedicas;
+use common\models\Doctores;
 use common\models\Entregas;
 
 
@@ -104,17 +105,18 @@ class PacientesController extends Controller
         }
         $page = "citas";
         $view=$page;
-        $model = Citasmedicas::find()->where(['isDeleted' => '0','iddoctor' => Yii::$app->user->identity->id ])->orderBy(["fechacreacion" => SORT_DESC])->all();
+        $doctor = Doctores::find()->where(['isDeleted' => '0','idususistem' => Yii::$app->user->identity->id ])->one();
+        $model = Citasmedicas::find()->where(['isDeleted' => '0','iddoctor' => $doctor->id ])->orderBy(["fechacreacion" => SORT_DESC])->all();
         $arrayResp = array();
         $count = 0;
         foreach ($model as $key => $data) {
             $editar=array(); $borrar=array();
 
-                if ( ($data["estatuscita"]=="AGENDADA"  || $data["estatuscita"]=="CANCELADO") ) {
-                    $editar=array('tipo'=>'link','nombre'=>'editar', 'id' => 'editar', 'titulo'=>'', 'link'=>'editar'.$view.'?id='.$data["id"], 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'verdesuave', 'icono'=>'editar','tamanio'=>'superp', 'adicional'=>'');
+                if ( ($data["estatuscita"]=="AGENDADA"  || $data["estatuscita"]=="CANCELADO" || $data["estatuscita"]=="EN ATENCIÓN") ) {
+                    $editar=array('tipo'=>'link','nombre'=>'atender', 'id' => 'atender', 'titulo'=>'', 'link'=>'atender'.$view.'?id='.$data["id"], 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'verdesuave', 'icono'=>'citamedica','tamanio'=>'superp', 'adicional'=>'');
                 }
                 if ( $data["estatus"]=="ACTIVO" ) {
-                    $borrar=array('tipo'=>'link','nombre'=>'eliminar', 'id' => 'editar', 'titulo'=>'', 'link'=>'','onclick'=>'deleteReg('.$data["id"]. ')', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'rojo', 'icono'=>'eliminar','tamanio'=>'superp', 'adicional'=>'');
+                    //$borrar=array('tipo'=>'link','nombre'=>'eliminar', 'id' => 'editar', 'titulo'=>'', 'link'=>'','onclick'=>'deleteReg('.$data["id"]. ')', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'rojo', 'icono'=>'eliminar','tamanio'=>'superp', 'adicional'=>'');
                 }
 
             foreach ($data as $id => $text) {
@@ -193,6 +195,11 @@ class PacientesController extends Controller
     public function actionHistoriaclinica()
     {
         return $this->render('historiaclinica');
+    }
+
+    public function actionAtendercitas()
+    {
+        return $this->render('atendercitas');
     }
 
     public function actionVerhistoriaclinica($id)
