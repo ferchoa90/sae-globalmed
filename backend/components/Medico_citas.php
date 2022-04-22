@@ -98,6 +98,7 @@ class Medico_citas extends Component
             $model->fechacita=$data['fecha'];
             $model->horacita=$data['hora'];
             $model->iddoctor=$data['doctor'];
+            $model->idoptometrista=$data['optometrista'];
             $model->observacion=$data['observacion'];
             $model->usuarioact=Yii::$app->user->identity->id;
             $model->fechaact= date("Y-m-d H:i:s");

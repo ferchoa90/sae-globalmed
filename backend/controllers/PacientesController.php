@@ -197,9 +197,17 @@ class PacientesController extends Controller
         return $this->render('historiaclinica');
     }
 
-    public function actionAtendercitas()
+    public function actionAtendercitas($id)
     {
-        return $this->render('atendercitas');
+        $data= new Medico_pacientes;
+        $pacientes= $data->getPaciente($id);
+        $consultas= $data->getHistoriaclinica($id);
+        //var_dump($pacientes);
+        return $this->render('atendercitas', [
+            //'data' => Doctores::find()->where(['id' => $id, "isDeleted" => 0])->one(),
+            'paciente' => $pacientes,
+            'consultas' => $consultas,
+        ]);
     }
 
     public function actionVerhistoriaclinica($id)
@@ -211,13 +219,24 @@ class PacientesController extends Controller
             //'data' => Doctores::find()->where(['id' => $id, "isDeleted" => 0])->one(),
             'paciente' => $pacientes,
             'consultas' => $consultas,
-        ]); 
+        ]);
 
     }
 
     public function actionAgenda()
     {
         return $this->render('agenda');
+    }
+
+    public function actionVercitas($id)
+    {
+        $cita= Citasmedicas::find()->where(['id' => $id, "isDeleted" => 0])->one();
+
+        return $this->render('vercita', [
+            'cita' =>$cita,
+           // 'entregasdetalle' => Diariodetalle::find()->where(['diario' => $entregas->diario, "isDeleted" => 0])->all(),
+        ]);
+
     }
 
 

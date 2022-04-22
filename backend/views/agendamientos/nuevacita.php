@@ -20,8 +20,9 @@ $urlpost='formnuevacita';
  $contenido=$objeto->getObjetosArray(
     array(
         array('tipo'=>'select','subtipo'=>'', 'nombre'=>'paciente', 'id'=>'paciente', 'valor'=>$pacientes, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Paciente: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'fecha', 'id'=>'fecha', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'calendario','boxbody'=>false,'etiqueta'=>'Fecha nacimiento: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'fecha', 'id'=>'fecha', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'calendario','boxbody'=>false,'etiqueta'=>'Fecha Cita: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'hora', 'id'=>'hora', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Hora: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
+        array('tipo'=>'select','subtipo'=>'', 'nombre'=>'optometrista', 'id'=>'optometrista', 'valor'=>$doctores, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Optometrista: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
         array('tipo'=>'select','subtipo'=>'', 'nombre'=>'doctor', 'id'=>'doctor', 'valor'=>$doctores, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Doctor: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'textarea', 'nombre'=>'observacion', 'id'=>'observacion', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Observación: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
 
@@ -120,15 +121,20 @@ ActiveForm::end();
            if ($('#paciente').val()!=-1){
                 if ($('#fecha').val()!=""){
                     if ($('#hora').val()!=""){
-                        if ($('#doctor').val()!=-1){
-                            if ($('#observación').val()!=-1){
-                                return true;
+                        if ($('#optometrista').val()!=-1){
+                            if ($('#doctor').val()!=-1){
+                                if ($('#observación').val()!=-1){
+                                    return true;
+                                }else{
+                                    $('#observación').focus();
+                                    return false;
+                                }
                             }else{
-                                $('#observación').focus();
+                                $('#doctor').focus();
                                 return false;
                             }
                         }else{
-                            $('#doctor').focus();
+                            $('#optometrista').focus();
                             return false;
                         }
                     }else{
