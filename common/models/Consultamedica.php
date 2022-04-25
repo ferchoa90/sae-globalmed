@@ -87,6 +87,12 @@ class Consultamedica extends \yii\db\ActiveRecord
         return $this->hasOne(Citasmedicas::className(), ['id' => 'idcitamedica']);
     }
 
+    public function getConsultamedica0()
+    {
+        return Consultamedicadet::find()->where(["idconsulta"=>$this->id])->one();
+        //return $this->hasOne(Consultamedicadet::className(), ['idconsulta' => 'id']);
+    }
+
     /**
      * Gets query for [[Idpaciente0]].
      *

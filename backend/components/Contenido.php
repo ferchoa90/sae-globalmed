@@ -109,7 +109,7 @@ class Contenido extends Component
                 break;
         }
 
-        $div='<div id="div-'.$clase.'" name="div-'.$clase.'" class="'.$clase.' '.$col.'"><b>'.$titulo.' </b> '.$contenido.'</div>';
+        $div='<div style="'.$style.'" id="div-'.$clase.'" name="div-'.$clase.'" class="'.$clase.' '.$col.'"><b>'.$titulo.' </b> '.$contenido.'</div>';
         $resultado=$div;
         return $resultado;
     }

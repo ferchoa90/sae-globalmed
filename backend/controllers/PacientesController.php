@@ -14,6 +14,7 @@ use common\models\Pacientes;
 use common\models\Cierreaniodetalle;
 use common\models\Citasmedicas;
 use common\models\Consultamedica;
+use common\models\Consultamedicadet;
 use common\models\Doctores;
 use common\models\Entregas;
 
@@ -226,6 +227,29 @@ class PacientesController extends Controller
             //'data' => Doctores::find()->where(['id' => $id, "isDeleted" => 0])->one(),
             'paciente' => $pacientes,
             'consultas' => $consultas,
+            'citamedica' => $citamedica,
+            'idcita' => $id,
+
+        ]);
+    }
+
+    public function actionConsultacitas($id)
+    {
+        $data= new Medico_pacientes;
+        $pacientes= $data->getPaciente($id);
+        
+        $citamedica=Citasmedicas::find()->where(["id" => $id])->one();
+        $consultamedica=Consultamedica::find()->where(["idcitamedica" => $id])->one();
+        //echo $consultamedica->id;
+        $consultamedicadet=Consultamedicadet::find()->where(["idconsulta" => $consultamedica->id])->one();
+        //var_dump();
+
+        //var_dump($pacientes);
+        return $this->render('consultacitas', [
+            //'data' => Doctores::find()->where(['id' => $id, "isDeleted" => 0])->one(),
+            'paciente' => $pacientes,
+            'consultamedica' => $consultamedica,
+            'consultamedicadet' => $consultamedicadet,
             'citamedica' => $citamedica,
             'idcita' => $id,
 
