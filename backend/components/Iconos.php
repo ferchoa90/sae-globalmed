@@ -32,8 +32,10 @@ class Iconos extends Component
             case 'archivo':
                 $tipo='fa fa-file-code-o';
                 break;
+            case 'lista':
+                $tipo='fa fa-list-alt';
+                break;
 
- 
             case 'pdf':
                 $tipo='file-pdf-o';
                 break;
@@ -136,11 +138,15 @@ class Iconos extends Component
             case 'citamedica':
                 $tipo='fa fa-stethoscope';
                 break;
-                
+
+            case 'lista':
+                $tipo='fa fa-list-alt';
+                break;
+
             case 'archivo':
                 $tipo='fa fa-file-code-o';
                 break;
-                
+
             case 'aceptar':
                 $tipo='fa fa-check-circle-o';
                 break;

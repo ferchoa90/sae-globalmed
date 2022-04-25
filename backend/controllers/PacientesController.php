@@ -7,11 +7,13 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\components\Botones;
 use backend\components\Medico_pacientes;
+use backend\components\Medico_consulta;
 use common\models\LoginForm;
 use common\models\Cierreanio;
 use common\models\Pacientes;
 use common\models\Cierreaniodetalle;
 use common\models\Citasmedicas;
+use common\models\Consultamedica;
 use common\models\Doctores;
 use common\models\Entregas;
 
@@ -105,15 +107,30 @@ class PacientesController extends Controller
         }
         $page = "citas";
         $view=$page;
-        $doctor = Doctores::find()->where(['isDeleted' => '0','idususistem' => Yii::$app->user->identity->id ])->one();
-        $model = Citasmedicas::find()->where(['isDeleted' => '0','iddoctor' => $doctor->id ])->orderBy(["fechacreacion" => SORT_DESC])->all();
+        $fechaactual=date("Y-m-d");
+
+        if (Yii::$app->user->identity->idrol==39){
+            $doctor = Doctores::find()->where(['isDeleted' => '0','idususistem' => Yii::$app->user->identity->id ])->one();
+            $model = Citasmedicas::find()->where(['isDeleted' => '0','idoptometrista' => $doctor->id, 'estatuscita'=>"EN ATENCIÓN", 'fechacita'=>$fechaactual ])->orderBy(["fechacreacion" => SORT_DESC])->all();
+        }else{
+            $doctor = Doctores::find()->where(['isDeleted' => '0','idususistem' => Yii::$app->user->identity->id ])->one();
+            $model = Citasmedicas::find()->where(['isDeleted' => '0','iddoctor' => $doctor->id ])->orderBy(["fechacreacion" => SORT_DESC])->all();
+
+        }
         $arrayResp = array();
         $count = 0;
         foreach ($model as $key => $data) {
             $editar=array(); $borrar=array();
 
                 if ( ($data["estatuscita"]=="AGENDADA"  || $data["estatuscita"]=="CANCELADO" || $data["estatuscita"]=="EN ATENCIÓN") ) {
-                    $editar=array('tipo'=>'link','nombre'=>'atender', 'id' => 'atender', 'titulo'=>'', 'link'=>'atender'.$view.'?id='.$data["id"], 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'verdesuave', 'icono'=>'citamedica','tamanio'=>'superp', 'adicional'=>'');
+                    $consultamedica=Consultamedica::find()->where(['isDeleted' => '0','idcitamedica' => $data->id ])->orderBy(["fechacreacion" => SORT_DESC])->one();
+                    if ($consultamedica){
+                        $editar=array('tipo'=>'link','nombre'=>'atender', 'id' => 'atender', 'titulo'=>'', 'link'=>'consulta'.$view.'?id='.$data["id"], 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'verdesuave', 'icono'=>'citamedica','tamanio'=>'superp', 'adicional'=>'');
+
+                    }else{
+                        $editar=array('tipo'=>'link','nombre'=>'atender', 'id' => 'atender', 'titulo'=>'', 'link'=>'atender'.$view.'?id='.$data["id"], 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'verdesuave', 'icono'=>'lista','tamanio'=>'superp', 'adicional'=>'');
+
+                    }
                 }
                 if ( $data["estatus"]=="ACTIVO" ) {
                     //$borrar=array('tipo'=>'link','nombre'=>'eliminar', 'id' => 'editar', 'titulo'=>'', 'link'=>'','onclick'=>'deleteReg('.$data["id"]. ')', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'rojo', 'icono'=>'eliminar','tamanio'=>'superp', 'adicional'=>'');
@@ -202,11 +219,16 @@ class PacientesController extends Controller
         $data= new Medico_pacientes;
         $pacientes= $data->getPaciente($id);
         $consultas= $data->getHistoriaclinica($id);
+        $citamedica=Citasmedicas::find()->where(["id" => $id])->one();
+
         //var_dump($pacientes);
         return $this->render('atendercitas', [
             //'data' => Doctores::find()->where(['id' => $id, "isDeleted" => 0])->one(),
             'paciente' => $pacientes,
             'consultas' => $consultas,
+            'citamedica' => $citamedica,
+            'idcita' => $id,
+
         ]);
     }
 
@@ -225,6 +247,7 @@ class PacientesController extends Controller
 
     public function actionAgenda()
     {
+
         return $this->render('agenda');
     }
 
@@ -239,5 +262,17 @@ class PacientesController extends Controller
 
     }
 
+    public function actionFormatendercita()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Medico_consulta;
+        $data= $data->Nuevo($_POST);
+        $response=$data;
+        return json_encode($response);
+
+    }
 
 }
