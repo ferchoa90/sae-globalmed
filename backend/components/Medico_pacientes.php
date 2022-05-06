@@ -35,11 +35,12 @@ class Medico_pacientes extends Component
         }
     }
 
-    public function getPaciente($id,$condicion=NULL,$itemsret=NULL)
+    public function getPaciente($id=0,$idcita=0,$condicion=NULL,$itemsret=NULL)
     {
         $result=array();
-        if ($id){
-            $result = Pacientes::find()->where(["isDeleted" => 0,"estatus" => "ACTIVO"])->orderBy(["apellidos" => SORT_ASC])->one();
+        if ($idcita){
+            $citamedica=Citasmedicas::find()->where(["isDeleted" => 0,"id"=>$idcita])->one();
+            $result = Pacientes::find()->where(["isDeleted" => 0,"estatus" => "ACTIVO", "id"=>$citamedica->idusuario])->one();
             if ($result)
             {
                 //$result=$result["nombres"].' '.$result["apellidos"].')';
@@ -48,7 +49,12 @@ class Medico_pacientes extends Component
                 $result="NINGUNO";
             }
         }else{
-            $result= false;
+            if ($id){
+                $result = Pacientes::find()->where(["isDeleted" => 0,"estatus" => "ACTIVO", "id"=>$id])->one();
+                return $result;
+            }else{
+                $result= false;
+            }
         }
         return $result;
     }
@@ -179,6 +185,38 @@ class Medico_pacientes extends Component
 
         return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
     }
+
+    public function Editarantecedentes($data)
+    {
+        $id=0;
+        $result=false;
+        if ($data):
+            $model= Pacientes::find()->where(["id"=>$data['idpaciente']])->one();
+            $model->antecedentesp=$data['antecedentesp'];
+            $model->antecedenteso=$data['antecedenteso'];
+            $model->antecedentesf=$data['antecedentesf'];
+            $model->enfermedada=$data['enfermedada'];
+            $model->antecedentesf=$data['antecedentesf'];
+            $model->usuarioact=Yii::$app->user->identity->id;
+            $model->fechaact= date("Y-m-d H:i:s");
+            if ($model->save()) {
+                $error=false;
+                return array("response" => true, "id" => $model->id, "mensaje"=> "Registro actualizado","tipo"=>"success", "success"=>true);
+            } else {
+                $this->callback(1,$id,$model->errors);
+                return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
+            }
+        else:
+            $log= new Log_errores;
+            $observacion="ID: 0";
+            $error="NO POST";
+            $log->Nuevo(self::MODULO." :: Medico_pacientes -> editar",$error,$observacion,0,Yii::$app->user->identity->id);
+            return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
+        endif;
+
+        return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
+    }
+
 
     public function Eliminar($id)
     {

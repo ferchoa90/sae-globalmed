@@ -89,6 +89,18 @@ class User extends \yii\db\ActiveRecord
 
     }
 
+    public function getUsuariocreacion0()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_at']);
+    }
+
+    public function getUsuarioactualizacion0()
+    {
+        $response=$this->hasOne(User::className(), ['id' => 'updated_at']);
+        if (!$this->updated_at){ $response=(object) $array; $response->username="No registra";}
+        return $response;
+    }
+
     public function getSucursal()
     {
         return $this->hasOne(Sucursal::className(), ['id' => 'idsucursal']);

@@ -16,6 +16,7 @@ use backend\models\User;
 use common\models\Sucursal;
 use common\models\Roles;
 use common\models\Rolespermisos;
+use backend\components\Sistema_sucursal;
 use backend\components\Usuarios_sistema;
 use backend\components\Usuarios_permisos;
 
@@ -75,7 +76,7 @@ class UsuariosController extends Controller
      */
 
     public function actionEditarrol($id)
-    { 
+    {
         $nuevorol= new Configuraciones_rolesmodulo;
         $nuevorol= $nuevorol->getDataID();
         //$roldata=={}
@@ -146,6 +147,19 @@ class UsuariosController extends Controller
         }
         extract($_POST);
         $data= new Usuarios_roles;
+        $data= $data->Editar($_POST);
+        $response=$data;
+        return json_encode($response);
+
+    }
+
+    public function actionFormeditarusuario()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $data= new Usuarios_sistema;
         $data= $data->Editar($_POST);
         $response=$data;
         return json_encode($response);
@@ -325,13 +339,23 @@ class UsuariosController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionEditarusuario($id)
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect(URL::base() . "/site/login");
         }
 
-        $sucursal = Sucursal::find()->where(['isDeleted' => '0'])->orderBy(["id" => SORT_ASC])->all();
+        $sucursal = new Sistema_sucursal;
+        $sucursal= $sucursal->getSelect();
+        $roles = Roles::find()->where(['isDeleted' => '0'])->andWhere(['<>','nombre', 'SuperAdmin'])->orderBy(["id" => SORT_ASC])->all();
+        $rolesArray=array();
+        $cont=0;
+        foreach ($roles as $key => $value) {
+            if ($cont==0){ $rolesArray[$cont]["value"]="Seleccione un rol"; $rolesArray[$cont]["id"]=-1; $cont++; }
+            $rolesArray[$cont]["value"]=$value->nombre;
+            $rolesArray[$cont]["id"]=$value->id;
+            $cont++;
+        }
         $model = $this->findModel($id);
         if (isset($_POST) and !empty($_POST)) {
             $data = $_POST;
@@ -357,9 +381,10 @@ class UsuariosController extends Controller
             }
 
         } else {
-            return $this->render('update', [
+            return $this->render('editarusuario', [
                 'model' => $model,
                 'sucursal' => $sucursal,
+                'roles' => $rolesArray,
             ]);
         }
     }

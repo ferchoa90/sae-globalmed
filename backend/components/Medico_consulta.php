@@ -8,6 +8,7 @@ use yii\base\InvalidConfigException;
 use common\models\Roles;
 use common\models\Rolespermisos;
 use backend\components\Log_errores;
+use backend\components\Archivos;
 use common\models\Consultamedica;
 use common\models\Consultamedicadet;
 use common\models\Citasmedicas;
@@ -111,8 +112,9 @@ class Medico_consulta extends Component
             if ($model->save()) {
                 $modeldetalle= new Consultamedicadet;
                 $modeldetalle->idconsulta=$model->id;
-                $modeldetalle->causaconsulta="-";
+
                 $modeldetalle->usolentes=$data['usolentes'];
+                $modeldetalle->causaconsulta=$data['motivo'];
 
                 $modeldetalle->agudezavscod=$data['agudezavscod'];
                 $modeldetalle->agudezavscoi=$data['agudezavscoi'];
@@ -175,6 +177,21 @@ class Medico_consulta extends Component
                 $modeldetalle->usuariocreacion=Yii::$app->user->identity->id;
                 $modeldetalle->estatus="ACTIVO";
                 $modeldetalle->isDeleted=0;
+                $archivoM= new Archivos;
+                //var_dump($_FILES["img1"]);
+                if ($_FILES){
+                    $archivo=$archivoM->Subirarchivo(array($_FILES["img1"]));
+                    //var_dump($archivo);
+                    $modeldetalle->img1=$archivo["nombrearchivo"];
+                    $archivo=$archivoM->Subirarchivo(array($_FILES["img2"]));
+                    $modeldetalle->img2=$archivo["nombrearchivo"];
+                    $archivo=$archivoM->Subirarchivo(array($_FILES["img3"]));
+                    $modeldetalle->img3=$archivo["nombrearchivo"];
+                    $archivo=$archivoM->Subirarchivo(array($_FILES["img4"]));
+                    $modeldetalle->img4=$archivo["nombrearchivo"];
+                    $archivo=$archivoM->Subirarchivo(array($_FILES["img5"]));
+                    $modeldetalle->img5=$archivo["nombrearchivo"];
+                }
 
 
                 if ($modeldetalle->save()) {
@@ -206,25 +223,65 @@ class Medico_consulta extends Component
         $id=0;
         $result=false;
         if ($data):
-            $model= Consultamedica::find()->where(["id"=>$data['id']])->one();
-            $model->nombres=$data['nombres'];
-            $model->apellidos=$data['apellidos'];
-            $model->cedula=$data['cedula'];
-            $model->alerta=$data['alerta'];
-            $model->idgenero=$data['genero'];
-            $model->idciudad=$data['ciudad'];
-            $model->idprofesion=$data['profesion'];
-            $model->direccion=$data['direccion'];
-            $model->correo=$data['correo'];
-            $model->fechanac=$data['fechanac'];
-            $model->tiposangre=$data['tiposangre'];
-            $model->antecedentesp=$data['antecedentesp'];
-            $model->antecedenteso=$data['antecedenteso'];
-            $model->antecedentesf=$data['antecedentesf'];
-            $model->enfermedada=$data['enfermedada'];
-            $model->antecedentesf=$data['antecedentesf'];
-            $model->telefonoemer=$data['telefonoemer'];
-            $model->direccionemer=$data['direccionemer'];
+            $model= Consultamedicadet::find()->where(["id"=>$data['idconsultam']])->one();
+            $model->causaconsulta=$data['motivo'];
+            $model->agudezavscod=$data['agudezavscod'];
+            $model->agudezavscoi=$data['agudezavscoi'];
+            $model->agudezavcod=$data['agudezavcod'];
+            $model->agudezavcoi=$data['agudezavcoi'];
+            $model->agudezavotr=$data['agudezavscotr'];
+
+            $model->visioncscod=$data['visioncercascod'];
+            $model->visioncosci=$data['visioncercascoi'];
+            $model->visionccod=$data['visioncercaccod'];
+            $model->visionccid=$data['visioncercaccoi'];
+            $model->visioncotr=$data['visioncercaotr'];
+
+            $model->visionlscod=$data['visionlejosscod'];
+            $model->visionlscoi=$data['visionlejosscoi'];
+            $model->visionlcod=$data['visionlejosccod'];
+            $model->visionlcoi=$data['visionlejosccoi'];
+            $model->visionlcotr=$data['visionlejosotr'];
+
+            $model->pioscod=$data['pioscod'];
+            $model->pioscoi=$data['pioscoi'];
+            $model->piocod=$data['piocod'];
+            $model->piocoi=$data['piocoi'];
+            $model->piootr=$data['piocotr'];
+
+            $model->biomicroscopia=$data['microboscopia'];
+            $model->visiondecolores=$data['visioncolores'];
+            $model->visionprofundidad=$data['visionprof'];
+            $model->reflejospup=$data['refloejospupi'];
+            $model->campovisual=$data['campovisual'];
+            $model->fondoojood=$data['fondoojood'];
+            $model->fondoojooi=$data['fondoojooi'];
+            $model->agujeroest=$data['agujeroest'];
+
+            $model->examenes=$data['examenes'];
+
+            $model->impdiag1=$data['impresion1'];
+            $model->impdiag2=$data['impresion2'];
+            $model->impdiag3=$data['impresion3'];
+            $model->cie1001=$data['cie1'];
+            $model->cie1002=$data['cie2'];
+            $model->cie1003=$data['cie3'];
+
+            $model->campim=$data['camping'];
+            $model->octangular=$data['octangular'];
+            $model->octm=$data['octm'];
+            $model->octn=$data['octn'];
+            $model->biood=$data['biometod'];
+            $model->bioid=$data['biometoi'];
+            $model->paquimod=$data['paquimod'];
+            $model->paquimid=$data['paquimoi'];
+            $model->ora=$data['ora'];
+            $model->topografia=$data['topografia'];
+            $model->angiog=$data['angioog'];
+            $model->ecogra=$data['ecogra'];
+            $model->endote=$data['endote'];
+            $model->ubm=$data['ubm'];
+            $model->retinografia=$data['retinografia'];
             $model->usuarioact=Yii::$app->user->identity->id;
             $model->fechaact= date("Y-m-d H:i:s");
             if ($model->save()) {

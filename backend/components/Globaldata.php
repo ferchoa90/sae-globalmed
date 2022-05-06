@@ -17,6 +17,14 @@ class Globaldata extends Component
      *
      * @return string
      */
+    public function getEdad($fechanac='1990-01-01')
+    {
+
+        $dia_actual = date("Y-m-d");
+        $edad_diff = date_diff(date_create($fechanac), date_create($dia_actual));
+        return $edad_diff->format('%y');
+    }
+
     public static function getCurrentDateTime()
     {
         $date = date("Y-m-d H:i:s");

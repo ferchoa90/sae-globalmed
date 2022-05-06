@@ -42,7 +42,7 @@ class Citasmedicas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idusuario', 'observacion', 'fechacita', 'horacita',   'usuariocreacion'], 'required'],
+            [['idusuario' , 'fechacita', 'horacita',   'usuariocreacion'], 'required'],
             [['idusuario', 'isDeleted', 'iddoctor', 'usuariocreacion', 'usuarioact'], 'integer'],
             [['observacion', 'estatuscita', 'via', 'estatus'], 'string'],
             [['fechacita', 'horacita', 'fechacreacion' ], 'safe'],

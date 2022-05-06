@@ -58,34 +58,44 @@ class Bloques extends Component
     {
         $classdefault='col-md-12 col-xs-12 ';
         $tipocolordefault='card card-primary';
+        $gradientdefault='bg-gradient-primary';
 
         switch ($tipocolor) {
             case 'azul':
                 $tipocolor='card card-primary';
+                $gradient='bg-gradient-primary';
                 break;
 
             case 'verde':
                 $tipocolor='card card-success';
+                $gradient='bg-gradient-success';
+
                 break;
 
             case 'rojo':
                 $tipocolor='card card-danger';
+                $gradient='bg-gradient-danger';
                 break;
 
             case 'verdesuave':
                 $tipocolor='card card-info';
+                $gradient='bg-gradient-info';
+
                 break;
 
             case 'amarillo':
                 $tipocolor='card card-warning';
+                $gradient='bg-gradient-warning';
                 break;
 
             case 'plomo' || 'gris':
                 $tipocolor='card card-secondary';
+                $gradient='bg-gradient-secondary';
                 break;
 
             default:
                 $tipocolor=$tipocolordefault;
+                $gradient=$gradientdefault;
                 break;
         }
 
@@ -101,9 +111,9 @@ class Bloques extends Component
 
         $div='
         <div class="'.$clase.' '.$col.'">
-            <div id="'.$id.'" nombre="'.$nombre.'">
+            <div id="'.$id.'" nombre="'.$nombre.'" style="box-shadow: 3px 2px 2px #ccc;">
                 <div class="'.$tipocolor.'">
-                    <div class="card-header">
+                    <div class="card-header '.$gradient.'">
                         <h3 class="card-title">'.$titulo.'</h3>
                     </div>
 

@@ -32,7 +32,7 @@ class Objetos extends Component
 
             switch ($obj['tipo']) {
             case 'input':
-                    $resultado.= $this->getInput($obj['subtipo'],$obj['nombre'], $obj['id'], $obj['valor'], $obj['onchange'], $obj['clase'], $obj['estilo'], $obj['icono'],$obj['boxbody'],$obj['etiqueta'],$obj['leyenda'], $obj['col'], $obj['adicional'], $obj['valordefecto']);
+                    $resultado.= $this->getInput($obj['subtipo'],$obj['nombre'], $obj['id'], $obj['valor'], $obj['onchange'], $obj['clase'], $obj['estilo'], $obj['icono'],$obj['boxbody'],$obj['etiqueta'],$obj['leyenda'], $obj['col'], $obj['adicional'], $obj['valordefecto'], $obj['textoon'], $obj['textooff']);
                     break;
 
             case 'select':
@@ -71,7 +71,7 @@ class Objetos extends Component
         }
     }
 
-    public function getInput($tipo, $nombre='', $id='', $valor='', $onchange='', $clase='', $style='', $icono='',$boxbody=false,$etiqueta='',$leyenda='', $col='', $adicional,$valordefecto='')
+    public function getInput($tipo, $nombre='', $id='', $valor='', $onchange='', $clase='', $style='', $icono='',$boxbody=false,$etiqueta='',$leyenda='', $col='', $adicional,$valordefecto='',$textoon='',$textooff='')
     {
         //$date = date("Y-m-d H:i:s");
         $iconfa=new Iconos;
@@ -98,7 +98,7 @@ class Objetos extends Component
                 break;
 
             case 'checkbox':
-                return $this->getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $estilo, $icono,$boxbody,$etiqueta,$leyenda, $col, $adicional);
+                return $this->getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $estilo, $icono,$boxbody,$etiqueta,$leyenda, $col, $adicional,$textoon,$textooff);
                 break;
 
             case 'oculto':
@@ -111,7 +111,7 @@ class Objetos extends Component
                 break;
 
             case 'onoff':
-                return $this->getInputOnoff($nombre, $id, $valor,$valordefecto, $onchange, $clase, $estilo, $icono,$boxbody,$etiqueta,$leyenda, $col, $adicional);
+                return $this->getInputOnoff($nombre, $id, $valor,$valordefecto, $onchange, $clase, $estilo, $icono,$boxbody,$etiqueta,$leyenda, $col, $adicional,$textoon,$textooff);
                 break;
 
             case 'archivo':
@@ -357,11 +357,11 @@ private function getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $esti
 
         switch ($leyenda) {
             case '':
-                $input='<input type="file" class="custom-file-input '.$clase.'" id="'.$id.'" name="'.$nombre.'" aria-describedby="inputGroupFileAddon01">';
+                $input='<input type="file" class="custom-file-input '.$clase.'" id="'.$id.'" name="'.$nombre.'" aria-describedby="inputGroupFileAddon01" accept="image/*">';
                 break;
 
                 default:
-                $input='<input type="file" class="custom-file-input '.$clase.'" id="'.$id.'" name="'.$nombre.'" placeholder="'.$leyenda.'" aria-describedby="inputGroupFileAddon01">';
+                $input='<input type="file" class="custom-file-input '.$clase.'" id="'.$id.'" name="'.$nombre.'" placeholder="'.$leyenda.'" aria-describedby="inputGroupFileAddon01" accept="image/*">';
                 break;
         }
 
@@ -599,7 +599,7 @@ private function getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $esti
 
         }
 
-        private function getInputOnoff($nombre, $id, $valor, $valordefecto='OFF', $onchange, $clase, $estilo, $icono,$boxbody,$etiqueta,$leyenda='', $col, $adicional)
+        private function getInputOnoff($nombre, $id, $valor, $valordefecto='OFF', $onchange, $clase, $estilo, $icono,$boxbody,$etiqueta,$leyenda='', $col, $adicional,$textoon='', $textooff='')
         {
             $iconfa=new Iconos;
             $iconfa= $iconfa->getIconofa($icono);
@@ -623,7 +623,11 @@ private function getInputCheckbox($nombre, $id, $valor, $onchange, $clase, $esti
 
             switch ($leyenda) {
                 case '':
-                    $input='<input type="checkbox"  '.$valordefectodefault.' id="'.$id.'" name="'.$nombre.'"   class="'.$clase.'"  data-on="'.$valor.'" data-off="'.$valor.'" data-toggle="toggle" data-onstyle="outline-info" data-offstyle="outline-danger" '.$adicional.' />';
+                    if ($textoon){
+                        $input='<input type="checkbox"  '.$valordefectodefault.' id="'.$id.'" name="'.$nombre.'"   class="'.$clase.'"  data-on="'.$textoon.'" data-off="'.$textooff.'" data-toggle="toggle" data-onstyle="outline-info" data-offstyle="outline-danger" '.$adicional.' />';
+                    }else{
+                        $input='<input type="checkbox"  '.$valordefectodefault.' id="'.$id.'" name="'.$nombre.'"   class="'.$clase.'"  data-on="'.$valor.'" data-off="'.$valor.'" data-toggle="toggle" data-onstyle="outline-info" data-offstyle="outline-danger" '.$adicional.' />';
+                    }
                     break;
 
                     default:

@@ -17,12 +17,12 @@ class Iconos extends Component
     public function getIconos($tipo,$nombre='', $id='', $titulo='', $clase='', $style='', $col='',$adicional )
     {
 
-                return $this->getIcono($tipo,$nombre, $id, $titulo, $clase, $style, $col,$adicional);
+        return $this->getIcono($tipo,$nombre, $id, $titulo, $clase, $style, $col,$adicional);
     }
 
     public function getIconofa($icono)
     {
-                return $this->getFaicono($icono);
+        return $this->getFaicono($icono);
     }
 
     private function getFaicono($icono='')
@@ -32,6 +32,15 @@ class Iconos extends Component
             case 'archivo':
                 $tipo='fa fa-file-code-o';
                 break;
+
+            case 'llave':
+                $tipo='fas fa-key';
+                break;
+
+            case 'diagnostico':
+                $tipo='fa fa-medkit';
+                break;
+
             case 'lista':
                 $tipo='fa fa-list-alt';
                 break;
@@ -104,10 +113,6 @@ class Iconos extends Component
                 $tipo='fa fa-usd';
                 break;
 
-            case 'llave':
-                $tipo='fas fa-key';
-                break;
-
             case 'aceptar':
                 $tipo='fa fa-check-circle-o';
                 break;
@@ -137,6 +142,14 @@ class Iconos extends Component
 
             case 'citamedica':
                 $tipo='fa fa-stethoscope';
+                break;
+
+            case 'diagnostico':
+                $tipo='fa fa-medkit';
+                break;
+
+            case 'llave':
+                $tipo='fas fa-key';
                 break;
 
             case 'lista':

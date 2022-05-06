@@ -22,9 +22,9 @@ class Archivos extends Component
 
     function __construct($ruta='',$tamanio='',$tipoarchivo='',$formatosdefecto='')
     {
-        $rutadefecto='E:/xampp-new/htdocs/sae-bagsacorp/backend/web/images/pedidos/';
-        $rutadefecto='C:/xampp/htdocs/sae-bagsacorp/backend/web/images/pedidos/';
-        $rutadefectoprod = '/var/www/html/frontend/web/images/pedidos/';
+        //$rutadefecto='E:/xampp-new/htdocs/sae-globalmed/backend/web/images/pedidos/';
+        $rutadefecto='C:/xampp/htdocs/sae-globalmed/backend/web/images/fichamedica/';
+        //$rutadefectoprod = '/var/www/html/frontend/web/images/pedidos/';
         $tamaniodefecto="10000000"; //MB
         $tipoarchivodefecto="*.jpg|*.png|*.pdf|";
         $this->ruta=$rutadefecto;
@@ -77,7 +77,7 @@ class Archivos extends Component
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif" ) {
                 //echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-                $return=array("success"=>false,"Mensaje"=>"El archivo debe se una imagen válida. Extensión: ".$imageFileTypes);
+                $return=array("success"=>false,"Mensaje"=>"El archivo debe se una imagen válida. Extensión: ".$imageFileType);
                 $uploadOk = 0;
             }
             // Check if $uploadOk is set to 0 by an error

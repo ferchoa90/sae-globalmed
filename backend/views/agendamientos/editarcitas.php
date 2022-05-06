@@ -9,22 +9,23 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 
-$this->title = "Nueva cita";
+$this->title = "Editar cita";
 $this->params['breadcrumbs'][] = $this->title;
 
 
 $objeto= new Objetos;
 $div= new Bloques;
-$urlpost='formnuevacita';
+$urlpost='formeditarcita';
 
  $contenido=$objeto->getObjetosArray(
     array(
-        array('tipo'=>'select','subtipo'=>'', 'nombre'=>'paciente', 'id'=>'paciente', 'valor'=>$pacientes, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Paciente: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'fecha', 'id'=>'fecha', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'calendario','boxbody'=>false,'etiqueta'=>'Fecha Cita: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'hora', 'id'=>'hora', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Hora: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
-        array('tipo'=>'select','subtipo'=>'', 'nombre'=>'optometrista', 'id'=>'optometrista', 'valor'=>$optometrista, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Optometrista: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'select','subtipo'=>'', 'nombre'=>'doctor', 'id'=>'doctor', 'valor'=>$doctores, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Doctor: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'textarea', 'nombre'=>'observacion', 'id'=>'observacion', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Observación: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'oculto', 'nombre'=>'idcita', 'id'=>'idcita', 'valor'=>$citamedica->id, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'col'=>'col-3 col-md-3', 'adicional'=>''),
+        array('tipo'=>'select','subtipo'=>'', 'nombre'=>'paciente', 'id'=>'paciente', 'valor'=>$pacientes, 'valordefecto'=>$citamedica->idusuario, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Paciente: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'fecha', 'id'=>'fecha', 'valor'=>$citamedica->fechacita, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'calendario','boxbody'=>false,'etiqueta'=>'Fecha Cita: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'hora', 'id'=>'hora', 'valor'=>$citamedica->horacita, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Hora: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
+        array('tipo'=>'select','subtipo'=>'', 'nombre'=>'optometrista', 'id'=>'optometrista', 'valor'=>$optometrista, 'valordefecto'=>$citamedica->idoptometrista, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Optometrista: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
+        array('tipo'=>'select','subtipo'=>'', 'nombre'=>'doctor', 'id'=>'doctor', 'valor'=>$doctores, 'valordefecto'=>$citamedica->iddoctor, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Doctor: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'textarea', 'nombre'=>'observacion', 'id'=>'observacion', 'valor'=>$citamedica->observacion, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Observación: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
 
     ),true
 );
@@ -94,7 +95,7 @@ ActiveForm::end();
                         // ============================ Not here, this would be too late
                         notificacion(data.mensaje,data.tipo);
                         //$this.data().isSubmitted = true;
-                        $('#frmDatos')[0].reset();
+                        //$('#frmDatos')[0].reset();
                         return true;
                     }else{
                         notificacion(data.mensaje,data.tipo);

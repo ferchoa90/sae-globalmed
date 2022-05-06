@@ -64,6 +64,7 @@ class Medico_citas extends Component
             $model->horacita=$data['hora'];
             $model->iddoctor=$data['doctor'];
             $model->observacion=$data['observacion'];
+            $model->idoptometrista=$data['optometrista'];
             $model->usuariocreacion=Yii::$app->user->identity->id;
             $model->estatuscita="AGENDADA";
             $model->estatus="ACTIVO";
@@ -92,8 +93,9 @@ class Medico_citas extends Component
     {
         $id=0;
         $result=false;
+        //var_dump($data);
         if ($data):
-            $model= Citasmedicas::find()->where(["id"=>$data['id']])->one();
+            $model = Citasmedicas::find()->where(["id"=>$data['idcita']])->one();
             $model->idusuario=$data['paciente'];
             $model->fechacita=$data['fecha'];
             $model->horacita=$data['hora'];

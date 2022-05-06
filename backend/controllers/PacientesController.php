@@ -7,6 +7,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\components\Botones;
 use backend\components\Medico_pacientes;
+use backend\components\Medico_diagnostico;
 use backend\components\Medico_consulta;
 use common\models\LoginForm;
 use common\models\Cierreanio;
@@ -15,6 +16,7 @@ use common\models\Cierreaniodetalle;
 use common\models\Citasmedicas;
 use common\models\Consultamedica;
 use common\models\Consultamedicadet;
+use common\models\Consultamedicadiag;
 use common\models\Doctores;
 use common\models\Entregas;
 
@@ -115,21 +117,33 @@ class PacientesController extends Controller
             $model = Citasmedicas::find()->where(['isDeleted' => '0','idoptometrista' => $doctor->id, 'estatuscita'=>"EN ATENCIÓN", 'fechacita'=>$fechaactual ])->orderBy(["fechacreacion" => SORT_DESC])->all();
         }else{
             $doctor = Doctores::find()->where(['isDeleted' => '0','idususistem' => Yii::$app->user->identity->id ])->one();
-            $model = Citasmedicas::find()->where(['isDeleted' => '0','iddoctor' => $doctor->id ])->orderBy(["fechacreacion" => SORT_DESC])->all();
+            $model = Citasmedicas::find()->where(['isDeleted' => '0','iddoctor' => $doctor->id, 'fechacita'=>$fechaactual  ])->orderBy(["fechacreacion" => SORT_DESC])->all();
 
         }
         $arrayResp = array();
         $count = 0;
         foreach ($model as $key => $data) {
-            $editar=array(); $borrar=array();
+            $editar=array(); $borrar=array();$editar2=array();
 
-                if ( ($data["estatuscita"]=="AGENDADA"  || $data["estatuscita"]=="CANCELADO" || $data["estatuscita"]=="EN ATENCIÓN") ) {
+                if ( ($data["estatuscita"]=="AGENDADA"  || $data["estatuscita"]=="CANCELADO" ||   $data["estatuscita"]=="EN ATENCIÓN") ) {
                     $consultamedica=Consultamedica::find()->where(['isDeleted' => '0','idcitamedica' => $data->id ])->orderBy(["fechacreacion" => SORT_DESC])->one();
                     if ($consultamedica){
-                        $editar=array('tipo'=>'link','nombre'=>'atender', 'id' => 'atender', 'titulo'=>'', 'link'=>'consulta'.$view.'?id='.$data["id"], 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'verdesuave', 'icono'=>'citamedica','tamanio'=>'superp', 'adicional'=>'');
+                        $diagmedico=Consultamedicadiag::find()->where(['isDeleted' => '0','idconsulta' => $consultamedica->id ])->orderBy(["fechacreacion" => SORT_DESC])->one();
+                        if ($diagmedico && $data["estatuscita"]=="ATENDIDO"){
+                            $editar=array('tipo'=>'link','nombre'=>'citamed', 'id' => 'citamed', 'titulo'=>'', 'link'=>'verconsulta'.$view.'?id='.$data["id"], 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'azul', 'icono'=>'citamedica','tamanio'=>'superp', 'adicional'=>'');
+
+                        }else{
+                            if (Yii::$app->user->identity->idrol==39){
+                                $editar=array('tipo'=>'link','nombre'=>'citamed', 'id' => 'citamed', 'titulo'=>'', 'link'=>'consulta'.$view.'?id='.$data["id"], 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'amarillo', 'icono'=>'citamedica','tamanio'=>'superp', 'adicional'=>'');
+                            }else{
+                                $editar2=array('tipo'=>'link','nombre'=>'diagn', 'id' => 'diagn', 'titulo'=>'', 'link'=>'diagnostico'.$view.'?id='.$data["id"], 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'azul', 'icono'=>'diagnostico','tamanio'=>'superp', 'adicional'=>'');
+
+                            }
+                        }
 
                     }else{
-                        $editar=array('tipo'=>'link','nombre'=>'atender', 'id' => 'atender', 'titulo'=>'', 'link'=>'atender'.$view.'?id='.$data["id"], 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'verdesuave', 'icono'=>'lista','tamanio'=>'superp', 'adicional'=>'');
+
+                        $editar=array('tipo'=>'link','nombre'=>'atender', 'id' => 'atender', 'titulo'=>'', 'link'=>'atender'.$view.'?id='.$data["id"], 'onclick'=>'', 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'amarillo', 'icono'=>'lista','tamanio'=>'superp', 'adicional'=>'');
 
                     }
                 }
@@ -150,6 +164,7 @@ class PacientesController extends Controller
                         array(
                           array('tipo'=>'link','nombre'=>'ver', 'id' => 'editar', 'titulo'=>'', 'link'=>'ver'.$view.'?id='.$text, 'onclick'=>'' , 'clase'=>'', 'style'=>'', 'col'=>'', 'tipocolor'=>'azul', 'icono'=>'ver','tamanio'=>'superp',  'adicional'=>''),
                           $editar,
+                          $editar2,
                           $borrar,
                         )
                       );
@@ -210,6 +225,8 @@ class PacientesController extends Controller
         return json_encode($arrayResp);
     }
 
+
+
     public function actionHistoriaclinica()
     {
         return $this->render('historiaclinica');
@@ -218,7 +235,7 @@ class PacientesController extends Controller
     public function actionAtendercitas($id)
     {
         $data= new Medico_pacientes;
-        $pacientes= $data->getPaciente($id);
+        $pacientes= $data->getPaciente(0,$id);
         $consultas= $data->getHistoriaclinica($id);
         $citamedica=Citasmedicas::find()->where(["id" => $id])->one();
 
@@ -236,8 +253,8 @@ class PacientesController extends Controller
     public function actionConsultacitas($id)
     {
         $data= new Medico_pacientes;
-        $pacientes= $data->getPaciente($id);
-        
+        $pacientes= $data->getPaciente(0,$id);
+
         $citamedica=Citasmedicas::find()->where(["id" => $id])->one();
         $consultamedica=Consultamedica::find()->where(["idcitamedica" => $id])->one();
         //echo $consultamedica->id;
@@ -250,6 +267,31 @@ class PacientesController extends Controller
             'paciente' => $pacientes,
             'consultamedica' => $consultamedica,
             'consultamedicadet' => $consultamedicadet,
+            'citamedica' => $citamedica,
+            'idcita' => $id,
+
+        ]);
+    }
+
+    public function actionDiagnosticocitas($id)
+    {
+        $data= new Medico_pacientes;
+        $pacientes= $data->getPaciente(0,$id);
+
+        $citamedica=Citasmedicas::find()->where(["id" => $id])->one();
+        $consultamedica=Consultamedica::find()->where(["idcitamedica" => $id])->one();
+        //echo $consultamedica->id;
+        $consultamedicadet=Consultamedicadet::find()->where(["idconsulta" => $consultamedica->id])->one();
+        $consultamedicadiag=Consultamedicadiag::find()->where(["idconsulta" => $consultamedica->id])->one();
+        //var_dump();
+
+        //var_dump($pacientes);
+        return $this->render('diagnosticocitas', [
+            //'data' => Doctores::find()->where(['id' => $id, "isDeleted" => 0])->one(),
+            'paciente' => $pacientes,
+            'consultamedica' => $consultamedica,
+            'consultamedicadet' => $consultamedicadet,
+            'consultamedicadiag' => $consultamedicadiag,
             'citamedica' => $citamedica,
             'idcita' => $id,
 
@@ -292,7 +334,45 @@ class PacientesController extends Controller
             return $this->redirect(URL::base() . "/site/login");
         }
         extract($_POST);
+
+        $dataPac= new Medico_pacientes;
+        $dataPac= $dataPac->Editarantecedentes($_POST);
+
         $data= new Medico_consulta;
+        $data= $data->Nuevo($_POST);
+        $response=$data;
+
+        return json_encode($response);
+
+    }
+
+    public function actionFormeditarconsulta()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $dataPac= new Medico_pacientes;
+        $dataPac= $dataPac->Editarantecedentes($_POST);
+
+        $dataUpd= new Medico_consulta;
+        $dataUpd= $dataUpd->Editar($_POST);
+
+        $response=$dataUpd;
+        return json_encode($response);
+
+    }
+
+    public function actionFormdiagnosticoconsulta()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+        extract($_POST);
+        $dataUpd= new Medico_consulta;
+        $dataUpd= $dataUpd->Editar($_POST);
+
+        $data= new Medico_diagnostico;
         $data= $data->Nuevo($_POST);
         $response=$data;
         return json_encode($response);

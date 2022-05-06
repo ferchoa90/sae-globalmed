@@ -25,7 +25,7 @@ $nav= new Navs;
 $div= new Bloques;
 
 $this->title = "Administración de Usuarios";
-$botones= new Botones; 
+$botones= new Botones;
 
 //var_dump($clientes);
 //$contenidotab='';
@@ -37,7 +37,7 @@ $botones= new Botones;
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'apellidos', 'id'=>'apellidos', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Apellido','leyenda'=>'Apellido del usuario ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'nombreusuario', 'id'=>'nombreusuario', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre de usuario','leyenda'=>'Nombre de usuario ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'cedula', 'id'=>'cedula', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'tarjeta','boxbody'=>false,'etiqueta'=>'Cédula de usuario','leyenda'=>'Cédula de usuario ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'select','subtipo'=>'', 'nombre'=>'rol', 'id'=>'rol', 'valor'=>$roles, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Tipo de usuario: ', 'col'=>'col-6 col-md-6', 'adicional'=>''),
+        array('tipo'=>'select','subtipo'=>'', 'nombre'=>'rol', 'id'=>'rol', 'valor'=>$roles, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Tipo de usuario: ', 'col'=>'col-6 col-md-6', 'adicional'=>' readonly '),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'correo', 'id'=>'correo', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'carta','boxbody'=>false,'etiqueta'=>'Correo de usuario','leyenda'=>'Correo de usuario ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'clave', 'nombre'=>'clave', 'id'=>'clave', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'llave','boxbody'=>false,'etiqueta'=>'Contraseña','leyenda'=>'Contraseña ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
        // array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
@@ -156,7 +156,7 @@ $botones= new Botones;
                         $('#nombreusuario').focus();
                         return false;
                     }
-                    
+
                 }else{
                     $('#apellidos').focus();
                     return false;
@@ -167,6 +167,3 @@ $botones= new Botones;
             }
        }
   </script>
-
-
-

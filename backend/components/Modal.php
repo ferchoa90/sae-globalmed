@@ -22,7 +22,7 @@ class Modal extends Component
     }
 
     public function getWinmodal($tipo,$nombre='', $id='', $titulo='',$content='', $clase='', $style='', $col='',$stylemodal='', $boton1='', $boton2='',$adicional)
-    { 
+    {
         $this->getWrite($nombre,$id,$tipo);
         $classdefault='';
         $tipodefault='fas fa-pencil-alt';
@@ -33,32 +33,41 @@ class Modal extends Component
             case 'okcancel':
                 $tipo='fas fa-pencil-alt';
                 $botones='<div class="modal-footer">
-                  <button type="button" onclick="javascript:'.$boton1.';" class="btn btn-primary  btn-xs p-2" data-dismiss="modal">Aceptar</button>
-                  <button type="button" onclick="javascript:'.$boton2.';" class="btn btn-danger  btn-xs p-2">Cancelar</button>
+                  <button type="button" onclick="javascript:'.$boton1.';" class="btn bg-gradient-primary  btn-xs p-2" data-dismiss="modal">Aceptar</button>
+                  <button type="button" onclick="javascript:'.$boton2.';" class="btn bg-gradient-danger  btn-xs p-2">Cancelar</button>
                 </div>';
                 break;
 
             case 'okcancelinput':
               $tipo='fas fa-pencil-alt';
               $botones='<div class="modal-footer">
-                <button type="button" onclick="javascript:'.$boton1.';" class="btn btn-primary  btn-xs p-2" data-dismiss="modal">Aceptar</button>
-                <button type="button" onclick="javascript:'.$boton2.';" class="btn btn-danger  btn-xs p-2">Cancelar</button>
+                <button type="button" onclick="javascript:'.$boton1.';" class="btn bg-gradient-primary  btn-xs p-2" data-dismiss="modal">Aceptar</button>
+                <button type="button" onclick="javascript:'.$boton2.';" class="btn bg-gradient-danger  btn-xs p-2">Cancelar</button>
               </div>';
               $input='<div class="p-2 col-12"><textarea name="mensaje" id="mensaje" class="col-12" rows="3"></textarea></div>';
               break;
 
+              case 'okcancelhtml':
+                $tipo='fas fa-pencil-alt';
+                $botones='<div class="modal-footer">
+                  <button type="button" onclick="javascript:'.$boton1.';" class="btn bg-gradient-primary  btn-xs p-2" data-dismiss="modal">Aceptar</button>
+                  <button type="button" onclick="javascript:'.$boton2.';" class="btn bg-gradient-danger  btn-xs p-2">Cancelar</button>
+                </div>';
+                $input='';
+                break;
+
             case 'sino':
                 $tipo='fas fa-pencil-alt';
                 $botones='<div class="modal-footer">
-                <button type="button" onclick="javascript:'.$boton1.';" class="btn btn-primary  btn-xs p-2" data-dismiss="modal">Si</button>
-                <button type="button" onclick="javascript:'.$boton2.';" class="btn btn-danger  btn-xs p-2">No</button>
+                <button type="button" onclick="javascript:'.$boton1.';" class="btn bg-gradient-primary  btn-xs p-2" data-dismiss="modal">Si</button>
+                <button type="button" onclick="javascript:'.$boton2.';" class="btn bg-gradient-danger  btn-xs p-2">No</button>
                 </div>';
                 break;
-                
-                
+
+
                 case 'ok':
                 $tipo='fas fa-eye';
-                $botones='<div class="modal-footer"><button type="button" class="btn btn-danger  btn-xs p-2" data-dismiss="modal">Close</button></div>';
+                $botones='<div class="modal-footer"><button type="button" class="btn bg-gradient-danger  btn-xs p-2" data-dismiss="modal">Close</button></div>';
                 break;
 
             case 'savecancel':

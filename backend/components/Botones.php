@@ -61,7 +61,7 @@ class Botones extends Component
     private function getBoton($tipo, $nombre='', $id='', $titulo='', $link='', $onclick='', $clase='', $style='', $col='',$tipocolor='',$icono='',$tamanio='',$target='', $adicional)
     {
         $classdefault=' ';
-        $tipocolordefault='btn btn-primary';
+        $tipocolordefault='btn bg-gradient-primary';
         $tamaniodefault='btn-sm';
         $onclickdefault='';
         $linkdefault='';
@@ -87,35 +87,35 @@ class Botones extends Component
 
         switch ($tipocolor) {
             case 'azul':
-                $tipocolor='btn btn-primary btnedit';
+                $tipocolor='btn bg-gradient-primary btnedit';
                 break;
 
             case 'verde':
-                $tipocolor='btn btn-success btnedit';
+                $tipocolor='btn bg-gradient-success btnedit';
                 break;
 
             case 'rojo':
-                $tipocolor='btn btn-danger btnedit';
+                $tipocolor='btn bg-gradient-danger btnedit';
                 break;
 
             case 'verdesuave':
-                $tipocolor='btn btn-info btnedit';
+                $tipocolor='btn bg-gradient-info btnedit';
                 break;
 
             case 'amarillo':
-                $tipocolor='btn btn-warning btnedit';
+                $tipocolor='btn bg-gradient-warning btnedit';
                 break;
 
             case 'plomo':
-                $tipocolor='btn btn-secondary btnedit';
+                $tipocolor='btn bg-gradient-secondary btnedit';
                 break;
 
             case 'negro':
-                $tipocolor='btn btn-dark btnedit';
+                $tipocolor='btn bg-gradient-dark btnedit';
                 break;
 
             case 'naranja':
-                $tipocolor='btn btn-warning btnedit';
+                $tipocolor='btn bg-gradient-warning btnedit';
                 break;
 
             default:

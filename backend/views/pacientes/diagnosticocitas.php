@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 $this->title = "Cita Médica";
 $this->params['breadcrumbs'][] = ['label' => 'Paciente', 'url' => ['historiaclinica']];
 $this->params['breadcrumbs'][] = $this->title;
-$urlpost='formeditarconsulta';
+$urlpost='formdiagnosticoconsulta';
 
 
 $nav= new Navs;
@@ -47,6 +47,7 @@ $contenido=$contenidoClass->getContenidoArrayr(
     );
 //var_dump($consultas);
 
+
 if ($data->estatus=="ACTIVO"){ $stylestatus="badge-success"; }else{ $stylestatus="badge-secondary" ; }
 $estatus='<span class="badge '.$stylestatus.'"><i class="fa fa-circle"></i>&nbsp;&nbsp;'.$data->estatus.'</span>';
 $contenido2=$contenidoClass->getContenidoArrayr(
@@ -66,7 +67,9 @@ foreach ($consultas as $key => $value) {
 }
 
 $contenidotab=$nav->getNavsarray($tabconsultas);
-$tabla='';
+
+ $tabla='';
+
 
 $contenidoHC=$objeto->getObjetosArray(
     array(
@@ -88,6 +91,7 @@ $contenidoHC=$objeto->getObjetosArray(
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'midria', 'id'=>'midria', 'valor'=>'','etiqueta'=>'Midria: ', 'col'=>'col-12 col-md-4', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'obs1', 'id'=>'obs1', 'valor'=>'','etiqueta'=>'Observación: ', 'col'=>'col-12 col-md-12', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
         array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
+
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'metodo', 'id'=>'metodo', 'valor'=>'','etiqueta'=>'Método: ', 'col'=>'col-12 col-md-4', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'vitreo', 'id'=>'vitreo', 'valor'=>'','etiqueta'=>'Vitreo: ', 'col'=>'col-12 col-md-4', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'papila', 'id'=>'papila', 'valor'=>'','etiqueta'=>'Papila: ', 'col'=>'col-12 col-md-4', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
@@ -100,6 +104,9 @@ $contenidoHC=$objeto->getObjetosArray(
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'obs2', 'id'=>'obs2', 'valor'=>'','etiqueta'=>'Observación: ', 'col'=>'col-12 col-md-12', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'visioncol', 'id'=>'visioncol', 'valor'=>'','etiqueta'=>'Visión Colores: ', 'col'=>'col-12 col-md-4', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'esteriopsis', 'id'=>'esteriopsis', 'valor'=>'','etiqueta'=>'Esteriopsis: ', 'col'=>'col-12 col-md-4', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
+
+
+
     ),true
 );
 
@@ -156,36 +163,95 @@ $contenidoDetalle.=$objeto->getObjetosArray(
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'odtiempo1', 'id'=>'odtiempo1', 'valor'=>'','etiqueta'=>'OD Tiempo: ', 'col'=>'col-6 col-md-3', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'odnumero1', 'id'=>'odnumero1', 'valor'=>'','etiqueta'=>'OD Número: ', 'col'=>'col-6 col-md-3', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'odpoder1', 'id'=>'odpoder1', 'valor'=>'','etiqueta'=>'OD Poder: ', 'col'=>'col-6 col-md-3', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
+
+
+
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'oitamano1', 'id'=>'oitamano1', 'valor'=>'','etiqueta'=>'OI Tamaño: ', 'col'=>'col-6 col-md-3', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'oitiempo1', 'id'=>'oitiempo1', 'valor'=>'','etiqueta'=>'OI Tiempo: ', 'col'=>'col-6 col-md-3', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'oinumero1', 'id'=>'oinumero1', 'valor'=>'','etiqueta'=>'OI Número: ', 'col'=>'col-6 col-md-3', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'oipoder1', 'id'=>'oipoder1', 'valor'=>'','etiqueta'=>'OI Poder: ', 'col'=>'col-6 col-md-3', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'adicional'=>''),
+
+
+
+
+
+
     ),true
 );
 
 
 $contenidoN1=$objeto->getObjetosArray(
     array(
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'camping', 'id'=>'camping', 'valor'=>$consultamedicadet->campim, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Campim: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'octangular', 'id'=>'octangular', 'valor'=>$consultamedicadet->octangular, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Oct. Angular: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'octm', 'id'=>'octm', 'valor'=>$consultamedicadet->octm, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Oct. M.: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'octn', 'id'=>'octn', 'valor'=>$consultamedicadet->octn, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Oct. N.: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'biometod', 'id'=>'biometod', 'valor'=>$consultamedicadet->biood, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Biomet. OD: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'biometoi', 'id'=>'biometoi', 'valor'=>$consultamedicadet->bioid, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Biomet. OI: ', 'col'=>'col-6 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'paquimod', 'id'=>'paquimod', 'valor'=>$consultamedicadet->paquimod, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Paquim. OD: ', 'col'=>'col-6 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'paquimoi', 'id'=>'paquimoi', 'valor'=>$consultamedicadet->paquimid, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Paquim. OI: ', 'col'=>'col-6 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'ora', 'id'=>'ora', 'valor'=>$consultamedicadet->ora, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'ORA: ', 'col'=>'col-6 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'topografia', 'id'=>'topografia', 'valor'=>$consultamedicadet->topografia, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Topografía: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'angioog', 'id'=>'angioog', 'valor'=>$consultamedicadet->angiog, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Angiog: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'ecogra', 'id'=>'ecogra', 'valor'=>$consultamedicadet->ecogra, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Ecogra: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'endote', 'id'=>'endote', 'valor'=>$consultamedicadet->endote, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Endote: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'ubm', 'id'=>'ubm', 'valor'=>$consultamedicadet->ubm, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'UBM: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'retinografia', 'id'=>'retinografia', 'valor'=>$consultamedicadet->retinografia, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Retinografía: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-           ),true
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'medicamento1', 'id'=>'medicamento1', 'valor'=>@$consultamedicadiag->med1, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Medicamento: ', 'col'=>'col-6 col-md-4', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'mprescripciono1', 'id'=>'prescripcion1', 'valor'=>@$consultamedicadiag->presc1, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Prescripción: ', 'col'=>'col-6 col-md-8', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'medicamento2', 'id'=>'medicamento2', 'valor'=>@$consultamedicadiag->med2, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Medicamento: ', 'col'=>'col-6 col-md-4', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'mprescripciono2', 'id'=>'prescripcion2', 'valor'=>@$consultamedicadiag->presc2, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Prescripción: ', 'col'=>'col-6 col-md-8', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'medicamento3', 'id'=>'medicamento3', 'valor'=>@$consultamedicadiag->med3, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Medicamento: ', 'col'=>'col-6 col-md-4', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'mprescripciono3', 'id'=>'prescripcion3', 'valor'=>@$consultamedicadiag->presc3, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Prescripción: ', 'col'=>'col-6 col-md-8', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'medicamento4', 'id'=>'medicamento4', 'valor'=>@$consultamedicadiag->med4, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Medicamento: ', 'col'=>'col-6 col-md-4', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'mprescripciono4', 'id'=>'prescripcion4', 'valor'=>@$consultamedicadiag->presc4, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Prescripción: ', 'col'=>'col-6 col-md-8', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'medicamento5', 'id'=>'medicamento5', 'valor'=>@$consultamedicadiag->med5, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Medicamento: ', 'col'=>'col-6 col-md-4', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'mprescripciono5', 'id'=>'prescripcion5', 'valor'=>@$consultamedicadiag->presc5, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Prescripción: ', 'col'=>'col-6 col-md-8', 'adicional'=>''),
+    ),true
+);
+$usolentes= ($consultamedicadet->id=="on")? 'SI' : 'NO' ;
+$contenidoinfo=$contenidoClass->getContenidoArrayr(
+    array(
+
+        //array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'ID:','contenido'=>$paciente->id,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item1', 'id' => 'item1', 'titulo'=>'Uso de lentes:','contenido'=>$usolentes,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
+        array('tipo'=>'div','nombre'=>'item0', 'id' => 'item0', 'titulo'=>'AGUDEZA VISUAL','contenido'=>'','clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item2', 'id' => 'item2', 'titulo'=>'SIN C. OD:','contenido'=>$consultamedicadet->agudezavscod,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item3', 'id' => 'item3', 'titulo'=>'SIN C. OI:','contenido'=>$consultamedicadet->agudezavscoi,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item4', 'id' => 'item4', 'titulo'=>'CORREGIR OD:','contenido'=>$consultamedicadet->agudezavcod,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item5', 'id' => 'item5', 'titulo'=>'CORREGIR OI:','contenido'=>$consultamedicadet->agudezavcoi,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item6', 'id' => 'item6', 'titulo'=>'CORREGIR OTR:','contenido'=>$consultamedicadet->agudezavotr,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
+        array('tipo'=>'div','nombre'=>'item7', 'id' => 'item7', 'titulo'=>'VISIÓN DE CERCA','contenido'=>'','clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item8', 'id' => 'item8', 'titulo'=>'SIN C. OD:','contenido'=>$consultamedicadet->visioncscod,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item9', 'id' => 'item9', 'titulo'=>'SIN C. OI:','contenido'=>$consultamedicadet->visioncosci,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item10', 'id' => 'item10', 'titulo'=>'CORREGIR OD:','contenido'=>$consultamedicadet->visionccod,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item11', 'id' => 'item11', 'titulo'=>'CORREGIR OI:','contenido'=>$consultamedicadet->visionccid,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item12', 'id' => 'item12', 'titulo'=>'CORREGIR OTR:','contenido'=>$consultamedicadet->visioncotr,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
+        array('tipo'=>'div','nombre'=>'item13', 'id' => 'item13', 'titulo'=>'VISIÓN DE LEJOS','contenido'=>'','clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item14', 'id' => 'item14', 'titulo'=>'SIN C. OD:','contenido'=>$consultamedicadet->visionlscod,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item15', 'id' => 'item15', 'titulo'=>'SIN C. OI:','contenido'=>$consultamedicadet->visionlscoi,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item16', 'id' => 'item16', 'titulo'=>'CORREGIR OD:','contenido'=>$consultamedicadet->visionlcod,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item17', 'id' => 'item17', 'titulo'=>'CORREGIR OI:','contenido'=>$consultamedicadet->visionlcoi,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item18', 'id' => 'item18', 'titulo'=>'CORREGIR OTR:','contenido'=>$consultamedicadet->visionlcotr,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
+        array('tipo'=>'div','nombre'=>'item27', 'id' => 'item27', 'titulo'=>'PIO','contenido'=>'','clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item28', 'id' => 'item28', 'titulo'=>'SIN C. OD:','contenido'=>$consultamedicadet->pioscod,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item29', 'id' => 'item29', 'titulo'=>'SIN C. OI:','contenido'=>$consultamedicadet->pioscoi,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item30', 'id' => 'item30', 'titulo'=>'CORREGIR OD:','contenido'=>$consultamedicadet->piocod,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item31', 'id' => 'item31', 'titulo'=>'CORREGIR OI:','contenido'=>$consultamedicadet->piocoi,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item32', 'id' => 'item32', 'titulo'=>'CORREGIR OTR:','contenido'=>$consultamedicadet->piootr,'clase'=>'', 'style'=>'', 'col'=>'col-3 col-md-3', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+
+        array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
+        array('tipo'=>'div','nombre'=>'item19', 'id' => 'item19', 'titulo'=>'BIOMICROSCOPIA:','contenido'=>$consultamedicadet->biomicroscopia,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item20', 'id' => 'item20', 'titulo'=>'VISIÓN DE COLORES:','contenido'=>$consultamedicadet->visiondecolores,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item21', 'id' => 'item21', 'titulo'=>'VISIÓN DE PROFUNDIDA:','contenido'=>$consultamedicadet->visionprofundidad,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item22', 'id' => 'item22', 'titulo'=>'REFLEJOS PUPILARES:','contenido'=>$consultamedicadet->reflejospup,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item23', 'id' => 'item23', 'titulo'=>'CAMPOVISUAL:','contenido'=>$consultamedicadet->campovisual,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item24', 'id' => 'item24', 'titulo'=>'FONDO DE OJO OD:','contenido'=>$consultamedicadet->fondoojood,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item25', 'id' => 'item25', 'titulo'=>'FONDO DE OJO OI:','contenido'=>$consultamedicadet->fondoojooi,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item26', 'id' => 'item26', 'titulo'=>'AGUJERO ESTENOPEICO','contenido'=>$consultamedicadet->agujeroest,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+
+        array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
+        array('tipo'=>'div','nombre'=>'item19', 'id' => 'item19', 'titulo'=>'EXÁMENES:','contenido'=>$consultamedicadet->examenes,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item20', 'id' => 'item20', 'titulo'=>'DIAGNÓSTICO:','contenido'=>$consultamedicadet->impdiag1,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item26', 'id' => 'item26', 'titulo'=>'CIE10','contenido'=>$consultamedicadet->cie1001,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item20', 'id' => 'item20', 'titulo'=>'DIAGNÓSTICO:','contenido'=>$consultamedicadet->impdiag2,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item26', 'id' => 'item26', 'titulo'=>'CIE10','contenido'=>$consultamedicadet->cie1002,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item20', 'id' => 'item20', 'titulo'=>'DIAGNÓSTICO:','contenido'=>$consultamedicadet->impdiag3,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'div','nombre'=>'item26', 'id' => 'item26', 'titulo'=>'CIE10','contenido'=>$consultamedicadet->cie1003,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+
+    )
 );
 
-$usolentes= ($consultamedicadet->id=="on")? 'SI' : 'NO' ;
-if ($consultamedicadet->usolentes=='on'){$checked='ON';}
+
 $contenidoinfo=$objeto->getObjetosArray(
     array(
         array('tipo'=>'input','subtipo'=>'oculto', 'nombre'=>'idpaciente', 'id'=>'idpaciente', 'valor'=>$paciente->id, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false, 'col'=>'col-3 col-md-3', 'adicional'=>''),
@@ -198,9 +264,7 @@ $contenidoinfo=$objeto->getObjetosArray(
       //  array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'agudezavcod', 'id'=>'agudezavcod', 'valor'=>$consultamedicadet->agudezavcod, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'AG Visual C. OD: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
       //  array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'agudezavcoi', 'id'=>'agudezavcoi', 'valor'=>$consultamedicadet->agudezavcoi, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'AG Visual C. OI: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
       //  array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'agudezavscotr', 'id'=>'agudezavscotr', 'valor'=>$consultamedicadet->agudezavotr, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'AG Visual C. OTR: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'textarea', 'nombre'=>'motivo', 'id'=>'motivo', 'valor'=>$consultamedicadet->causaconsulta, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Motivo de la consulta: ', 'col'=>'col-12 col-md-9', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'onoff', 'nombre'=>'usolentes', 'id'=>'usolentes', 'valordefecto'=>$checked, 'textoon'=>'Sí', 'textooff'=>'No', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Uso de lentes: ', 'col'=>'col-3 col-md-3', 'adicional'=>''),
-        array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
+      //  array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'visioncercascod', 'id'=>'visioncercascod', 'valor'=>$consultamedicadet->visioncscod, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Visión C. S/C OD: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'visioncercascoi', 'id'=>'visioncercascoi', 'valor'=>$consultamedicadet->visioncosci, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Visión C. S/C OI: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'visioncercaccod', 'id'=>'visioncercaccod', 'valor'=>$consultamedicadet->visionccod, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Visión CC. OD: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
@@ -231,72 +295,31 @@ $contenidoinfo=$objeto->getObjetosArray(
         array('tipo'=>'input','subtipo'=>'textarea', 'nombre'=>'examenes', 'id'=>'examenes', 'valor'=>$consultamedicadet->examenes, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Exámenes: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
         array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'impresion1', 'id'=>'impresion1', 'valor'=>$consultamedicadet->impdiag1, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Impresión Diagnóstica: ', 'col'=>'col-12 col-md-8', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'cie1', 'id'=>'cie1', 'valor'=>$consultamedicadet->cie1001, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'CIE 10: ', 'col'=>'col-12 col-md-4', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'cie1', 'id'=>'cie1', 'valor'=>$consultamedicadet->cie1001, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'CIE 10 - 1: ', 'col'=>'col-12 col-md-4', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'impresion2', 'id'=>'impresion2', 'valor'=>$consultamedicadet->impdiag2, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Impresión Diagnóstica 2: ', 'col'=>'col-12 col-md-8', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'cie2', 'id'=>'cie2', 'valor'=>$consultamedicadet->cie1002, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'CIE 10: ', 'col'=>'col-12 col-md-4', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'cie2', 'id'=>'cie2', 'valor'=>$consultamedicadet->cie1002, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'CIE 10 - 2: ', 'col'=>'col-12 col-md-4', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'impresion3', 'id'=>'impresion3', 'valor'=>$consultamedicadet->impdiag3, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Impresión Diagnóstica 3: ', 'col'=>'col-12 col-md-8', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'cie3', 'id'=>'cie3', 'valor'=>$consultamedicadet->cie1003, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'CIE 10: ', 'col'=>'col-12 col-md-4', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'cie3', 'id'=>'cie3', 'valor'=>$consultamedicadet->cie1003, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'CIE 10 - 3: ', 'col'=>'col-12 col-md-4', 'adicional'=>''),
 
     ),true
 );
 
-$contenidoant=$objeto->getObjetosArray(
-    array(
-        array('tipo'=>'input','subtipo'=>'textarea', 'nombre'=>'antecedentesp', 'id'=>'antecedentesp', 'valor'=>$paciente->antecedentesp, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Antecedentes Personales: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'textarea', 'nombre'=>'antecedenteso', 'id'=>'antecedenteso', 'valor'=>$paciente->antecedenteso , 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Antecedentes Oculares: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'textarea', 'nombre'=>'antecedentesf', 'id'=>'antecedentesf', 'valor'=>$paciente->antecedentesf , 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Antecedentes Familiares: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'textarea', 'nombre'=>'enfermedada', 'id'=>'enfermedada', 'valor'=>$paciente->enfermedada , 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Enfermedad Actual: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
-    ),true
-);
 
-$contenidoI1=$objeto->getObjetosArray(
-    array(
-        array('tipo'=>'input','subtipo'=>'archivo', 'nombre'=>'img1', 'id'=>'img1', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Imagen 1: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
-       ),true
-);
 
-$contenidoI2=$objeto->getObjetosArray(
-    array(
-        array('tipo'=>'input','subtipo'=>'archivo', 'nombre'=>'img2', 'id'=>'img2', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Imagen 2: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
-    ),true
-);
-
-$contenidoI3=$objeto->getObjetosArray(
-    array(
-        array('tipo'=>'input','subtipo'=>'archivo', 'nombre'=>'img3', 'id'=>'img3', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Imagen 3: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
-      ),true
-);
-
-$contenidoI4=$objeto->getObjetosArray(
-    array(
-        array('tipo'=>'input','subtipo'=>'archivo', 'nombre'=>'img4', 'id'=>'img4', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Imagen 4: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
-    ),true
-);
-
-$contenidoI5=$objeto->getObjetosArray(
-    array(
-        array('tipo'=>'input','subtipo'=>'archivo', 'nombre'=>'img5', 'id'=>'img5', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Imagen 5: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
-    ),true
-);
 $img1= ($consultamedicadet->img1) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img1.'"/>': '' ;
 $img2= ($consultamedicadet->img2) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img2.'"/>': '' ;
 $img3= ($consultamedicadet->img3) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img3.'"/>': '' ;
 $img4= ($consultamedicadet->img4) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img4.'"/>': '' ;
 $img5= ($consultamedicadet->img5) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img5.'"/>': '' ;
-
-$img1.=$contenidoI1;
-$img2.=$contenidoI2;
-$img3.=$contenidoI3;
-$img4.=$contenidoI4;
-$img5.=$contenidoI5;
-
 $contenidoN3=$contenidoClass->getContenidoArrayr(
     array(
         //array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'ID:','contenido'=>$paciente->id,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
         array('tipo'=>'div','nombre'=>'img-1', 'id' => 'img-1', 'titulo'=>'Imagen1:','contenido'=>$img1,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
         array('tipo'=>'div','nombre'=>'img-2', 'id' => 'img-2', 'titulo'=>'Imagen2:','contenido'=>$img2,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
         array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
         array('tipo'=>'div','nombre'=>'img-3', 'id' => 'img-3', 'titulo'=>'Imagen3:','contenido'=>$img3,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+        array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
         array('tipo'=>'div','nombre'=>'img-4', 'id' => 'img-4', 'titulo'=>'Imagen4:','contenido'=>$img4,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
         array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
         array('tipo'=>'div','nombre'=>'img-5', 'id' => 'img-5', 'titulo'=>'Imagen5:','contenido'=>$img5,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
@@ -306,14 +329,9 @@ $contenidoN3=$contenidoClass->getContenidoArrayr(
 $contenidotab=$nav->getNavsarray(
     array(
         array('tipo'=>'config','nombre'=>'tabpermisos', 'id'=>'tabpermisos', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'tab','nombre'=>'tabantecedentes', 'id'=>'tabantecedentes', 'titulo'=>'Antecedentes', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoant),
-        array('tipo'=>'tab','nombre'=>'tabficha', 'id'=>'tabficha', 'titulo'=>'Ficha Visual', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoinfo),
-        array('tipo'=>'tab','nombre'=>'tabinfo', 'id'=>'tabinfo', 'titulo'=>'Información', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoN1),
-
-        //array('tipo'=>'tab','nombre'=>'tabdiario', 'id'=>'tabdiario', 'titulo'=>'Diagnóstico', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoHC),
-        //array('tipo'=>'tab','nombre'=>'tabdetalle', 'id'=>'tabdetalle', 'titulo'=>'Detalle', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoDetalle),
+        array('tipo'=>'tab','nombre'=>'tabinfo', 'id'=>'tabinfo', 'titulo'=>'Información', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoinfo),
         array('tipo'=>'tab','nombre'=>'tabimagenes', 'id'=>'tabimagenes', 'titulo'=>'Imágenes', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoN3),
-       // array('tipo'=>'tab','nombre'=>'tabfactura', 'id'=>'tabfactura', 'titulo'=>'Receta', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoN1),
+        array('tipo'=>'tab','nombre'=>'tabfactura', 'id'=>'tabfactura', 'titulo'=>'Receta', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoN1),
     )
   );
 $form = ActiveForm::begin(['id'=>'frmDatos']);
@@ -348,7 +366,7 @@ $("#guardar").on('click', function() {
                 // ============================ Not here, this would be too late
                 notificacion(data.mensaje,data.tipo);
                 //$this.data().isSubmitted = true;
-                //$('#frmDatos')[0].reset();
+                $('#frmDatos')[0].reset();
                 return true;
             }else{
                 notificacion(data.mensaje,data.tipo);
