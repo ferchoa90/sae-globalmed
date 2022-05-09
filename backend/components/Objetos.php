@@ -147,11 +147,11 @@ class Objetos extends Component
 
         switch ($etiqueta) {
             case '':
-                $select='<select class="'.$clase.'" id="'.$id.'" name="'.$nombre.'">';
+                $select='<select class="'.$clase.'" id="'.$id.'" name="'.$nombre.'" '.$adicional.'>';
                 break;
 
                 default:
-                $select='<select class="'.$clase.'" id="'.$id.'" name="'.$nombre.'" value="'.$valor.'" placeholder="'.$etiqueta.'">';
+                $select='<select class="'.$clase.'" id="'.$id.'" name="'.$nombre.'" value="'.$valor.'" placeholder="'.$etiqueta.'"  '.$adicional.'>';
                 break;
         }
         $selectvalue+='<option>'.$etiqueta.'</option>';

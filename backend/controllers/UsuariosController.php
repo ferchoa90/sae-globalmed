@@ -95,12 +95,18 @@ class UsuariosController extends Controller
         return $this->render('index');
     }
 
-
     public function actionUsuarios()
     {
         return $this->render('usuarios');
     }
 
+    public function actionVerusuario($id)
+    {
+        $usuario= User::find()->where(["id"=>$id])->one();
+        return $this->render('verusuario', [
+            'data' => $usuario,
+        ]);
+    }
 
     public function actionRoles()
     {

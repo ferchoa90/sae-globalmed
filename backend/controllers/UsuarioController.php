@@ -10,6 +10,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\db\Query;
+use backend\components\Sistema_sucursal;
+use common\models\Roles;
 
 use backend\models\User;
 
@@ -52,7 +54,25 @@ class UsuarioController extends Controller
      */
     public function actionMiperfil()
     {
-        return $this->render('miperfil');
+        $id=Yii::$app->user->identity->id;
+        $model = User::find()->where(["isDeleted"=>"0","id"=>$id])->one();
+        $sucursal = new Sistema_sucursal;
+        $sucursal= $sucursal->getSelect();
+        $roles = Roles::find()->where(['isDeleted' => '0'])->orderBy(["id" => SORT_ASC])->all();
+        $rolesArray=array();
+        $cont=0;
+        foreach ($roles as $key => $value) {
+            if ($cont==0){ $rolesArray[$cont]["value"]="Seleccione un rol"; $rolesArray[$cont]["id"]=-1; $cont++; }
+            $rolesArray[$cont]["value"]=$value->nombre;
+            $rolesArray[$cont]["id"]=$value->id;
+            $cont++;
+        }
+        return $this->render('miperfil', [
+            'model' => $model,
+            'sucursal' => $sucursal,
+            'roles' => $rolesArray,
+        ]);
+
     }
 
     /**

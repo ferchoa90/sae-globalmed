@@ -43,9 +43,7 @@ $botones= new Botones;
        // array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
     ),true
 );
- //echo $div->getBloque('bloquediv','rr','ee','PRUEBA','col-md-9 col-xs-12 ','','','','');
- //echo $div->getBloque('bloquediv','rr','ee','PRUEBA','col-md-3 col-xs-12 ','','','','');
- //echo $contenido;
+
  $botonC=$botones->getBotongridArray(
     array(
         array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
