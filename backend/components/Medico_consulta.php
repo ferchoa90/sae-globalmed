@@ -95,125 +95,134 @@ class Medico_consulta extends Component
         $idmodulo=0;
         $model= new Consultamedica;
         $result=false;
-        $citamedica=Citasmedicas::find()->where(["id" => $data['idcita']])->one();
-        //var_dump($citamedica);
-        if ($data && $citamedica):
-            $model->idpaciente=$data['idpaciente'];
-            $model->idcitamedica=$data['idcita'];
-            $model->fechacita=$citamedica->fechacita;
-            $model->fechainatencion=date("Y-m-d h:i:s");
-            $model->observacion="-";
-            $model->horacita=$citamedica->horacita;
-            $model->iddoctor=$data['iddoctor'];
-            $model->idoptometrista=$data['idoptometrista'];
-            $model->usuariocreacion=Yii::$app->user->identity->id;
-            $model->estatus="ACTIVO";
-            $model->isDeleted=0;
-            if ($model->save()) {
-                $modeldetalle= new Consultamedicadet;
-                $modeldetalle->idconsulta=$model->id;
 
-                $modeldetalle->usolentes=$data['usolentes'];
-                $modeldetalle->causaconsulta=$data['motivo'];
+        $consultamed=Consultamedica::find()->where(["idcitamedica" => $data['idcita']])->one();
+        if ($consultamed){
+            $data['idconsultam']=$consultamed->id;
+            $result= $this->Editar($data);
+            return $result;
+        }else{
+            $citamedica=Citasmedicas::find()->where(["id" => $data['idcita']])->one();
+            if ($data && $citamedica):
+                $model->idpaciente=$data['idpaciente'];
+                $model->idcitamedica=$data['idcita'];
+                $model->fechacita=$citamedica->fechacita;
+                $model->fechainatencion=date("Y-m-d h:i:s");
+                $model->observacion="-";
+                $model->horacita=$citamedica->horacita;
+                $model->iddoctor=$data['iddoctor'];
+                $model->idoptometrista=$data['idoptometrista'];
+                $model->usuariocreacion=Yii::$app->user->identity->id;
+                $model->estatus="ACTIVO";
+                $model->isDeleted=0;
+                if ($model->save()) {
+                    $modeldetalle= new Consultamedicadet;
+                    $modeldetalle->idconsulta=$model->id;
 
-                $modeldetalle->agudezavscod=$data['agudezavscod'];
-                $modeldetalle->agudezavscoi=$data['agudezavscoi'];
-                $modeldetalle->agudezavcod=$data['agudezavcod'];
-                $modeldetalle->agudezavcoi=$data['agudezavcoi'];
-                $modeldetalle->agudezavotr=$data['agudezavscotr'];
+                    $modeldetalle->usolentes=$data['usolentes'];
+                    $modeldetalle->causaconsulta=$data['motivo'];
 
-                $modeldetalle->visioncscod=$data['visioncercascod'];
-                $modeldetalle->visioncosci=$data['visioncercascoi'];
-                $modeldetalle->visionccod=$data['visioncercaccod'];
-                $modeldetalle->visionccid=$data['visioncercaccoi'];
-                $modeldetalle->visioncotr=$data['visioncercaotr'];
+                    $modeldetalle->agudezavscod=$data['agudezavscod'];
+                    $modeldetalle->agudezavscoi=$data['agudezavscoi'];
+                    $modeldetalle->agudezavcod=$data['agudezavcod'];
+                    $modeldetalle->agudezavcoi=$data['agudezavcoi'];
+                    $modeldetalle->agudezavotr=$data['agudezavscotr'];
 
-                $modeldetalle->visionlscod=$data['visionlejosscod'];
-                $modeldetalle->visionlscoi=$data['visionlejosscoi'];
-                $modeldetalle->visionlcod=$data['visionlejosccod'];
-                $modeldetalle->visionlcoi=$data['visionlejosccoi'];
-                $modeldetalle->visionlcotr=$data['visionlejosotr'];
+                    $modeldetalle->visioncscod=$data['visioncercascod'];
+                    $modeldetalle->visioncosci=$data['visioncercascoi'];
+                    $modeldetalle->visionccod=$data['visioncercaccod'];
+                    $modeldetalle->visionccid=$data['visioncercaccoi'];
+                    $modeldetalle->visioncotr=$data['visioncercaotr'];
 
-                $modeldetalle->pioscod=$data['pioscod'];
-                $modeldetalle->pioscoi=$data['pioscoi'];
-                $modeldetalle->piocod=$data['piocod'];
-                $modeldetalle->piocoi=$data['piocoi'];
-                $modeldetalle->piootr=$data['piocotr'];
+                    $modeldetalle->visionlscod=$data['visionlejosscod'];
+                    $modeldetalle->visionlscoi=$data['visionlejosscoi'];
+                    $modeldetalle->visionlcod=$data['visionlejosccod'];
+                    $modeldetalle->visionlcoi=$data['visionlejosccoi'];
+                    $modeldetalle->visionlcotr=$data['visionlejosotr'];
 
-                $modeldetalle->biomicroscopia=$data['microboscopia'];
-                $modeldetalle->visiondecolores=$data['visioncolores'];
-                $modeldetalle->visionprofundidad=$data['visionprof'];
-                $modeldetalle->reflejospup=$data['refloejospupi'];
-                $modeldetalle->campovisual=$data['campovisual'];
-                $modeldetalle->fondoojood=$data['fondoojood'];
-                $modeldetalle->fondoojooi=$data['fondoojooi'];
-                $modeldetalle->agujeroest=$data['agujeroest'];
+                    $modeldetalle->pioscod=$data['pioscod'];
+                    $modeldetalle->pioscoi=$data['pioscoi'];
+                    $modeldetalle->piocod=$data['piocod'];
+                    $modeldetalle->piocoi=$data['piocoi'];
+                    $modeldetalle->piootr=$data['piocotr'];
 
-                $modeldetalle->examenes=$data['examenes'];
+                    $modeldetalle->biomicroscopia=$data['microboscopia'];
+                    $modeldetalle->visiondecolores=$data['visioncolores'];
+                    $modeldetalle->visionprofundidad=$data['visionprof'];
+                    $modeldetalle->reflejospup=$data['refloejospupi'];
+                    $modeldetalle->campovisual=$data['campovisual'];
+                    $modeldetalle->fondoojood=$data['fondoojood'];
+                    $modeldetalle->fondoojooi=$data['fondoojooi'];
+                    $modeldetalle->agujeroest=$data['agujeroest'];
 
-                $modeldetalle->impdiag1=$data['impresion1'];
-                $modeldetalle->impdiag2=$data['impresion2'];
-                $modeldetalle->impdiag3=$data['impresion3'];
-                $modeldetalle->cie1001=$data['cie1'];
-                $modeldetalle->cie1002=$data['cie2'];
-                $modeldetalle->cie1003=$data['cie3'];
+                    $modeldetalle->examenes=$data['examenes'];
 
-                $modeldetalle->campim=$data['camping'];
-                $modeldetalle->octangular=$data['octangular'];
-                $modeldetalle->octm=$data['octm'];
-                $modeldetalle->octn=$data['octn'];
-                $modeldetalle->biood=$data['biometod'];
-                $modeldetalle->bioid=$data['biometoi'];
-                $modeldetalle->paquimod=$data['paquimod'];
-                $modeldetalle->paquimid=$data['paquimoi'];
-                $modeldetalle->ora=$data['ora'];
-                $modeldetalle->topografia=$data['topografia'];
-                $modeldetalle->angiog=$data['angioog'];
-                $modeldetalle->ecogra=$data['ecogra'];
-                $modeldetalle->endote=$data['endote'];
-                $modeldetalle->ubm=$data['ubm'];
-                $modeldetalle->retinografia=$data['retinografia'];
+                    $modeldetalle->impdiag1=$data['impresion1'];
+                    $modeldetalle->impdiag2=$data['impresion2'];
+                    $modeldetalle->impdiag3=$data['impresion3'];
+                    $modeldetalle->cie1001=$data['cie1'];
+                    $modeldetalle->cie1002=$data['cie2'];
+                    $modeldetalle->cie1003=$data['cie3'];
 
-                $modeldetalle->usuariocreacion=Yii::$app->user->identity->id;
-                $modeldetalle->estatus="ACTIVO";
-                $modeldetalle->isDeleted=0;
-                $archivoM= new Archivos;
-                //var_dump($_FILES["img1"]);
-                if ($_FILES){
-                    $archivo=$archivoM->Subirarchivo(array($_FILES["img1"]));
-                    //var_dump($archivo);
-                    $modeldetalle->img1=$archivo["nombrearchivo"];
-                    $archivo=$archivoM->Subirarchivo(array($_FILES["img2"]));
-                    $modeldetalle->img2=$archivo["nombrearchivo"];
-                    $archivo=$archivoM->Subirarchivo(array($_FILES["img3"]));
-                    $modeldetalle->img3=$archivo["nombrearchivo"];
-                    $archivo=$archivoM->Subirarchivo(array($_FILES["img4"]));
-                    $modeldetalle->img4=$archivo["nombrearchivo"];
-                    $archivo=$archivoM->Subirarchivo(array($_FILES["img5"]));
-                    $modeldetalle->img5=$archivo["nombrearchivo"];
-                }
+                    $modeldetalle->campim=$data['camping'];
+                    $modeldetalle->octangular=$data['octangular'];
+                    $modeldetalle->octm=$data['octm'];
+                    $modeldetalle->octn=$data['octn'];
+                    $modeldetalle->biood=$data['biometod'];
+                    $modeldetalle->bioid=$data['biometoi'];
+                    $modeldetalle->paquimod=$data['paquimod'];
+                    $modeldetalle->paquimid=$data['paquimoi'];
+                    $modeldetalle->ora=$data['ora'];
+                    $modeldetalle->topografia=$data['topografia'];
+                    $modeldetalle->angiog=$data['angioog'];
+                    $modeldetalle->ecogra=$data['ecogra'];
+                    $modeldetalle->endote=$data['endote'];
+                    $modeldetalle->ubm=$data['ubm'];
+                    $modeldetalle->retinografia=$data['retinografia'];
+
+                    $modeldetalle->usuariocreacion=Yii::$app->user->identity->id;
+                    $modeldetalle->estatus="ACTIVO";
+                    $modeldetalle->isDeleted=0;
+                    $archivoM= new Archivos;
+                    //var_dump($_FILES["img1"]);
+                    if ($_FILES){
+                        $archivo=$archivoM->Subirarchivo(array($_FILES["img1"]));
+                        //var_dump($archivo);
+                        $modeldetalle->img1=$archivo["nombrearchivo"];
+                        $archivo=$archivoM->Subirarchivo(array($_FILES["img2"]));
+                        $modeldetalle->img2=$archivo["nombrearchivo"];
+                        $archivo=$archivoM->Subirarchivo(array($_FILES["img3"]));
+                        $modeldetalle->img3=$archivo["nombrearchivo"];
+                        $archivo=$archivoM->Subirarchivo(array($_FILES["img4"]));
+                        $modeldetalle->img4=$archivo["nombrearchivo"];
+                        $archivo=$archivoM->Subirarchivo(array($_FILES["img5"]));
+                        $modeldetalle->img5=$archivo["nombrearchivo"];
+                    }
 
 
-                if ($modeldetalle->save()) {
-                    $error=false;
-                    return array("response" => true, "id" => $model->id, "mensaje"=> "Registro agregado","tipo"=>"success", "success"=>true);
-                }else{
-                    $this->callback(1,$idusuario,$modeldetalle->errors);
+                    if ($modeldetalle->save()) {
+                        $error=false;
+                        return array("response" => true, "id" => $model->id, "mensaje"=> "Registro agregado","tipo"=>"success", "success"=>true);
+                    }else{
+                        $this->callback(1,$idusuario,$modeldetalle->errors);
+                        return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
+
+                    }
+                    //$this->callback(1,$idusuario,$model->errors);
+                } else {
+                    $this->callback(1,$idusuario,$model->errors);
                     return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
-
                 }
-                //$this->callback(1,$idusuario,$model->errors);
-            } else {
-                $this->callback(1,$idusuario,$model->errors);
+            else:
+                $log= new Log_errores;
+                $observacion="ID: 0";
+                $error="NO POST";
+                $log->Nuevo(self::MODULO." :: Medico_consultamedica ",$error,$observacion,0,Yii::$app->user->identity->id);
                 return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
-            }
-        else:
-            $log= new Log_errores;
-            $observacion="ID: 0";
-            $error="NO POST";
-            $log->Nuevo(self::MODULO." :: Medico_consultamedica ",$error,$observacion,0,Yii::$app->user->identity->id);
-            return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
-        endif;
+            endif;
+        }
+        //var_dump($citamedica);
+
 
         return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
     }
@@ -284,6 +293,25 @@ class Medico_consulta extends Component
             $model->retinografia=$data['retinografia'];
             $model->usuarioact=Yii::$app->user->identity->id;
             $model->fechaact= date("Y-m-d H:i:s");
+
+            $archivoM= new Archivos;
+            //var_dump($_FILES["img1"]);
+            if ($_FILES){
+                $archivo=$archivoM->Subirarchivo(array($_FILES["img1"]));
+                //var_dump($archivo);
+                $model->img1=$archivo["nombrearchivo"];
+                $archivo=$archivoM->Subirarchivo(array($_FILES["img2"]));
+                $model->img2=$archivo["nombrearchivo"];
+                $archivo=$archivoM->Subirarchivo(array($_FILES["img3"]));
+                $model->img3=$archivo["nombrearchivo"];
+                $archivo=$archivoM->Subirarchivo(array($_FILES["img4"]));
+                $model->img4=$archivo["nombrearchivo"];
+                $archivo=$archivoM->Subirarchivo(array($_FILES["img5"]));
+                $model->img5=$archivo["nombrearchivo"];
+            }
+
+
+
             if ($model->save()) {
                 $error=false;
                 return array("response" => true, "id" => $model->id, "mensaje"=> "Registro actualizado","tipo"=>"success", "success"=>true);

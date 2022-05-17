@@ -333,13 +333,30 @@ ActiveForm::end();
 $(document).ready(function(){
 $("#guardar").on('click', function() {
     if (validardatos()==true){
-        var form    = $('#frmDatos');
+        var form = document.getElementById('frmDatos');
+        var data = new FormData(form);
+        var archivo=document.getElementById('img1').files;
+        var archivo2=document.getElementById('img2').files;
+        var archivo3=document.getElementById('img3').files;
+        var archivo4=document.getElementById('img4').files;
+        var archivo5=document.getElementById('img5').files;
+        data.append('files',archivo);
+        data.append('files',archivo2);
+        data.append('files',archivo3);
+        data.append('files',archivo4);
+        data.append('files',archivo5);
         $.ajax({
             url: '<?= $urlpost ?>',
             async: 'false',
             cache: 'false',
             type: 'POST',
-            data: form.serialize(),
+            enctype: 'multipart/form-data',
+            //data: form.serialize(),
+            dataType: 'text', //Get back from PHP
+            processData: false, //Don't process the files
+            contentType: false,
+            cache: false,
+            data: data,
             success: function(response){
             data=JSON.parse(response);
             console.log(response);
