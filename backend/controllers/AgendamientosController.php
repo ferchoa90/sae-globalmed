@@ -117,7 +117,7 @@ class AgendamientosController extends Controller
             $cont++;
         }
 
-        $doctores=Doctores::find()->where(["isDeleted" => 0,"estatus" => "ACTIVO"])->orderBy(["apellidos" => SORT_ASC])->all();
+        $doctores=User::find()->where(["isDeleted" => 0,"estatus" => "ACTIVO","idrol" => 36])->orderBy(["apellidos" => SORT_ASC])->all();
         $doctoresArray=array();
         $cont=0;
         foreach ($doctores as $key => $value) {
@@ -127,9 +127,16 @@ class AgendamientosController extends Controller
             $cont++;
         }
 
-        $optometrista=Doctores::find()->where(["isDeleted" => 0,"estatus" => "ACTIVO", "idprofesion"=>146])->orderBy(["apellidos" => SORT_ASC])->all();
+        $optometrista=User::find()->where(["isDeleted" => 0,"estatus" => "ACTIVO", "idrol"=>39])->orderBy(["apellidos" => SORT_ASC])->all();
         $optometristaArray=array();
         $cont=0;
+        /*foreach ($optometrista as $key => $value) {
+            if ($cont==0){ $optometristaArray[$cont]["value"]="Seleccione un doctor"; $optometristaArray[$cont]["id"]=-1; $cont++; }
+            $optometristaArray[$cont]["value"]=$value->apellidos.' '.$value->nombres;
+            $optometristaArray[$cont]["id"]=$value->id;
+            $cont++;
+        }*/
+
         foreach ($optometrista as $key => $value) {
             if ($cont==0){ $optometristaArray[$cont]["value"]="Seleccione un doctor"; $optometristaArray[$cont]["id"]=-1; $cont++; }
             $optometristaArray[$cont]["value"]=$value->apellidos.' '.$value->nombres;
@@ -235,7 +242,7 @@ class AgendamientosController extends Controller
                     $arrayResp[$key][$id] = '<small class="badge badge-secondary"><i class="fa fa-circle-thin"></i>&nbsp; ' . $text . '</small>';
                 } else {
 
-                    if (($id == "nombres")  || ($id == "observacion") ) { $arrayResp[$key][$id] = $text; }
+                    if (($id == "nombres")  || ($id == "observacion")|| ($id == "tipocita") ) { $arrayResp[$key][$id] = $text; }
                     if (($id == "fechacita") || ($id == "usuariocreacion") ) { $arrayResp[$key][$id] = $text; }
                     if (($id == "horacita") ) { $arrayResp[$key][$id] = $text; }
                     if (($id == "fechacreacion") ) { $arrayResp[$key][$id] = $text; }

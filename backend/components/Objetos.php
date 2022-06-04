@@ -12,6 +12,7 @@ use backend\models\User;
 use backend\models\Configuracion;
 use backend\components\Iconos;
 use backend\components\Botones;
+use backend\components\Contenido;
 
 /**
  * Created by VSCODE.
@@ -35,16 +36,33 @@ class Objetos extends Component
                     $resultado.= $this->getInput($obj['subtipo'],$obj['nombre'], $obj['id'], $obj['valor'], $obj['onchange'], $obj['clase'], $obj['estilo'], $obj['icono'],$obj['boxbody'],$obj['etiqueta'],$obj['leyenda'], $obj['col'], $obj['adicional'], $obj['valordefecto'], $obj['textoon'], $obj['textooff']);
                     break;
 
+
+
+            case 'box':
+                if (!$obj['contenido']){ $obj['contenido']="&nbsp;"; };
+                $resultado.= '<div class="'.$obj['col'].'" '.$obj['adicional'].'>'.$obj['contenido'].'</div>';
+                break;
+
             case 'select':
                 $resultado.= $this->getSelect($obj['subtipo'],$obj['nombre'], $obj['id'], $obj['valor'], $obj['valordefecto'], $obj['onchange'], $obj['clase'], $obj['estilo'], $obj['icono'],$obj['boxbody'],$obj['etiqueta'],$obj['leyenda'], $obj['col'], $obj['adicional']);
                 break;
 
-                case 'separador':
-                    $resultado.= $this->getSeparador($obj['clase'],$obj['estilo'], $obj['color']);
-                    break;
-                default:
+            case 'separador':
+                $resultado.= $this->getSeparador($obj['clase'],$obj['estilo'], $obj['color']);
+                break;
 
-                    break;
+            case 'div':
+                $contenidoClass= new contenido;
+                $contenido=$contenidoClass->getContenidoArrayr(
+                    array(
+                        array('tipo'=>'div','nombre'=>$obj['nombre'], 'id' => $obj['id'], 'titulo'=>$obj['titulo'],'contenido'=>$obj['contenido'], 'col'=>$obj['col'],'clase'=>$obj['clase'], 'style'=>$obj['style'], 'tipocolor'=>$obj['tipocolor'], 'icono'=>$obj['icono'],'adicional'=>$obj['adicional']),
+                    ));
+                $resultado.='<div class="col-12 mb-3 mt-3">'. $contenido.'</div>';
+                break;
+
+            default:
+
+                break;
 
             case 'boton':
                 //echo $obj['link'];

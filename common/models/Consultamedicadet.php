@@ -90,8 +90,8 @@ class Consultamedicadet extends \yii\db\ActiveRecord
             [['idconsulta', 'isDeleted', 'usuariocreacion', 'usuarioact'], 'integer'],
             [['causaconsulta', 'examenes', 'estatus'], 'string'],
             [['fechacreacion', 'fechaact'], 'safe'],
-            [['agudezavscod', 'agudezavscoi', 'agudezavcod', 'agudezavcoi', 'agudezavotr', 'visioncscod', 'visioncosci', 'visionccod', 'visionccid', 'visioncotr', 'visionlscod', 'visionlscoi', 'visionlcod', 'visionlcoi', 'visionlcotr', 'pioscod', 'pioscoi', 'piocod', 'piocoi', 'piootr', 'visiondecolores', 'visionprofundidad', 'reflejospup', 'campovisual', 'fondoojood', 'fondoojooi', 'agujeroest', 'impdiag1', 'impdiag2', 'impdiag3', 'cie1001', 'cie1002', 'cie1003', 'usolentes', 'campim', 'octangular', 'octm', 'octn', 'biood', 'bioid', 'paquimod', 'paquimid', 'ora', 'topografia', 'angiog', 'ecogra', 'endote', 'ubm', 'retinografia'], 'string', 'max' => 30],
-            [['biomicroscopia'], 'string', 'max' => 50],
+            [['agudezavscod', 'agudezavscoi', 'agudezavcod', 'agudezavcoi', 'agudezavotr', 'visioncscod', 'visioncosci', 'visionccod', 'visionccid', 'visioncotr', 'visionlscod', 'visionlscoi', 'visionlcod', 'visionlcoi', 'visionlcotr', 'pioscod', 'pioscoi', 'piocod', 'piocoi', 'piootr', 'visiondecolores', 'visionprofundidad', 'reflejospup', 'campovisual', 'fondoojood', 'fondoojooi', 'agujeroest', 'impdiag1', 'impdiag2', 'impdiag3', 'cie1001', 'cie1002', 'cie1003', 'usolentes', 'campim', 'octangular', 'octm', 'octn', 'biood', 'bioid', 'paquimod', 'paquimid', 'ora', 'topografia', 'angiog', 'ecogra', 'endote', 'ubm', 'retinografia'], 'string', 'max' => 100],
+            [['biomicroscopia'], 'string', 'max' => 100],
             [['idconsulta'], 'exist', 'skipOnError' => true, 'targetClass' => Consultamedica::className(), 'targetAttribute' => ['idconsulta' => 'id']],
         ];
     }

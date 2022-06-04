@@ -16,14 +16,17 @@ $this->params['breadcrumbs'][] = $this->title;
 $objeto= new Objetos;
 $div= new Bloques;
 $urlpost='formnuevacita';
-
+$tipocita=array();
+$tipocita[0]["id"]="NUEVA CITA"; $tipocita[0]["value"]="NUEVA CITA";
+$tipocita[1]["id"]="CONTROL"; $tipocita[1]["value"]="CONTROL";
  $contenido=$objeto->getObjetosArray(
     array(
         array('tipo'=>'select','subtipo'=>'', 'nombre'=>'paciente', 'id'=>'paciente', 'valor'=>$pacientes, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Paciente: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'fecha', 'id'=>'fecha', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'calendario','boxbody'=>false,'etiqueta'=>'Fecha Cita: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'hora', 'id'=>'hora', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Hora: ', 'col'=>'col-6 col-md-3', 'adicional'=>''),
         array('tipo'=>'select','subtipo'=>'', 'nombre'=>'optometrista', 'id'=>'optometrista', 'valor'=>$optometrista, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Optometrista: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'select','subtipo'=>'', 'nombre'=>'doctor', 'id'=>'doctor', 'valor'=>$doctores, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Doctor: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
+        array('tipo'=>'select','subtipo'=>'', 'nombre'=>'doctor', 'id'=>'doctor', 'valor'=>$doctores, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Doctor: ', 'col'=>'col-12 col-md-8', 'adicional'=>''),
+        array('tipo'=>'select','subtipo'=>'', 'nombre'=>'tipocita', 'id'=>'tipocita', 'valor'=>$tipocita, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Tipo cita: ', 'col'=>'col-12 col-md-4', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'textarea', 'nombre'=>'observacion', 'id'=>'observacion', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Observación: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
 
     ),true

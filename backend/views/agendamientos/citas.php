@@ -33,6 +33,7 @@ $columnas= array(
     array('columna'=>'#', 'datareg' => 'num', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),
     array('columna'=>'Paciente', 'datareg' => 'paciente', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),
     array('columna'=>'Observación', 'datareg' => 'observacion', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),
+    array('columna'=>'Tipo Cita', 'datareg' => 'tipocita', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),
     array('columna'=>'Fecha', 'datareg' => 'fechacita', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),
     array('columna'=>'Hora', 'datareg' => 'horacita', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),
     array('columna'=>'Doctor', 'datareg' => 'doctor', 'clase'=>'', 'estilo'=>'', 'ancho'=>''),

@@ -30,7 +30,7 @@ $contenido.='<div class="col-12 col-md-9"><b>Nombres:</b>&nbsp; '.$paciente->ape
 $contenido.='<div class="col-12 col-md-3"><b>Tipo de Sangre:</b>&nbsp; '.$paciente->tiposangre.'</span><br></div>';
 $contenido.='<div class="col-12 col-md-12"><b>Dirección:</b>&nbsp; '.$paciente->direccion.'</span><br></div>';
 $contenido.='<div class="col-12 col-md-6"><b>Correo:</b>&nbsp; '.$paciente->correo.'</span><br></div>';
-$contenido.='<div class="col-12 col-md-6"><b>Teléfono:</b>&nbsp; '.$paciente->direccion.'</span><br></div>';
+$contenido.='<div class="col-12 col-md-6"><b>Teléfono:</b>&nbsp; '.$paciente->telefono.'</span><br></div>';
 $contenido.='<div class="col-12 col-md-12"><hr style="color: #0056b2;"></div>';
 $contenido.='<div class="col-12 col-md-12"><b>Antecedentes Personales:</b>&nbsp; '.$paciente->antecedentesp.'</span><br></div>';
 $contenido.='<div class="col-12 col-md-12"><b>Antecedentes Oculares:</b>&nbsp; '.$paciente->antecedenteso.'</span><br></div>';

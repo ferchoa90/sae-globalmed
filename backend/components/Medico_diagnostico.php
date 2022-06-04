@@ -159,6 +159,7 @@ class Medico_diagnostico extends Component
             $model->laserroiti=$data['oitiempo1'];
             $model->laserroin=$data['oinumero1'];
             $model->laserroip=$data['oipoder1'];
+            $model->plan=$data['plan'];
 
             $model->med1=$data['medicamento1'];
             $model->presc1=$data['mprescripciono1'];
@@ -255,6 +256,7 @@ class Medico_diagnostico extends Component
             $model->laserroiti=$data['oitiempo1'];
             $model->laserroin=$data['oinumero1'];
             $model->laserroip=$data['oipoder1'];
+            $model->plan=$data['plan'];
 
             $model->med1=$data['medicamento1'];
             $model->presc1=$data['mprescripciono1'];

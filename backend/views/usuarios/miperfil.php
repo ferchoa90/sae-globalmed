@@ -18,7 +18,7 @@ $this->title = 'Crear Usuario';
 $this->params['breadcrumbs'][] = ['label' => 'Administración de Usuarios', 'url' => ['usuarios']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$urlpost='formusuario';
+$urlpost='formeditarusuario';
 
 $objeto= new Objetos;
 $nav= new Navs;
@@ -33,6 +33,7 @@ $botones= new Botones;
 
  $contenido=$objeto->getObjetosArray(
     array(
+        array('tipo'=>'input','subtipo'=>'oculto', 'nombre'=>'id', 'id'=>'id', 'valor'=>Yii::$app->user->identity->id, 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'nombres', 'id'=>'nombres', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del usuario ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'apellidos', 'id'=>'apellidos', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Apellido','leyenda'=>'Apellido del usuario ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'nombreusuario', 'id'=>'nombreusuario', 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre de usuario','leyenda'=>'Nombre de usuario ', 'col'=>'col-12 col-md-6', 'adicional'=>''),

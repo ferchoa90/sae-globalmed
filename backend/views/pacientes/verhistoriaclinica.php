@@ -98,7 +98,7 @@ foreach ($consultas as $key => $value) {
             array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'Visión Lejos SC. OI:','contenido'=>$fichamedica->visionlscoi,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
             array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'Visión Lejos CO. OD:','contenido'=>$fichamedica->visionlcod,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
             array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'Visión Lejos CO. OI:','contenido'=>$fichamedica->visionlcoi,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
-            array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'Visión Lejos OTR:','contenido'=>$fichamedica->visionlcotr,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+            array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'DP:','contenido'=>$fichamedica->visionlcotr,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
             array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
             array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'PIO OD:','contenido'=>$fichamedica->pioscod,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
             array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'PIO OI:','contenido'=>$fichamedica->pioscoi,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
@@ -141,28 +141,23 @@ foreach ($consultas as $key => $value) {
             )
     );
 
-    $img1= ($fichamedica->img1) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$fichamedica->img1.'"/>': '' ;
-    $img2= ($fichamedica->img2) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$fichamedica->img2.'"/>': '' ;
-    $img3= ($fichamedica->img3) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$fichamedica->img3.'"/>': '' ;
-    $img4= ($fichamedica->img4) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$fichamedica->img4.'"/>': '' ;
-    $img5= ($fichamedica->img5) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$fichamedica->img5.'"/>': '' ;
     $contenidoImagenes=$contenidoClass->getContenidoArrayr(
         array(
             //array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'ID:','contenido'=>$paciente->id,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
-            array('tipo'=>'div','nombre'=>'img-1', 'id' => 'img-1', 'titulo'=>'Imagen1:','contenido'=>$img1,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
-            array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
-            array('tipo'=>'div','nombre'=>'img-2', 'id' => 'img-2', 'titulo'=>'Imagen2:','contenido'=>$img2,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
-            array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
-            array('tipo'=>'div','nombre'=>'img-3', 'id' => 'img-3', 'titulo'=>'Imagen3:','contenido'=>$img3,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
-            array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
-            array('tipo'=>'div','nombre'=>'img-4', 'id' => 'img-4', 'titulo'=>'Imagen4:','contenido'=>$img4,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
-            array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
-            array('tipo'=>'div','nombre'=>'img-5', 'id' => 'img-5', 'titulo'=>'Imagen5:','contenido'=>$img5,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+            array('tipo'=>'image','nombre'=>'img-1', 'id' => 'img-1', 'src'=>$fichamedica->img1,'clase'=>'pb-3 pr-3', 'style'=>'border: 1px dashed #c6c6c6;', 'col'=>'col-12 col-md-4',  'etiqueta'=>' IMAGEN 1' ,  'adicional'=>''),
+            array('tipo'=>'image','nombre'=>'img-2', 'id' => 'img-2', 'src'=>$fichamedica->img2,'clase'=>'pb-3 pr-3', 'style'=>'border: 1px dashed #c6c6c6;', 'col'=>'col-12 col-md-4',  'etiqueta'=>' IMAGEN 2' ,  'adicional'=>''),
+            array('tipo'=>'image','nombre'=>'img-3', 'id' => 'img-3', 'src'=>$fichamedica->img3,'clase'=>'pb-3 pr-3', 'style'=>'border: 1px dashed #c6c6c6;', 'col'=>'col-12 col-md-4',  'etiqueta'=>' IMAGEN 3' ,  'adicional'=>''),
+            array('tipo'=>'image','nombre'=>'img-4', 'id' => 'img-4', 'src'=>$fichamedica->img4,'clase'=>'pb-3 pr-3', 'style'=>'border: 1px dashed #c6c6c6;', 'col'=>'col-12 col-md-4',  'etiqueta'=>' IMAGEN 4' ,  'adicional'=>''),
+            array('tipo'=>'image','nombre'=>'img-5', 'id' => 'img-5', 'src'=>$fichamedica->img5,'clase'=>'pb-3 pr-3', 'style'=>'border: 1px dashed #c6c6c6;', 'col'=>'col-12 col-md-4',  'etiqueta'=>' IMAGEN 5' ,  'adicional'=>''),
         )
     );
+    //$obj['subtipo'],$obj['nombre'], $obj['id'], $obj['src'], $obj['onchange'], $obj['clase'], $obj['estilo'],$obj['etiqueta'], $obj['col'], $obj['adicional']
+
+
     $diagnosticomedico=Consultamedicadiag::find()->where(["idconsulta"=>$value->id])->one();
     $contenidoDiagnostico=$contenidoClass->getContenidoArrayr(
         array(
+            array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'PLAN:','contenido'=>$diagnosticomedico->plan,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
             array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'MEDICAMENTO:','contenido'=>$diagnosticomedico->med1,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
             array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'PRESCRIPCIÓN:','contenido'=>$diagnosticomedico->presc1,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
             array('tipo'=>'separador','clase'=>'', 'estilo'=>'', 'color'=>''),
@@ -185,7 +180,7 @@ foreach ($consultas as $key => $value) {
     $contenidotab=$nav->getNavsarray(
         array(
             array('tipo'=>'config','nombre'=>'tabcontenido-'.$value->id, 'id'=>'tabcontenido'.$value->id, 'valor'=>'', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-            array('tipo'=>'tab','nombre'=>'tabant-'.$value->id, 'id'=>'tabant-'.$value->id, 'titulo'=>'Ficha Visual'.$value->id, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoConsulta),
+            array('tipo'=>'tab','nombre'=>'tabant-'.$value->id, 'id'=>'tabant-'.$value->id, 'titulo'=>'Ficha Visual', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoConsulta),
             array('tipo'=>'tab','nombre'=>'tabinfo-'.$value->id, 'id'=>'tabinfo-'.$value->id, 'titulo'=>'Información', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoInfo),
             array('tipo'=>'tab','nombre'=>'tabimagenes-'.$value->id, 'id'=>'tabimagenes-'.$value->id, 'titulo'=>'Imágenes', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoImagenes),
             array('tipo'=>'tab','nombre'=>'tabdiagnostico-'.$value->id, 'id'=>'tabdiagnostico-'.$value->id, 'titulo'=>'Diagnóstico', 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Nombre','leyenda'=>'Nombre del rol ', 'col'=>'col-12 col-md-6', 'adicional'=>'', 'contenido'=>$contenidoDiagnostico),
@@ -211,3 +206,80 @@ $contenidotab=$nav->getNavsarray($tabconsultas);
 
 //var_dump($objeto);
 ?>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <img class="modal-content" id="img01">
+</div>
+
+<script>
+    // Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('img-1');
+var img2 = document.getElementById('img-2');
+var img3 = document.getElementById('img-3');
+var img4 = document.getElementById('img-4');
+var img5 = document.getElementById('img-5');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+
+if (img){
+    img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    modalImg.alt = this.alt;
+    captionText.innerHTML = this.alt;
+    }
+}
+
+if (img2){
+    img2.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    modalImg.alt = this.alt;
+    captionText.innerHTML = this.alt;
+    }
+}
+
+if (img3){
+    img3.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    modalImg.alt = this.alt;
+    captionText.innerHTML = this.alt;
+    }
+}
+
+if (img4){
+    img4.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    modalImg.alt = this.alt;
+    captionText.innerHTML = this.alt;
+    }
+}
+
+if (img5){
+    img5.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    modalImg.alt = this.alt;
+    captionText.innerHTML = this.alt;
+    }
+}
+
+
+
+
+// When the user clicks on <span> (x), close the modal
+modal.onclick = function() {
+    img01.className += " out";
+    setTimeout(function() {
+       modal.style.display = "none";
+       img01.className = "modal-content";
+     }, 400);
+
+ }
+</script>

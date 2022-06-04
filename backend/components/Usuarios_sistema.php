@@ -114,8 +114,8 @@ class Usuarios_sistema extends Component
         $model= User::find()->where(["id"=>$data['id']])->one();
         $result=false;
         if ($data):
-            if ($data['clave']){
-                $model->password_hash=Yii::$app->getSecurity()->generatePasswordHash($data['clave']);
+            if ($data['contra']){
+                $model->password_hash=Yii::$app->getSecurity()->generatePasswordHash($data['contra']);
             }
             $model->nombres=$data['nombres'];
             $model->apellidos=$data['apellidos'];
@@ -134,10 +134,10 @@ class Usuarios_sistema extends Component
             $model->updated_at=Yii::$app->user->identity->id;
 
             if ($model->save()) {
-                return array("response" => true, "id" => $model->id, "mensaje"=> "Registro agregado","tipo"=>"success", "success"=>true);
+                return array("response" => true, "id" => $model->id, "mensaje"=> "Registro actualizado","tipo"=>"success", "success"=>true);
             } else {
                 $this->callback(1,$idusuario,$model->errors);
-                return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
+                return array("response" => true, "id" => 0, "mensaje"=> "Error al actulizar el registro","tipo"=>"error", "success"=>false);
             }
         else:
             $log= new Log_errores;

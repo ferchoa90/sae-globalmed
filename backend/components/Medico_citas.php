@@ -65,6 +65,7 @@ class Medico_citas extends Component
             $model->iddoctor=$data['doctor'];
             $model->observacion=$data['observacion'];
             $model->idoptometrista=$data['optometrista'];
+            $model->tipocita=$data['tipocita'];
             $model->usuariocreacion=Yii::$app->user->identity->id;
             $model->estatuscita="AGENDADA";
             $model->estatus="ACTIVO";
@@ -100,6 +101,7 @@ class Medico_citas extends Component
             $model->fechacita=$data['fecha'];
             $model->horacita=$data['hora'];
             $model->iddoctor=$data['doctor'];
+            $model->tipocita=$data['tipocita'];
             $model->idoptometrista=$data['optometrista'];
             $model->observacion=$data['observacion'];
             $model->usuarioact=Yii::$app->user->identity->id;

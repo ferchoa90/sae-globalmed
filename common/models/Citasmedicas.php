@@ -48,7 +48,7 @@ class Citasmedicas extends \yii\db\ActiveRecord
             [['fechacita', 'horacita', 'fechacreacion' ], 'safe'],
             [['idusuario'], 'exist', 'skipOnError' => true, 'targetClass' => Pacientes::className(), 'targetAttribute' => ['idusuario' => 'id']],
             [['usuariocreacion'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['usuariocreacion' => 'id']],
-            [['iddoctor'], 'exist', 'skipOnError' => true, 'targetClass' => Doctores::className(), 'targetAttribute' => ['iddoctor' => 'id']],
+            [['iddoctor'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['iddoctor' => 'id']],
         ];
     }
 
@@ -82,7 +82,7 @@ class Citasmedicas extends \yii\db\ActiveRecord
      */
     public function getIddoctor0()
     {
-        return $this->hasOne(Doctores::className(), ['id' => 'iddoctor']);
+        return $this->hasOne(User::className(), ['id' => 'iddoctor']);
     }
 
     /**

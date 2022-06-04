@@ -96,8 +96,8 @@ class Consultamedicadiag extends \yii\db\ActiveRecord
             [['idconsulta', 'isDeleted', 'usuariocreacion', 'usuarioact'], 'integer'],
             [['observacion2', 'compliant', 'complipost', 'med1', 'presc1', 'med2', 'presc2', 'med3', 'presc3', 'med4', 'presc4', 'med5', 'presc5', 'estatus'], 'string'],
             [['fechacreacion', 'fechaact'], 'safe'],
-            [['orbita', 'globos', 'lagrim', 'escler', 'conjunt', 'limbo', 'parpados', 'camant', 'iris', 'cornea', 'presion', 'piocc', 'reflpup', 'cristal', 'midria', 'observacion', 'metodo', 'vitreo', 'papila', 'polpost', 'perif', 'nervioopt', 'visioncol', 'esteriopsis', 'ordenatencion', 'yaglaser', 'segantodd', 'segantidp', 'segantidd', 'segposodp', 'segaposodd', 'segposidp', 'segposidd', 'laserrodt', 'laserrodti', 'laserrodn', 'laserrodp', 'laserroidt', 'laserroiti', 'laserroin', 'laserroip'], 'string', 'max' => 30],
-            [['macula', 'ecuador', 'vasos', 'segantodp'], 'string', 'max' => 50],
+            [['orbita', 'globos', 'lagrim', 'escler', 'conjunt', 'limbo', 'parpados', 'camant', 'iris', 'cornea', 'presion', 'piocc', 'reflpup', 'cristal', 'midria', 'observacion', 'metodo', 'vitreo', 'papila', 'polpost', 'perif', 'nervioopt', 'visioncol', 'esteriopsis', 'ordenatencion', 'yaglaser', 'segantodd', 'segantidp', 'segantidd', 'segposodp', 'segaposodd', 'segposidp', 'segposidd', 'laserrodt', 'laserrodti', 'laserrodn', 'laserrodp', 'laserroidt', 'laserroiti', 'laserroin', 'laserroip'], 'string', 'max' => 100],
+            [['macula', 'ecuador', 'vasos', 'segantodp'], 'string', 'max' => 100],
             [['idconsulta'], 'exist', 'skipOnError' => true, 'targetClass' => Consultamedica::className(), 'targetAttribute' => ['idconsulta' => 'id']],
         ];
     }

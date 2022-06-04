@@ -118,6 +118,7 @@ class Medico_pacientes extends Component
             $model->enfermedada=$data['enfermedada'];
             $model->antecedentesf=$data['antecedentesf'];
             $model->telefonoemer=$data['telefonoemer'];
+            $model->telefono=$data['telefono'];
             $model->direccionemer=$data['direccionemer'];
             $model->usuariocreacion=Yii::$app->user->identity->id;
             $model->estatus="ACTIVO";
@@ -165,6 +166,7 @@ class Medico_pacientes extends Component
             $model->enfermedada=$data['enfermedada'];
             $model->antecedentesf=$data['antecedentesf'];
             $model->telefonoemer=$data['telefonoemer'];
+            $model->telefono=$data['telefono'];
             $model->direccionemer=$data['direccionemer'];
             $model->usuarioact=Yii::$app->user->identity->id;
             $model->fechaact= date("Y-m-d H:i:s");
