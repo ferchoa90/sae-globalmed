@@ -40,8 +40,8 @@ class Archivos extends Component
         //echo $this->ruta;
         //var_dump($archivo);
         foreach ($archivo as $key => $value) {
-
-            $target_file = $target_dir . basename($value["name"]);
+            $fecha=date('Ymd-his');
+            $target_file = $target_dir . $fecha.'-'.basename($value["name"]);
             $nombreArchivo=basename($value["name"]);
             $uploadOk = 0;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -88,7 +88,7 @@ class Archivos extends Component
             } else {
                 //echo move_uploaded_file($value["tmp_name"], $target_file);
                 if (move_uploaded_file($value["tmp_name"], $target_file)) {
-                    $return=array("success"=>true,"mensaje"=>"Imagen subida.","nombrearchivo"=>$nombreArchivo);
+                    $return=array("success"=>true,"mensaje"=>"Imagen subida.","nombrearchivo"=> $fecha.'-'.$nombreArchivo);
                     //$return=array("success"=>"true","Mensaje"=>"OK");
                     //echo json_encode($return);
                     //echo "The file ". basename( $value["name"]). " has been uploaded.";

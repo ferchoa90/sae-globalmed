@@ -394,7 +394,7 @@ class PacientesController extends Controller
         $datacons= new Medico_diagnostico;
         $datacons= $datacons->Nuevo($_POST);
         $response=$datacons;
-        return json_encode($response);
+        //return json_encode($response);
 
         return json_encode($response);
 

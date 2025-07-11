@@ -16,12 +16,12 @@
     RewriteRule ^css/(.*)$ frontend/web/css/$1 [L]
     RewriteRule ^js/(.*)$ frontend/web/js/$1 [L]
     RewriteRule ^images/(.*)$ frontend/web/images/$1 [L]
-    RewriteRule ^(.*)$ frontend/web/$1 [L]
+    RewriteRule ^(.*)$ backend/web/$1 [L]
     RewriteCond %{REQUEST_URI} !^/(frontend|backend)/web/(assets|css|js)/
     RewriteCond %{REQUEST_URI} !index.php
     RewriteCond %{REQUEST_FILENAME} !-f [OR]
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^.*$ frontend/web/index.php
+    RewriteRule ^.*$ backend/web/index.php
 </IfModule>
 
 # BEGIN cPanel-generated php ini directives, do not edit

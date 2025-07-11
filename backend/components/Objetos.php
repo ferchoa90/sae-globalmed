@@ -36,8 +36,6 @@ class Objetos extends Component
                     $resultado.= $this->getInput($obj['subtipo'],$obj['nombre'], $obj['id'], $obj['valor'], $obj['onchange'], $obj['clase'], $obj['estilo'], $obj['icono'],$obj['boxbody'],$obj['etiqueta'],$obj['leyenda'], $obj['col'], $obj['adicional'], $obj['valordefecto'], $obj['textoon'], $obj['textooff']);
                     break;
 
-
-
             case 'box':
                 if (!$obj['contenido']){ $obj['contenido']="&nbsp;"; };
                 $resultado.= '<div class="'.$obj['col'].'" '.$obj['adicional'].'>'.$obj['contenido'].'</div>';

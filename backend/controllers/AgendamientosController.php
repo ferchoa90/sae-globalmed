@@ -609,5 +609,24 @@ class AgendamientosController extends Controller
         return json_encode($arrayResp);
     }
 
+    
+    public function actionCitaseliminar($id)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(URL::base() . "/site/login");
+        }
+
+        $model = Citasmedicas::findOne($id);
+        $model->isDeleted = 1;
+
+        if ($model->save())
+        {
+            return true;
+        }else{
+            return false;
+        }
+        //return $this->redirect(['index']);
+    }
+
 
 }

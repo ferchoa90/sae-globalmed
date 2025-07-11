@@ -97,6 +97,7 @@ class Medico_consulta extends Component
         $result=false;
 
         $consultamed=Consultamedica::find()->where(["idcitamedica" => $data['idcita']])->one();
+        //die(var_dump($consultamed));
         if ($consultamed){
             $data['idconsultam']=$consultamed->id;
             $result= $this->Editar($data);
@@ -231,8 +232,14 @@ class Medico_consulta extends Component
     {
         $id=0;
         $result=false;
+        $nuevo=false;
         if ($data):
             $model= Consultamedicadet::find()->where(["id"=>$data['idconsultam']])->one();
+            if (!$model){
+                $model= new Consultamedicadet;
+                $nuevo=true;
+            }
+            $model->usolentes=$data['usolentes'];
             $model->causaconsulta=$data['motivo'];
             $model->agudezavscod=$data['agudezavscod'];
             $model->agudezavscoi=$data['agudezavscoi'];
@@ -291,34 +298,63 @@ class Medico_consulta extends Component
             $model->endote=$data['endote'];
             $model->ubm=$data['ubm'];
             $model->retinografia=$data['retinografia'];
-            $model->usuarioact=Yii::$app->user->identity->id;
-            $model->fechaact= date("Y-m-d H:i:s");
+            
 
             $archivoM= new Archivos;
             //var_dump($_FILES["img1"]);
             if ($_FILES){
-                $archivo=$archivoM->Subirarchivo(array($_FILES["img1"]));
-                //var_dump($archivo);
-                $model->img1=$archivo["nombrearchivo"];
-                $archivo=$archivoM->Subirarchivo(array($_FILES["img2"]));
-                $model->img2=$archivo["nombrearchivo"];
-                $archivo=$archivoM->Subirarchivo(array($_FILES["img3"]));
-                $model->img3=$archivo["nombrearchivo"];
-                $archivo=$archivoM->Subirarchivo(array($_FILES["img4"]));
-                $model->img4=$archivo["nombrearchivo"];
-                $archivo=$archivoM->Subirarchivo(array($_FILES["img5"]));
-                $model->img5=$archivo["nombrearchivo"];
+               // var_dump($_FILES);
+                if ($_FILES["img1"]["name"]){
+                    $archivo=$archivoM->Subirarchivo(array($_FILES["img1"]));
+                    $model->img1=$archivo["nombrearchivo"];
+                }
+                if ($_FILES["img2"]["name"]){
+                    $archivo=$archivoM->Subirarchivo(array($_FILES["img2"]));
+                    $model->img2=$archivo["nombrearchivo"];
+                }
+                if ($_FILES["img3"]["name"]){
+                    $archivo=$archivoM->Subirarchivo(array($_FILES["img3"]));
+                    $model->img3=$archivo["nombrearchivo"];
+                }
+                if ($_FILES["img4"]["name"]){
+                    $archivo=$archivoM->Subirarchivo(array($_FILES["img4"]));
+                    $model->img4=$archivo["nombrearchivo"];
+                }
+                if ($_FILES["img5"]["name"]){
+                    $archivo=$archivoM->Subirarchivo(array($_FILES["img5"]));
+                    $model->img5=$archivo["nombrearchivo"];
+                }
+
+                
             }
 
+            if ($nuevo==false){
+                $model->usuarioact=Yii::$app->user->identity->id;
+                $model->fechaact= date("Y-m-d H:i:s");
+                if ($model->save()) {
+                    $error=false;
+                    return array("response" => true, "id" => $model->id, "mensaje"=> "Registro actualizado","tipo"=>"success", "success"=>true);
+                } else {
+                    $this->callback(1,$id,$model->errors);
+                    return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
+                }
+            }else{
+                $model->idconsulta=$data['idconsultam'];
+                $model->usuariocreacion=Yii::$app->user->identity->id;
+                $model->isDeleted=0;
+                $model->estatus="ACTIVO";
+                if ($model ->save()) {
+                    $error=false;
+                    return array("response" => true, "id" => $model->id, "mensaje"=> "Registro agregado","tipo"=>"success", "success"=>true);
+                }else{
+                  //  die(var_dump($model->errors));
+                    $this->callback(1,$idusuario,$modeldetalle->errors);
+                    return array("response" => true, "id" => 0, "mensaje"=> "Error al agregar el registro","tipo"=>"error", "success"=>false);
 
-
-            if ($model->save()) {
-                $error=false;
-                return array("response" => true, "id" => $model->id, "mensaje"=> "Registro actualizado","tipo"=>"success", "success"=>true);
-            } else {
-                $this->callback(1,$id,$model->errors);
-                return array("response" => true, "id" => 0, "mensaje"=> "Error al actualizar el registro","tipo"=>"error", "success"=>false);
+                }
             }
+
+           
         else:
             $log= new Log_errores;
             $observacion="ID: 0";
