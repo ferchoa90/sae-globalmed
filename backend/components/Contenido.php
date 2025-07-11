@@ -3,6 +3,7 @@ namespace backend\components;
 use Yii;
 use backend\models\Configuracion;
 use yii\base\Component;
+use yii\helpers\Html;
 use yii\base\InvalidConfigException;
 
 
@@ -52,7 +53,7 @@ class Contenido extends Component
                     break;
 
                 case 'image':
-                    //$this->declareCss($obj['id']);
+                    $this->declareCss($obj['id']);
                     $this->registrarJs($obj['id']);
                     $contenido.= $this->getImage($obj['subtipo'],$obj['nombre'], $obj['id'], $obj['src'], $obj['clase'], $obj['estilo'],$obj['etiqueta'], $obj['col'], $obj['adicional']);
                     break;
@@ -117,17 +118,20 @@ class Contenido extends Component
 
     public function declareCss($id)
     {
+        $id = Html::encode($id);
         //$this->registerCssFile('@web/css/ccalendar.css', ['depends' => [yii\bootstrap\BootstrapAsset::className()]]);
         $idn=str_replace("-","",$id);
         $modal='modal'.$idn;
-        $cssnew= <<< CSS
+
+        $cssnew=
+<<< CSS
 $id {
             border-radius: 5px;
             cursor: pointer;
             transition: 0.3s;
             display: block;
             margin-left: auto;
-            margin-right: auto
+            margin-right: auto;
             }
             $id:hover {opacity: 0.7;}
 
@@ -150,7 +154,7 @@ $id {
     margin: auto;
     display: block;
     width: 75%;
-    //max-width: 75%;
+    /*max-width: 75%;*/
 }
 
 /* Caption of Modal Image */
@@ -218,9 +222,16 @@ $id {
     }
 }
 CSS;
-Yii::$app->getView()->registerCss($cssnew, \yii\web\View::POS_END);
+        try {
+           // Yii::$app->getView()->registerCss($cssnew, \yii\web\View::POS_END);
+            Yii::$app->getView()->registerCss($cssnew);
+        }catch (InvalidConfigException $e){
+            echo $e->getMessage();
+        }
+
         //Yii::$app()->clientScript->registerCss('customCSS',$css );
        // echo 'hola';
+
         return true;
     }
 
