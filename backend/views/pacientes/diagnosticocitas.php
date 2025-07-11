@@ -119,7 +119,7 @@ foreach ($consultastotal as $key => $value) {
             array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'OCT. ANGULAR:','contenido'=>$fichamedica->octangular,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
             array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'OCT. M.:','contenido'=>$fichamedica->octm,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
             array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'OCT. N.:','contenido'=>$fichamedica->octn,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
-            array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'EXCAVACION:','contenido'=>$fichamedica->excavacion,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
+            array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'EXCAVACION NERVIO:','contenido'=>$fichamedica->excavacion,'clase'=>'', 'style'=>'', 'col'=>'col-12 col-md-12', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
             array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'BIOMET. OD:','contenido'=>$fichamedica->biood,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
             array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'BIOMET. ID:','contenido'=>$fichamedica->bioid,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
             array('tipo'=>'div','nombre'=>'id', 'id' => 'id', 'titulo'=>'PAQUIM OD:','contenido'=>$fichamedica->paquimod,'clase'=>'', 'style'=>'', 'col'=>'col-6 col-md-6', 'tipocolor'=>'azul', 'icono'=>'regresar','adicional'=>''),
@@ -372,11 +372,11 @@ $usolentes= ($consultamedicadet->id=="on")? 'SI' : 'NO' ;
 
 
 
-$img1= ($consultamedicadet->img1) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img1.'"/>': '' ;
-$img2= ($consultamedicadet->img2) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img2.'"/>': '' ;
-$img3= ($consultamedicadet->img3) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img3.'"/>': '' ;
-$img4= ($consultamedicadet->img4) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img4.'"/>': '' ;
-$img5= ($consultamedicadet->img5) ? '<img name="" id="" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img5.'"/>': '' ;
+$img1= ($consultamedicadet->img1) ? '<img name="img-1" id="img-1" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img1.'"/>': '' ;
+$img2= ($consultamedicadet->img2) ? '<img name="img2" id="img2" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img2.'"/>': '' ;
+$img3= ($consultamedicadet->img3) ? '<img name="img3" id="img3" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img3.'"/>': '' ;
+$img4= ($consultamedicadet->img4) ? '<img name="img4" id="img4" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img4.'"/>': '' ;
+$img5= ($consultamedicadet->img5) ? '<img name="img5" id="img5" class="col-12 col-md-12" src="/backend/web/images/fichamedica/'.$consultamedicadet->img5.'"/>': '' ;
 
 $contenidoN3=$objeto->getObjetosArray(
     array(
@@ -384,7 +384,7 @@ $contenidoN3=$objeto->getObjetosArray(
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'octangular', 'id'=>'octangular', 'valor'=>$consultamedicadet->octangular, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Oct. Angular: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'octm', 'id'=>'octm', 'valor'=>$consultamedicadet->octm, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Oct. M.: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'octn', 'id'=>'octn', 'valor'=>$consultamedicadet->octn, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Oct. N.: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
-        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'excavacion', 'id'=>'excavacion', 'valor'=>$consultamedicadet->excavacion, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Excavacion.: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
+        array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'excavacion', 'id'=>'excavacion', 'valor'=>$consultamedicadet->excavacion, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Excavacion Nervio: ', 'col'=>'col-12 col-md-12', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'biometod', 'id'=>'biometod', 'valor'=>$consultamedicadet->biood, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Biomet. OD: ', 'col'=>'col-12 col-md-6', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'biometoi', 'id'=>'biometoi', 'valor'=>$consultamedicadet->bioid, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Biomet. OI: ', 'col'=>'col-6 col-md-6', 'adicional'=>''),
         array('tipo'=>'input','subtipo'=>'cajatexto', 'nombre'=>'paquimod', 'id'=>'paquimod', 'valor'=>$consultamedicadet->paquimod, 'onchange'=>'', 'clase'=>'', 'style'=>'', 'icono'=>'lapiz','boxbody'=>false,'etiqueta'=>'Paquim. OD: ', 'col'=>'col-6 col-md-6', 'adicional'=>''),
