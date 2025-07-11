@@ -148,6 +148,7 @@ class Medico_consulta extends Component
                     $modeldetalle->piootr=$data['piocotr'];
 
                     $modeldetalle->biomicroscopia=$data['microboscopia'];
+                    $modeldetalle->esteriopsis=$data['esteriopsis'];
                     $modeldetalle->visiondecolores=$data['visioncolores'];
                     $modeldetalle->visionprofundidad=$data['visionprof'];
                     $modeldetalle->reflejospup=$data['refloejospupi'];
@@ -169,6 +170,7 @@ class Medico_consulta extends Component
                     $modeldetalle->octangular=$data['octangular'];
                     $modeldetalle->octm=$data['octm'];
                     $modeldetalle->octn=$data['octn'];
+                    $modeldetalle->excavacion=$data['excavacion'];
                     $modeldetalle->biood=$data['biometod'];
                     $modeldetalle->bioid=$data['biometoi'];
                     $modeldetalle->paquimod=$data['paquimod'];
@@ -266,6 +268,7 @@ class Medico_consulta extends Component
             $model->piootr=$data['piocotr'];
 
             $model->biomicroscopia=$data['microboscopia'];
+            $model->esteriopsis=$data['esteriopsis'];
             $model->visiondecolores=$data['visioncolores'];
             $model->visionprofundidad=$data['visionprof'];
             $model->reflejospup=$data['refloejospupi'];
@@ -287,6 +290,7 @@ class Medico_consulta extends Component
             $model->octangular=$data['octangular'];
             $model->octm=$data['octm'];
             $model->octn=$data['octn'];
+            $model->excavacion=$data['excavacion'];
             $model->biood=$data['biometod'];
             $model->bioid=$data['biometoi'];
             $model->paquimod=$data['paquimod'];

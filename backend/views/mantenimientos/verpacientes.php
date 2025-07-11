@@ -40,6 +40,7 @@ $contenido.='<div class="col-12 col-md-12"><hr style="color: #0056b2;"></div>';
 $contenido.='<div class="col-12 col-md-6"><b>Contacto Emer.:</b>&nbsp; '.$paciente->nombresemer.'</span><br></div>';
 $contenido.='<div class="col-12 col-md-6"><b>Direccion Emer.:</b>&nbsp; '.$paciente->direccionemer.'</span><br></div>';
 $contenido.='<div class="col-12 col-md-6"><b>Teléfono Emer.:</b>&nbsp; '.$paciente->telefonoemer.'</span><br></div>';
+$contenido.='<div class="col-12 col-md-12"><b>Alerta:</b>&nbsp; '.$paciente->alerta.'</span><br></div>';
 $contenido.='<div class="col-12 col-md-12"><hr style="color: #0056b2;"></div>';
 $contenido.='<div class="col-12 col-md-6"><b>Detalle Historia C.:</b>&nbsp; '.''.'</span><br></div>';
 $contenido.='</div>';
