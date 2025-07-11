@@ -289,6 +289,7 @@ class PacientesController extends Controller
         //echo $consultamedica->id;
         $consultamedicadet=Consultamedicadet::find()->where(["idconsulta" => $consultamedica->id])->one();
         $consultamedicadiag=Consultamedicadiag::find()->where(["idconsulta" => $consultamedica->id])->one();
+        $consultasTotal= $data->getHistoriaclinica($citamedica->idusuario);
         //var_dump();
 
         //var_dump($pacientes);
@@ -296,6 +297,7 @@ class PacientesController extends Controller
             //'data' => Doctores::find()->where(['id' => $id, "isDeleted" => 0])->one(),
             'paciente' => $pacientes,
             'consultamedica' => $consultamedica,
+            'consultastotal' => $consultasTotal,
             'consultamedicadet' => $consultamedicadet,
             'consultamedicadiag' => $consultamedicadiag,
             'citamedica' => $citamedica,
