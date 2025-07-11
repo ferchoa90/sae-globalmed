@@ -31,6 +31,7 @@ use Yii;
  * @property string|null $piocoi
  * @property string|null $piootr
  * @property string|null $biomicroscopia
+ * @property string|null $esteriopsis
  * @property string|null $visiondecolores
  * @property string|null $visionprofundidad
  * @property string|null $reflejospup
@@ -50,6 +51,7 @@ use Yii;
  * @property string|null $octangular
  * @property string|null $octm
  * @property string|null $octn
+ * @property string|null $excavacion
  * @property string|null $biood
  * @property string|null $bioid
  * @property string|null $paquimod
@@ -90,7 +92,7 @@ class Consultamedicadet extends \yii\db\ActiveRecord
             [['idconsulta', 'isDeleted', 'usuariocreacion', 'usuarioact'], 'integer'],
             [['causaconsulta', 'examenes', 'estatus'], 'string'],
             [['fechacreacion', 'fechaact'], 'safe'],
-            [['agudezavscod', 'agudezavscoi', 'agudezavcod', 'agudezavcoi', 'agudezavotr', 'visioncscod', 'visioncosci', 'visionccod', 'visionccid', 'visioncotr', 'visionlscod', 'visionlscoi', 'visionlcod', 'visionlcoi', 'visionlcotr', 'pioscod', 'pioscoi', 'piocod', 'piocoi', 'piootr', 'visiondecolores', 'visionprofundidad', 'reflejospup', 'campovisual', 'fondoojood', 'fondoojooi', 'agujeroest', 'impdiag1', 'impdiag2', 'impdiag3', 'cie1001', 'cie1002', 'cie1003', 'usolentes', 'campim', 'octangular', 'octm', 'octn', 'biood', 'bioid', 'paquimod', 'paquimid', 'ora', 'topografia', 'angiog', 'ecogra', 'endote', 'ubm', 'retinografia'], 'string', 'max' => 30],
+            [['agudezavscod', 'agudezavscoi', 'agudezavcod', 'agudezavcoi', 'agudezavotr', 'visioncscod', 'visioncosci', 'visionccod', 'visionccid', 'visioncotr', 'visionlscod', 'visionlscoi', 'visionlcod', 'visionlcoi', 'visionlcotr', 'pioscod', 'pioscoi', 'piocod', 'piocoi', 'piootr', 'esteriopsis','visiondecolores', 'visionprofundidad', 'reflejospup', 'campovisual', 'fondoojood', 'fondoojooi', 'agujeroest', 'impdiag1', 'impdiag2', 'impdiag3', 'cie1001', 'cie1002', 'cie1003', 'usolentes', 'campim', 'octangular', 'octm', 'octn', 'excavacion', 'biood', 'bioid', 'paquimod', 'paquimid', 'ora', 'topografia', 'angiog', 'ecogra', 'endote', 'ubm', 'retinografia'], 'string', 'max' => 30],
             [['biomicroscopia'], 'string', 'max' => 50],
             [['idconsulta'], 'exist', 'skipOnError' => true, 'targetClass' => Consultamedica::className(), 'targetAttribute' => ['idconsulta' => 'id']],
         ];
@@ -126,6 +128,7 @@ class Consultamedicadet extends \yii\db\ActiveRecord
             'piocoi' => 'Piocoi',
             'piootr' => 'Piootr',
             'biomicroscopia' => 'Biomicroscopia',
+            'esteriopsis' => 'Esteriopsis',
             'visiondecolores' => 'Visiondecolores',
             'visionprofundidad' => 'Visionprofundidad',
             'reflejospup' => 'Reflejospup',
@@ -145,6 +148,7 @@ class Consultamedicadet extends \yii\db\ActiveRecord
             'octangular' => 'Octangular',
             'octm' => 'Octm',
             'octn' => 'Octn',
+            'excavacion' => 'Excavacion',
             'biood' => 'Biood',
             'bioid' => 'Bioid',
             'paquimod' => 'Paquimod',

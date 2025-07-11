@@ -16,6 +16,27 @@ use yii\base\InvalidConfigException;
 class Bloques extends Component
 {
 
+    public function getBloqueNoRowArray($objetos)
+    {
+        foreach($objetos as $obj):
+            //var_dump($objetos);
+
+            switch ($obj['tipo']) {
+                case 'bloquediv':
+                    echo $this->getBloqueDiv($obj['nombre'],$obj['id'],$obj['titulo'],$obj['clase'],$obj['style'],$obj['col'],$obj['tipocolor'],$obj['adicional'],$obj['contenido']);
+                    break;
+
+                case 'separador':
+                    //echo $this->getSeparador($obj['clase'],$obj['estilo'], $obj['color']);
+                    break;
+                default:
+
+                    break;
+            }
+
+        endforeach;
+    }
+
     public function getBloqueArray($objetos)
     {
         echo '<div class="row col-12">';

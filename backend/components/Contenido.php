@@ -52,7 +52,7 @@ class Contenido extends Component
                     break;
 
                 case 'image':
-                    $this->declareCss($obj['id']);
+                    //$this->declareCss($obj['id']);
                     $this->registrarJs($obj['id']);
                     $contenido.= $this->getImage($obj['subtipo'],$obj['nombre'], $obj['id'], $obj['src'], $obj['clase'], $obj['estilo'],$obj['etiqueta'], $obj['col'], $obj['adicional']);
                     break;

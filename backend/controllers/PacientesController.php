@@ -242,12 +242,14 @@ class PacientesController extends Controller
         $pacientes= $data->getPaciente(0,$id);
         $consultas= $data->getHistoriaclinica($id);
         $citamedica=Citasmedicas::find()->where(["id" => $id])->one();
+        $consultasTotal= $data->getHistoriaclinica($citamedica->idusuario);
 
-        //var_dump($pacientes);
+        //var_dump($citamedica->idusuario);
         return $this->render('atendercitas', [
             //'data' => Doctores::find()->where(['id' => $id, "isDeleted" => 0])->one(),
             'paciente' => $pacientes,
             'consultas' => $consultas,
+            'consultastotal' => $consultasTotal,
             'citamedica' => $citamedica,
             'idcita' => $id,
 
